@@ -2,10 +2,21 @@
 <html lang="ru" class="dark h-full">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Оптимизация области просмотра для мобильных устройств (запрет зума, полноэкранный режим) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>STM32 BLE Controller - PWA</title>
 
-    <!-- Tailwind CSS -->
+    <!-- PWA / Мобильные мета-теги для iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="STM32 Полив">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/cyber/512/microchip.png">
+
+    <!-- Мета-теги цветности темы для Android Chrome -->
+    <meta name="theme-color" content="#0a0d14">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Tailwind CSS (стилизация) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -31,7 +42,7 @@
         }
     </script>
 
-    <!-- FontAwesome & Chart.js -->
+    <!-- Иконки FontAwesome & Библиотека графиков Chart.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -41,35 +52,21 @@
             color: #e2e8f0;
             font-family: system-ui, -apple-system, sans-serif;
             touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Custom Scrollbars */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0d14;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1f293d;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00f0ff;
-        }
+        /* Пользовательский скроллбар */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0d14; }
+        ::-webkit-scrollbar-thumb { background: #1f293d; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
 
-        .glow-green {
-            box-shadow: 0 0 12px rgba(0, 255, 102, 0.35);
-        }
-        .glow-red {
-            box-shadow: 0 0 12px rgba(255, 42, 109, 0.35);
-        }
-        .glow-cyan {
-            box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
-        }
+        /* Эффекты неонового свечения */
+        .glow-green { box-shadow: 0 0 12px rgba(0, 255, 102, 0.35); }
+        .glow-red { box-shadow: 0 0 12px rgba(255, 42, 109, 0.35); }
+        .glow-cyan { box-shadow: 0 0 12px rgba(0, 240, 255, 0.35); }
 
-        /* Pump Active Pulse Wave Animation */
+        /* Анимация пульсации при работе насоса */
         @keyframes waterPulse {
             0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.4); }
             70% { box-shadow: 0 0 0 12px rgba(0, 255, 102, 0); }
@@ -80,25 +77,17 @@
             border-color: rgba(0, 255, 102, 0.6) !important;
         }
 
-        /* Custom Cyberpunk Toggle Button Effects */
-        .btn-active:active {
-            transform: scale(0.97);
-        }
+        .btn-active:active { transform: scale(0.97); }
 
-        /* Mobile Touch Target Optimizations */
         @media (max-width: 768px) {
-            .touch-target-lg {
-                min-height: 52px;
-            }
-            .mobile-bottom-nav {
-                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
-            }
+            .touch-target-lg { min-height: 52px; }
+            .mobile-bottom-nav { box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5); }
         }
     </style>
 </head>
 <body class="h-full flex flex-col font-sans antialiased overflow-x-hidden pb-16 md:pb-0 selection:bg-cyan-500 selection:text-black">
 
-    <!-- TOP HEADER -->
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ СТАТУСА И ШАПКА -->
     <header class="bg-cyber-panel border-b border-cyber-border px-3 md:px-4 py-2.5 md:py-3 flex items-center justify-between sticky top-0 z-50 shadow-md">
         <div class="flex items-center space-x-2.5 md:space-x-3">
             <div class="w-8 h-8 rounded-lg bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shrink-0">
@@ -116,13 +105,13 @@
         </div>
 
         <div class="flex items-center space-x-2">
-            <!-- PWA Install Button -->
-            <button id="pwaInstallBtn" class="hidden text-xs bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/40 px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition">
-                <i class="fa-solid fa-download"></i>
-                <span class="hidden sm:inline">PWA</span>
+            <!-- Кнопка установки PWA приложения -->
+            <button id="pwaInstallBtn" onclick="triggerPWAInstall()" class="text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/50 px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition font-mono font-bold">
+                <i class="fa-solid fa-mobile-screen-button text-amber-400"></i>
+                <span>Установить PWA</span>
             </button>
 
-            <!-- Bluetooth Connect Button -->
+            <!-- Кнопка подключения Bluetooth (Web BLE API) -->
             <button id="bleConnectBtn" onclick="toggleBLEConnection()" class="text-xs md:text-sm font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 hover:border-cyan-400 px-3 md:px-4 py-2 rounded-xl flex items-center gap-1.5 transition glow-cyan btn-active touch-target-lg">
                 <i class="fa-solid fa-bluetooth text-sm"></i>
                 <span id="bleBtnText">Подключить</span>
@@ -130,7 +119,7 @@
         </div>
     </header>
 
-    <!-- NAVIGATION TABS (Top on Desktop, Bottom Fixed App Bar on Mobile) -->
+    <!-- НИЖНЯЯ НАВИГАЦИОННАЯ ПАНЕЛЬ ДЛЯ СМАРТФОНОВ / ВЕРХНЯЯ ДЛЯ ПК -->
     <nav class="fixed bottom-0 left-0 right-0 md:sticky md:top-[57px] bg-cyber-panel/95 backdrop-blur border-t md:border-t-0 md:border-b border-cyber-border px-2 md:px-4 flex justify-around md:justify-center space-x-1 md:space-x-4 font-mono text-xs z-50 mobile-bottom-nav py-1 md:py-0">
         <button id="tabBtnDashboard" onclick="switchTab('dashboard')" class="flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-cyan-400 text-cyan-400 font-semibold flex flex-col md:flex-row items-center justify-center gap-1 transition">
             <i class="fa-solid fa-gauge-high text-base md:text-sm"></i> 
@@ -146,16 +135,16 @@
         </button>
     </nav>
 
-    <!-- MAIN CONTENT CONTAINERS -->
+    <!-- ОСНОВНОЙ КОНТЕНТ СТРАНИЦЫ -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-2.5 md:p-6 space-y-4 md:space-y-6">
 
-        <!-- TAB 1: DASHBOARD -->
+        <!-- ВКЛАДКА 1: ДАШБОРД (МОНИТОРИНГ И УПРАВЛЕНИЕ) -->
         <div id="tabDashboard" class="space-y-4 md:space-y-6">
 
-            <!-- TOP STATS BAR -->
+            <!-- ВЕРХНИЕ КАРТОЧКИ ТЕЛЕМЕТРИИ -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
                 
-                <!-- STM32 RTC Clock Card -->
+                <!-- Часы RTC микроконтроллера STM32 -->
                 <div class="bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 flex items-center justify-between shadow-lg">
                     <div class="space-y-0.5">
                         <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Время МК (RTC)</span>
@@ -171,7 +160,7 @@
                     </div>
                 </div>
 
-                <!-- Last Telemetry Packet Card -->
+                <!-- Время последнего приема пакета UART/BLE -->
                 <div class="bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 flex items-center justify-between shadow-lg">
                     <div class="space-y-1">
                         <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Обновление данных</span>
@@ -183,7 +172,7 @@
                     </div>
                 </div>
 
-                <!-- System Telemetry Mini Badge -->
+                <!-- Статус активности систем -->
                 <div class="bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 flex items-center justify-between shadow-lg">
                     <div class="space-y-1">
                         <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Статус систем</span>
@@ -206,10 +195,10 @@
 
             </div>
 
-            <!-- INDEPENDENT PUMP CONTROL CARDS -->
+            <!-- ИНДИВИДУАЛЬНЫЕ КАРТОЧКИ УПРАВЛЕНИЯ НАСОСАМИ -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
 
-                <!-- PUMP 1 CARD -->
+                <!-- КАРТОЧКА НАСОСА #1 -->
                 <div id="pump1Card" class="bg-cyber-panel border border-cyber-border rounded-xl p-4 md:p-5 shadow-xl space-y-3.5 md:space-y-4 transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-cyber-border/60 pb-2.5">
                         <div class="flex items-center gap-2.5">
@@ -226,7 +215,7 @@
                         </span>
                     </div>
 
-                    <!-- Pressure & Flow Sensors for Pump 1 -->
+                    <!-- Показания давления и дискретный датчик протока -->
                     <div class="grid grid-cols-2 gap-2.5">
                         <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border">
                             <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Давление Н1</span>
@@ -239,15 +228,15 @@
                         </div>
 
                         <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border">
-                            <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Проток Н1</span>
+                            <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Датчик протока Н1</span>
                             <div class="flex items-baseline gap-1 mt-0.5">
-                                <span id="p1FlowDisplay" class="text-xl md:text-2xl font-mono font-bold text-cyan-400">НЕТ</span>
+                                <span id="p1FlowDisplay" class="text-xl md:text-2xl font-mono font-bold text-gray-500">НЕТ</span>
                             </div>
                             <span id="p1FlowStatus" class="text-[9px] md:text-[10px] font-mono font-bold text-rose-400 block mt-1">ОТСУТСТВУЕТ</span>
                         </div>
                     </div>
 
-                    <!-- Relay Override & Duty -->
+                    <!-- Переключение на резервное реле давления -->
                     <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border space-y-1.5">
                         <div class="flex items-center justify-between text-xs font-mono">
                             <span class="text-gray-300 text-[11px] md:text-xs">Режим управления:</span>
@@ -262,7 +251,7 @@
                         </div>
                     </div>
 
-                    <!-- Pump 1 Manual Controls (Large Mobile Touch Targets) -->
+                    <!-- Кнопки ручного пуска и остановки -->
                     <div class="grid grid-cols-2 gap-2.5 pt-1">
                         <button onclick="sendPumpCommand(1, 'START')" class="py-3 px-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-cyber-neonGreen border border-emerald-500/50 font-mono font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition glow-green btn-active touch-target-lg">
                             <i class="fa-solid fa-play text-sm"></i> ПУСК
@@ -273,7 +262,7 @@
                     </div>
                 </div>
 
-                <!-- PUMP 2 CARD -->
+                <!-- КАРТОЧКА НАСОСА #2 -->
                 <div id="pump2Card" class="bg-cyber-panel border border-cyber-border rounded-xl p-4 md:p-5 shadow-xl space-y-3.5 md:space-y-4 transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-cyber-border/60 pb-2.5">
                         <div class="flex items-center gap-2.5">
@@ -290,7 +279,7 @@
                         </span>
                     </div>
 
-                    <!-- Pressure & Flow Sensors for Pump 2 -->
+                    <!-- Показания давления и дискретный датчик протока -->
                     <div class="grid grid-cols-2 gap-2.5">
                         <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border">
                             <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Давление Н2</span>
@@ -303,15 +292,15 @@
                         </div>
 
                         <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border">
-                            <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Проток Н2</span>
+                            <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Датчик протока Н2</span>
                             <div class="flex items-baseline gap-1 mt-0.5">
-                                <span id="p2FlowDisplay" class="text-xl md:text-2xl font-mono font-bold text-cyan-400">НЕТ</span>
+                                <span id="p2FlowDisplay" class="text-xl md:text-2xl font-mono font-bold text-gray-500">НЕТ</span>
                             </div>
                             <span id="p2FlowStatus" class="text-[9px] md:text-[10px] font-mono font-bold text-rose-400 block mt-1">ОТСУТСТВУЕТ</span>
                         </div>
                     </div>
 
-                    <!-- Relay Override & Duty -->
+                    <!-- Переключение на резервное реле давления -->
                     <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border space-y-1.5">
                         <div class="flex items-center justify-between text-xs font-mono">
                             <span class="text-gray-300 text-[11px] md:text-xs">Режим управления:</span>
@@ -326,7 +315,7 @@
                         </div>
                     </div>
 
-                    <!-- Pump 2 Manual Controls -->
+                    <!-- Кнопки ручного управления -->
                     <div class="grid grid-cols-2 gap-2.5 pt-1">
                         <button onclick="sendPumpCommand(2, 'START')" class="py-3 px-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-cyber-neonGreen border border-emerald-500/50 font-mono font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition glow-green btn-active touch-target-lg">
                             <i class="fa-solid fa-play text-sm"></i> ПУСК
@@ -339,14 +328,14 @@
 
             </div>
 
-            <!-- DUAL PRESSURE CHART & CONSOLE LOGS -->
+            <!-- ГРАФИК ДАВЛЕНИЯ И UART КОНСОЛЬ -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
 
-                <!-- Realtime Dual Pressure Graph -->
+                <!-- График давления в реальном времени (Chart.js) -->
                 <div class="lg:col-span-2 bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 shadow-xl flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-2 md:mb-3">
                         <h3 class="text-xs font-mono uppercase tracking-wider text-gray-300 flex items-center gap-2">
-                            <i class="fa-solid fa-chart-line text-cyan-400"></i> График давления
+                            <i class="fa-solid fa-chart-line text-cyan-400"></i> График давления (бар)
                         </h3>
                         <button onclick="clearChart()" class="text-xs font-mono text-gray-500 hover:text-gray-300 p-1">Сброс</button>
                     </div>
@@ -355,7 +344,7 @@
                     </div>
                 </div>
 
-                <!-- Raw UART Console Log -->
+                <!-- Текстовая консоль UART логов -->
                 <div class="bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 shadow-xl flex flex-col min-h-[200px] md:min-h-[280px]">
                     <div class="flex items-center justify-between mb-2">
                         <h3 class="text-xs font-mono uppercase tracking-wider text-gray-300 flex items-center gap-2">
@@ -372,26 +361,22 @@
 
         </div>
 
-        <!-- TAB 2: IRRIGATION SCHEDULE (3 ZONES PER PUMP) -->
+        <!-- ВКЛАДКА 2: ГРАФИКИ И РАСПИСАНИЕ ПОЛИВА -->
         <div id="tabSchedule" class="hidden space-y-4 md:space-y-6">
 
             <div class="bg-cyber-panel border border-cyber-border rounded-xl p-4 md:p-5 shadow-xl space-y-4">
                 <h2 class="font-bold text-sm md:text-base text-white flex items-center gap-2 border-b border-cyber-border/60 pb-3">
-                    <i class="fa-solid fa-calendar-days text-cyan-400"></i> Настройки графика полива по зонам
+                    <i class="fa-solid fa-calendar-days text-cyan-400"></i> Расписание автополива для 3 зон
                 </h2>
 
-                <p class="text-xs text-gray-400">
-                    Укажите время начала полива, длительность и дни недели для каждой из трех зон.
-                </p>
-
-                <!-- PUMP 1 SCHEDULE -->
+                <!-- РАСПИСАНИЕ ЗОН НАСОСА #1 -->
                 <div class="space-y-3 pt-2">
                     <h3 class="text-xs md:text-sm font-mono font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-faucet text-cyan-400"></i> Расписание Зон Насоса #1
+                        <i class="fa-solid fa-faucet text-cyan-400"></i> Зоны Насоса #1 (Капельный полив)
                     </h3>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <!-- Zone 1 -->
+                        <!-- Зона 1.1 -->
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 1.1 (Газон)</span>
                             <div class="grid grid-cols-2 gap-2">
@@ -418,7 +403,7 @@
                             </div>
                         </div>
 
-                        <!-- Zone 2 -->
+                        <!-- Зона 1.2 -->
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 1.2 (Огород)</span>
                             <div class="grid grid-cols-2 gap-2">
@@ -445,7 +430,7 @@
                             </div>
                         </div>
 
-                        <!-- Zone 3 -->
+                        <!-- Зона 1.3 -->
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 1.3 (Теплица)</span>
                             <div class="grid grid-cols-2 gap-2">
@@ -474,14 +459,14 @@
                     </div>
                 </div>
 
-                <!-- PUMP 2 SCHEDULE -->
+                <!-- РАСПИСАНИЕ ЗОН НАСОСА #2 -->
                 <div class="space-y-3 pt-4">
                     <h3 class="text-xs md:text-sm font-mono font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-faucet text-amber-400"></i> Расписание Зон Насоса #2
+                        <i class="fa-solid fa-faucet text-amber-400"></i> Зоны Насоса #2 (Дождевание)
                     </h3>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <!-- Zone 1 -->
+                        <!-- Зона 2.1 -->
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 2.1 (Сад)</span>
                             <div class="grid grid-cols-2 gap-2">
@@ -508,7 +493,7 @@
                             </div>
                         </div>
 
-                        <!-- Zone 2 -->
+                        <!-- Зона 2.2 -->
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 2.2 (Цветник)</span>
                             <div class="grid grid-cols-2 gap-2">
@@ -535,7 +520,7 @@
                             </div>
                         </div>
 
-                        <!-- Zone 3 -->
+                        <!-- Зона 2.3 -->
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 2.3 (Клумбы)</span>
                             <div class="grid grid-cols-2 gap-2">
@@ -566,34 +551,34 @@
 
                 <div class="pt-2">
                     <button onclick="sendScheduleToSTM32()" class="w-full py-3.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-black font-mono font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition glow-cyan btn-active touch-target-lg">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> Отправить график полива в STM32
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Передать график полива в STM32
                     </button>
                 </div>
             </div>
 
         </div>
 
-        <!-- TAB 3: SETTINGS & RTC -->
+        <!-- ВКЛАДКА 3: НАСТРОЙКИ RTC И ПРЕДЕЛОВ ДАВЛЕНИЯ -->
         <div id="tabSettings" class="hidden space-y-4 md:space-y-6">
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
 
-                <!-- RTC CONFIGURATION CARD -->
+                <!-- Синхронизация встроенного RTC STM32 -->
                 <div class="bg-cyber-panel border border-cyber-border rounded-xl p-4 md:p-5 shadow-xl space-y-3.5">
                     <div class="border-b border-cyber-border/60 pb-2.5 flex items-center justify-between">
                         <h2 class="font-bold text-sm md:text-base text-white flex items-center gap-2">
-                            <i class="fa-regular fa-clock text-cyan-400"></i> Настройка Времени STM32
+                            <i class="fa-regular fa-clock text-cyan-400"></i> Часы Реального Времени STM32
                         </h2>
                         <span class="text-[10px] md:text-xs font-mono text-cyan-400">RTC Hardware</span>
                     </div>
 
                     <p class="text-xs text-gray-400">
-                        Установка системных часов STM32 (RTC) для работы автоматических расписаний.
+                        Настройка встроенных часов STM32 для автозапуска полива без активного соединения.
                     </p>
 
                     <div class="space-y-3 pt-1">
                         <button onclick="syncLocalTime()" class="w-full py-2.5 px-3 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 font-mono text-xs font-semibold flex items-center justify-center gap-2 transition btn-active">
-                            <i class="fa-solid fa-rotate-angle"></i> Взять время со смартфона
+                            <i class="fa-solid fa-rotate-angle"></i> Получить время со смартфона
                         </button>
 
                         <div class="grid grid-cols-2 gap-2.5">
@@ -608,28 +593,28 @@
                         </div>
 
                         <button onclick="sendRTCConfig()" class="w-full py-3.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-black font-mono font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition glow-cyan btn-active touch-target-lg">
-                            <i class="fa-solid fa-paper-plane"></i> Отправить RTC в STM32
+                            <i class="fa-solid fa-paper-plane"></i> Синхронизировать RTC в STM32
                         </button>
                     </div>
                 </div>
 
-                <!-- INDEPENDENT PRESSURE THRESHOLDS -->
+                <!-- Пороги давления и защита от сухого хода -->
                 <div class="bg-cyber-panel border border-cyber-border rounded-xl p-4 md:p-5 shadow-xl space-y-3.5">
                     <div class="border-b border-cyber-border/60 pb-2.5 flex items-center justify-between">
                         <h2 class="font-bold text-sm md:text-base text-white flex items-center gap-2">
-                            <i class="fa-solid fa-sliders text-amber-400"></i> Пределы Давления
+                            <i class="fa-solid fa-sliders text-amber-400"></i> Уставки Порогов Давления
                         </h2>
                         <span class="text-[10px] md:text-xs font-mono text-amber-400">Реле / Защита</span>
                     </div>
 
                     <div class="space-y-4">
-                        <!-- Pump 1 Thresholds -->
+                        <!-- Насос #1 -->
                         <div class="bg-cyber-bg p-3 rounded-lg border border-cyber-border space-y-2.5">
                             <h3 class="text-xs font-mono font-bold text-cyan-400 uppercase">Насос #1: Пределы</h3>
                             
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label class="text-[11px] font-mono text-gray-300">Нижний предел (Вкл)</label>
+                                    <label class="text-[11px] font-mono text-gray-300">Нижний порог (Включение)</label>
                                     <span id="p1MinVal" class="text-xs font-mono font-bold text-emerald-400">1.50 бар</span>
                                 </div>
                                 <input type="range" id="p1MinInput" min="0.2" max="5.0" step="0.1" value="1.5" oninput="document.getElementById('p1MinVal').innerText = parseFloat(this.value).toFixed(2) + ' бар'" class="w-full accent-emerald-400 bg-cyber-panel rounded-lg h-2 cursor-pointer">
@@ -637,7 +622,7 @@
 
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label class="text-[11px] font-mono text-gray-300">Верхний предел (Выкл)</label>
+                                    <label class="text-[11px] font-mono text-gray-300">Верхний порог (Отключение)</label>
                                     <span id="p1MaxVal" class="text-xs font-mono font-bold text-rose-400">3.50 бар</span>
                                 </div>
                                 <input type="range" id="p1MaxInput" min="0.5" max="10.0" step="0.1" value="3.5" oninput="document.getElementById('p1MaxVal').innerText = parseFloat(this.value).toFixed(2) + ' бар'" class="w-full accent-rose-400 bg-cyber-panel rounded-lg h-2 cursor-pointer">
@@ -645,20 +630,20 @@
 
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label class="text-[11px] font-mono text-amber-400">Мин. давление (Поиск воды)</label>
+                                    <label class="text-[11px] font-mono text-amber-400">Мин. давление (Поиск воды / Сухой ход)</label>
                                     <span id="p1LowVal" class="text-xs font-mono font-bold text-amber-400">0.50 бар</span>
                                 </div>
                                 <input type="range" id="p1LowInput" min="0.1" max="2.0" step="0.05" value="0.5" oninput="document.getElementById('p1LowVal').innerText = parseFloat(this.value).toFixed(2) + ' бар'" class="w-full accent-amber-400 bg-cyber-panel rounded-lg h-2 cursor-pointer">
                             </div>
                         </div>
 
-                        <!-- Pump 2 Thresholds -->
+                        <!-- Насос #2 -->
                         <div class="bg-cyber-bg p-3 rounded-lg border border-cyber-border space-y-2.5">
                             <h3 class="text-xs font-mono font-bold text-cyan-400 uppercase">Насос #2: Пределы</h3>
                             
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label class="text-[11px] font-mono text-gray-300">Нижний предел (Вкл)</label>
+                                    <label class="text-[11px] font-mono text-gray-300">Нижний порог (Включение)</label>
                                     <span id="p2MinVal" class="text-xs font-mono font-bold text-emerald-400">1.50 бар</span>
                                 </div>
                                 <input type="range" id="p2MinInput" min="0.2" max="5.0" step="0.1" value="1.5" oninput="document.getElementById('p2MinVal').innerText = parseFloat(this.value).toFixed(2) + ' бар'" class="w-full accent-emerald-400 bg-cyber-panel rounded-lg h-2 cursor-pointer">
@@ -666,7 +651,7 @@
 
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label class="text-[11px] font-mono text-gray-300">Верхний предел (Выкл)</label>
+                                    <label class="text-[11px] font-mono text-gray-300">Верхний порог (Отключение)</label>
                                     <span id="p2MaxVal" class="text-xs font-mono font-bold text-rose-400">3.50 бар</span>
                                 </div>
                                 <input type="range" id="p2MaxInput" min="0.5" max="10.0" step="0.1" value="3.5" oninput="document.getElementById('p2MaxVal').innerText = parseFloat(this.value).toFixed(2) + ' бар'" class="w-full accent-rose-400 bg-cyber-panel rounded-lg h-2 cursor-pointer">
@@ -674,7 +659,7 @@
 
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label class="text-[11px] font-mono text-amber-400">Мин. давление (Поиск воды)</label>
+                                    <label class="text-[11px] font-mono text-amber-400">Мин. давление (Поиск воды / Сухой ход)</label>
                                     <span id="p2LowVal" class="text-xs font-mono font-bold text-amber-400">0.50 бар</span>
                                 </div>
                                 <input type="range" id="p2LowInput" min="0.1" max="2.0" step="0.05" value="0.5" oninput="document.getElementById('p2LowVal').innerText = parseFloat(this.value).toFixed(2) + ' бар'" class="w-full accent-amber-400 bg-cyber-panel rounded-lg h-2 cursor-pointer">
@@ -682,7 +667,7 @@
                         </div>
 
                         <button onclick="savePumpConfig()" class="w-full py-3.5 px-4 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/50 font-mono font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition btn-active touch-target-lg">
-                            <i class="fa-solid fa-floppy-disk"></i> Сохранить Настройки в STM32
+                            <i class="fa-solid fa-floppy-disk"></i> Сохранить настройки в EEPROM STM32
                         </button>
                     </div>
                 </div>
@@ -693,76 +678,137 @@
 
     </main>
 
-    <!-- CORE APPLICATION LOGIC UPDATE -->
-    <script>
-        // 1. Dynamic Web App Manifest Blob
-        const manifestData = {
-            "name": "STM32 BLE Pump Controller",
-            "short_name": "STM32 BLE",
-            "start_url": "./",
-            "display": "standalone",
-            "background_color": "#0a0d14",
-            "theme_color": "#121824",
-            "icons": [
-                {
-                    "src": "https://img.icons8.com/cyber/512/microchip.png",
-                    "sizes": "512x512",
-                    "type": "image/png"
-                }
-            ]
-        };
-        const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/json' });
-        const manifestURL = URL.createObjectURL(manifestBlob);
-        const manifestLink = document.createElement('link');
-        manifestLink.rel = 'manifest';
-        manifestLink.href = manifestURL;
-        document.head.appendChild(manifestLink);
+    <!-- МОДАЛЬНОЕ ОКНО ИНСТРУКЦИИ УСТАНОВКИ PWA (ДЛЯ iOS И ИНДИКАЦИИ) -->
+    <div id="pwaInstallModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-cyber-panel border border-cyan-500/50 rounded-2xl max-w-md w-full p-5 space-y-4 relative shadow-2xl">
+            <button onclick="closePwaModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="flex items-center gap-3 border-b border-cyber-border pb-3">
+                <div class="w-10 h-10 rounded-xl bg-cyan-950 border border-cyan-500 flex items-center justify-center text-cyan-400">
+                    <i class="fa-solid fa-mobile-screen-button text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-white text-base">Установка PWA приложения</h3>
+                    <p class="text-xs text-gray-400">Добавление на домашний экран</p>
+                </div>
+            </div>
 
-        // 2. Safe Service Worker Registration
-        // Avoid using Blob URLs for service workers as browsers block `blob:` scheme in navigator.serviceWorker.register
-        if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
-            navigator.serviceWorker.register('./sw.js')
-                .then(() => console.log('PWA Service Worker registered.'))
-                .catch(err => console.log('Service Worker skipped/not supported in current preview environment:', err.message));
-        } else {
-            console.log('PWA active (Service Worker bypassed for sandboxed Blob/Data URI environment).');
+            <!-- Разделы инструкции для Android / iOS -->
+            <div class="space-y-3 text-xs font-mono text-gray-300">
+                <div class="bg-cyber-bg p-3 rounded-lg border border-cyber-border space-y-1.5">
+                    <div class="text-cyan-400 font-bold flex items-center gap-2">
+                        <i class="fa-brands fa-apple text-sm"></i> Инструкция для iPhone / iPad (Safari):
+                    </div>
+                    <ol class="list-decimal list-inside space-y-1 text-gray-400 text-[11px]">
+                        <li>Нажмите кнопку <span class="text-white font-bold">«Поделиться»</span> (квадрат со стрелкой вверх) внизу экрана Safari.</li>
+                        <li>Прокрутите меню вниз и выберите <span class="text-white font-bold">«На экран "Домой"»</span>.</li>
+                        <li>Нажмите <span class="text-white font-bold">«Добавить»</span> в правом верхнем углу.</li>
+                    </ol>
+                </div>
+
+                <div class="bg-cyber-bg p-3 rounded-lg border border-cyber-border space-y-1.5">
+                    <div class="text-emerald-400 font-bold flex items-center gap-2">
+                        <i class="fa-brands fa-android text-sm"></i> Инструкция для Android (Chrome):
+                    </div>
+                    <ol class="list-decimal list-inside space-y-1 text-gray-400 text-[11px]">
+                        <li>Нажмите три точки <span class="text-white font-bold">(⋮)</span> в верхнем углу браузера.</li>
+                        <li>Выберите пункт <span class="text-white font-bold">«Установить приложение»</span> или <span class="text-white font-bold">«Добавить на гл. экран»</span>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <button onclick="closePwaModal()" class="w-full py-3 bg-cyan-600 hover:bg-cyan-500 text-black font-mono font-bold text-xs rounded-xl">
+                Понятно
+            </button>
+        </div>
+    </div>
+
+    <!-- PWA МАНИФЕСТ И SERVICE WORKER ИНИЦИАЛИЗАЦИЯ -->
+    <script>
+        // 1. Динамическое создание PWA Manifest (Manifest JSON) в виде Blob URL для ярлыка приложения
+        try {
+            const pwaManifestObj = {
+                "name": "STM32 BLE Pump Controller",
+                "short_name": "STM32 Полив",
+                "description": "Автономное приложение PWA для управления насосами через BLE HM-10",
+                "start_url": "./",
+                "display": "standalone",
+                "orientation": "portrait",
+                "background_color": "#0a0d14",
+                "theme_color": "#121824",
+                "icons": [
+                    {
+                        "src": "https://img.icons8.com/cyber/512/microchip.png",
+                        "sizes": "512x512",
+                        "type": "image/png",
+                        "purpose": "any maskable"
+                    }
+                ]
+            };
+
+            const manifestBlobStr = new Blob([JSON.stringify(pwaManifestObj)], { type: 'application/json' });
+            const manifestUrlStr = URL.createObjectURL(manifestBlobStr);
+            const manifestLinkTag = document.createElement('link');
+            manifestLinkTag.rel = 'manifest';
+            manifestLinkTag.href = manifestUrlStr;
+            document.head.appendChild(manifestLinkTag);
+        } catch (e) {
+            console.warn('[PWA] Ошибка формирования манифеста:', e);
         }
 
-        // PWA Install Prompt Capture
-        let deferredPrompt;
-        const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+        // 2. Безопасная инициализация Service Worker без сбоев из-за Blob URL
+        if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(() => console.log('[PWA Engine] Service Worker успешно зарегистрирован!'))
+                    .catch((err) => console.log('[PWA Engine] Стандартный SW не найден, PWA работает в онлайн-режиме:', err.message));
+            });
+        }
+
+        // 3. Обработка PWA промпта установки на экран
+        let deferredPwaPrompt = null;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
-            deferredPrompt = e;
-            pwaInstallBtn.classList.remove('hidden');
+            deferredPwaPrompt = e;
+            const btn = document.getElementById('pwaInstallBtn');
+            if (btn) btn.classList.remove('hidden');
         });
 
-        pwaInstallBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    pwaInstallBtn.classList.add('hidden');
-                }
-                deferredPrompt = null;
+        function triggerPWAInstall() {
+            if (deferredPwaPrompt) {
+                deferredPwaPrompt.prompt();
+                deferredPwaPrompt.userChoice.then((choice) => {
+                    if (choice.outcome === 'accepted') {
+                        console.log('Пользователь установил PWA');
+                    }
+                    deferredPwaPrompt = null;
+                });
+            } else {
+                // Если стандартный диалог недоступен (например на iOS), показываем инфо-модалку
+                document.getElementById('pwaInstallModal').classList.remove('hidden');
             }
-        });
+        }
+
+        function closePwaModal() {
+            document.getElementById('pwaInstallModal').classList.add('hidden');
+        }
     </script>
 
-    <!-- CORE APPLICATION logic -->
+    <!-- ОСНОВНАЯ ЛОГИКА ВЕБ-ПРИЛОЖЕНИЯ (JS) -->
     <script>
-        // BLE UUIDs for HM-10 Module
+        // UUID службы и характеристики модуля BLE HM-10
         const HM10_SERVICE_UUID = '0000ffe0-0000-1000-8000-00805f9b34fb';
         const HM10_CHARACTERISTIC_UUID = '0000ffe1-0000-1000-8000-00805f9b34fb';
 
-        // Application State
+        // Глобальные переменные состояния Bluetooth
         let bleDevice = null;
         let bleServer = null;
         let rxTxCharacteristic = null;
         let isConnected = false;
         let rxBuffer = '';
 
-        // Device Controls State
+        // Переменные состояния насосов и датчиков
         let pump1Running = false;
         let pump2Running = false;
         let p1PressureBar = 0.0;
@@ -770,21 +816,29 @@
         let p1FlowRate = 0.0;
         let p2FlowRate = 0.0;
         
-        // Pressure Limit States
+        // Пороги давления
         let p1MinThresh = 1.5, p1MaxThresh = 3.5, p1LowThresh = 0.5;
         let p2MinThresh = 1.5, p2MaxThresh = 3.5, p2LowThresh = 0.5;
 
-        // Chart Initialization
+        // Экземпляр графика Chart.js
         let chartInstance = null;
         const maxDataPoints = 30;
 
+        // Выполняется при полной загрузке страницы
         window.onload = function () {
             initChart();
             syncLocalTime();
-            setInterval(updateUIRuntime, 1000);
+            
+            // Проверка, запущено ли приложение как установленное PWA
+            if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+                const installBtn = document.getElementById('pwaInstallBtn');
+                if (installBtn) installBtn.classList.add('hidden');
+            }
         };
 
-        // --- TIME & RTC HELPERS ---
+        // --- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ВРЕМЕНИ И RTC ---
+
+        /* Автоматическое получение локального времени смартфона */
         function syncLocalTime() {
             const now = new Date();
             const year = now.getFullYear();
@@ -798,27 +852,24 @@
             document.getElementById('rtcTimePicker').value = `${hours}:${minutes}:${seconds}`;
         }
 
+        /* Отправка команды установки времени RTC в STM32 */
         function sendRTCConfig() {
-            const dateVal = document.getElementById('rtcDatePicker').value; // YYYY-MM-DD
-            const timeVal = document.getElementById('rtcTimePicker').value; // HH:MM:SS
-            const prefixEl = document.getElementById('cmdSetTimePrefix');
-            const prefix = prefixEl ? prefixEl.value : 'AT+SETTIME:';
+            const dateVal = document.getElementById('rtcDatePicker').value;
+            const timeVal = document.getElementById('rtcTimePicker').value;
 
             if (!dateVal || !timeVal) {
-                alert("Пожалуйста, укажите и дату, и время.");
+                alert("Пожалуйста, укажите дату и время.");
                 return;
             }
 
-            const payload = `${prefix}${dateVal}T${timeVal}`;
+            const payload = `AT+SETTIME:${dateVal}T${timeVal}`;
             sendRawCommand(payload);
-            appendLog(`[RTC] Отправлена команда времени: ${payload}`);
+            appendLog(`[RTC] Команда установки времени: ${payload}`);
         }
 
-        function updateUIRuntime() {
-            // Updated regularly via timer if needed
-        }
+        // --- УПРАВЛЕНИЕ И СВЯЗЬ WEB BLUETOOTH API ---
 
-        // --- BLE CONNECTION & COMMAND HANDLERS ---
+        /* Подключение/Отключение Bluetooth устройства HM-10 */
         async function toggleBLEConnection() {
             if (isConnected) {
                 if (bleDevice && bleDevice.gatt.connected) {
@@ -830,6 +881,8 @@
 
             try {
                 appendLog("[BLE] Поиск устройства HM-10...");
+                
+                // Запрос выбора устройства у пользователя с фильтром по имени HM/MLT
                 bleDevice = await navigator.bluetooth.requestDevice({
                     filters: [{ namePrefix: 'HM' }, { namePrefix: 'MLT' }],
                     optionalServices: [HM10_SERVICE_UUID]
@@ -840,12 +893,13 @@
                 appendLog("[BLE] Подключение к GATT серверу...");
                 bleServer = await bleDevice.gatt.connect();
 
-                appendLog("[BLE] Получение службы HM-10...");
+                appendLog("[BLE] Подключение к службе HM-10...");
                 const service = await bleServer.getPrimaryService(HM10_SERVICE_UUID);
 
-                appendLog("[BLE] Получение характеристики RX/TX...");
+                appendLog("[BLE] Подключение к характеристике...");
                 rxTxCharacteristic = await service.getCharacteristic(HM10_CHARACTERISTIC_UUID);
 
+                // Включение подписки на входящие уведомления
                 await rxTxCharacteristic.startNotifications();
                 rxTxCharacteristic.addEventListener('characteristicvaluechanged', handleBLEDataReceived);
 
@@ -858,12 +912,14 @@
             }
         }
 
+        /* Обработчик разрыва Bluetooth соединения */
         function onBLEDisconnected() {
             isConnected = false;
             updateConnectionUI(false);
-            appendLog("[BLE] Устройство отключено.");
+            appendLog("[BLE] Связь отключена.");
         }
 
+        /* Обновление элементов статуса в шапке */
         function updateConnectionUI(connected) {
             const statusIndicator = document.getElementById('statusIndicator');
             const statusText = document.getElementById('statusText');
@@ -882,12 +938,9 @@
             }
         }
 
+        /* Отправка текстовых команд AT+ через UART BLE */
         async function sendRawCommand(cmdStr) {
-            const terminatorEl = document.getElementById('cmdTerminator');
-            const term = terminatorEl 
-                ? terminatorEl.value.replace('\\r', '\r').replace('\\n', '\n') 
-                : '\r\n';
-            const fullCmd = cmdStr + term;
+            const fullCmd = cmdStr + '\r\n';
 
             if (!isConnected || !rxTxCharacteristic) {
                 appendLog(`[Эмуляция TX]: ${fullCmd.trim()}`);
@@ -903,21 +956,14 @@
             }
         }
 
+        /* Ручная команда ПУСК / СТОП для насосов */
         function sendPumpCommand(pumpNum, action) {
-            const startCmdEl = document.getElementById(`cmdP${pumpNum}Start`);
-            const stopCmdEl = document.getElementById(`cmdP${pumpNum}Stop`);
-
-            let cmd = '';
-            if (action === 'START') {
-                cmd = startCmdEl ? startCmdEl.value : `AT+PUMP${pumpNum}:START`;
-            } else {
-                cmd = stopCmdEl ? stopCmdEl.value : `AT+PUMP${pumpNum}:STOP`;
-            }
-
+            const cmd = `AT+PUMP${pumpNum}:${action}`;
             sendRawCommand(cmd);
             setPumpState(pumpNum, action === 'START');
         }
 
+        /* Обновление визуального состояния насоса в UI */
         function setPumpState(pumpNum, isRunning) {
             if (pumpNum === 1) pump1Running = isRunning;
             if (pumpNum === 2) pump2Running = isRunning;
@@ -953,13 +999,14 @@
             }
         }
 
+        /* Прием и обработка входящего потока байт от HM-10 */
         function handleBLEDataReceived(event) {
             const decoder = new TextDecoder('utf-8');
             const chunk = decoder.decode(event.target.value);
             rxBuffer += chunk;
 
             const lines = rxBuffer.split(/\r?\n/);
-            rxBuffer = lines.pop(); // Keep incomplete line fragment in buffer
+            rxBuffer = lines.pop(); // Оставляем незавершенную строку в буфере
 
             for (const line of lines) {
                 const trimmed = line.trim();
@@ -997,7 +1044,7 @@
             }
         }
 
-        // --- TAB NAVIGATION ---
+        // --- ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК НАВИГАЦИИ ---
         function switchTab(tabName) {
             const dashTab = document.getElementById('tabDashboard');
             const schedTab = document.getElementById('tabSchedule');
@@ -1011,23 +1058,23 @@
             schedTab.classList.add('hidden');
             settingsTab.classList.add('hidden');
 
-            btnDash.className = "py-2.5 px-4 border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center gap-2 transition";
-            btnSched.className = "py-2.5 px-4 border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center gap-2 transition";
-            btnSettings.className = "py-2.5 px-4 border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center gap-2 transition";
+            btnDash.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex flex-col md:flex-row items-center justify-center gap-1 transition";
+            btnSched.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex flex-col md:flex-row items-center justify-center gap-1 transition";
+            btnSettings.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex flex-col md:flex-row items-center justify-center gap-1 transition";
 
             if (tabName === 'dashboard') {
                 dashTab.classList.remove('hidden');
-                btnDash.className = "py-2.5 px-4 border-b-2 border-cyan-400 text-cyan-400 font-semibold flex items-center gap-2 transition";
+                btnDash.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-cyan-400 text-cyan-400 font-semibold flex flex-col md:flex-row items-center justify-center gap-1 transition";
             } else if (tabName === 'schedule') {
                 schedTab.classList.remove('hidden');
-                btnSched.className = "py-2.5 px-4 border-b-2 border-cyan-400 text-cyan-400 font-semibold flex items-center gap-2 transition";
+                btnSched.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-cyan-400 text-cyan-400 font-semibold flex flex-col md:flex-row items-center justify-center gap-1 transition";
             } else {
                 settingsTab.classList.remove('hidden');
-                btnSettings.className = "py-2.5 px-4 border-b-2 border-cyan-400 text-cyan-400 font-semibold flex items-center gap-2 transition";
+                btnSettings.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-cyan-400 text-cyan-400 font-semibold flex flex-col md:flex-row items-center justify-center gap-1 transition";
             }
         }
 
-        // --- RELAY VS AUTO MODE TOGGLE ---
+        // --- ПЕРЕКЛЮЧЕНИЕ РЕЖИМА АВТО / РЕЛЕ ДАВЛЕНИЯ ---
         function togglePumpControlMode(pumpNum) {
             const toggle = document.getElementById(`p${pumpNum}RelayModeToggle`);
             const label = document.getElementById(`p${pumpNum}ModeLabel`);
@@ -1043,10 +1090,10 @@
             }
         }
 
-        // --- SCHEDULE SENDER ---
+        // --- ОТПРАВКА ГРАФИКА ПОЛИВА В МК ---
         function sendScheduleToSTM32() {
-            // Pack schedule data per pump and zone into string
-            // Payload format: AT+SCH:P1:Z1:06:00,D:30,W:1010101
+            // Формирование пакетов для всех 3 зон каждого из 2 насосов
+            // Формат пакета: AT+SCH:P1:Z1:06:00,D:30,W:1010101
             for (let p = 1; p <= 2; p++) {
                 for (let z = 1; z <= 3; z++) {
                     const time = document.getElementById(`p${p}z${z}Time`).value;
@@ -1061,12 +1108,12 @@
                     sendRawCommand(packet);
                 }
             }
-            alert("График полива для всех зон отправлен в STM32!");
+            alert("Расписание полива всех зон передано в STM32!");
         }
 
-        // --- INCOMING DATA PARSER UPDATE ---
+        // --- ПАРСИНГ ТЕЛЕМЕТРИИ С ДАТЧИКОВ STM32 ---
         function parseTelemetryLine(line) {
-            // JSON Format: {"p1": 1.2, "p2": 2.1, "f1": 15.5, "f2": 0.0, "p1On": 1, "p2On": 0, "t": "12:30:00"}
+            // Разбор пакета JSON
             try {
                 if (line.startsWith('{') && line.endsWith('}')) {
                     const data = JSON.parse(line);
@@ -1083,7 +1130,7 @@
                 }
             } catch(e) {}
 
-            // ASCII Fallback parsing e.g., P1:1.20|P2:2.10|F1:12.5|F2:0.0
+            // Разбор пакета ASCII (P1:1.20|P2:2.10|F1:1|F2:0)
             if (line.includes('P1:')) {
                 const m = line.match(/P1:([\d.]+)/);
                 if (m) updatePumpPressure(1, parseFloat(m[1]));
@@ -1112,6 +1159,7 @@
             pushChartData(p1PressureBar, p2PressureBar);
         }
 
+        /* Обновление состояния дискретного датчика протока */
         function updateFlowRate(pumpNum, flowVal) {
             if (pumpNum === 1) p1FlowRate = flowVal;
             if (pumpNum === 2) p2FlowRate = flowVal;
@@ -1119,7 +1167,7 @@
             const display = document.getElementById(`p${pumpNum}FlowDisplay`);
             const status = document.getElementById(`p${pumpNum}FlowStatus`);
 
-            // Binary flow sensor logic: 1 = Flow Present, 0 = No Flow
+            // Логика: 1 = Есть проток, 0 = Нет протока
             const hasFlow = (flowVal > 0);
 
             if (hasFlow) {
@@ -1140,6 +1188,7 @@
             document.getElementById('p2PressureDisplay').innerText = p2PressureBar.toFixed(2);
         }
 
+        /* Сохранение порогов давления */
         function savePumpConfig() {
             p1MinThresh = parseFloat(document.getElementById('p1MinInput').value);
             p1MaxThresh = parseFloat(document.getElementById('p1MaxInput').value);
@@ -1149,7 +1198,7 @@
             p2MaxThresh = parseFloat(document.getElementById('p2MaxInput').value);
             p2LowThresh = parseFloat(document.getElementById('p2LowInput').value);
 
-            // Dashboard indicators update
+            // Обновление цифр на дашборде
             document.getElementById('p1MinDash').innerText = p1MinThresh.toFixed(2);
             document.getElementById('p1MaxDash').innerText = p1MaxThresh.toFixed(2);
             document.getElementById('p1LowDash').innerText = p1LowThresh.toFixed(2);
@@ -1159,10 +1208,10 @@
             document.getElementById('p2LowDash').innerText = p2LowThresh.toFixed(2);
 
             sendRawCommand(`AT+CONFIG:P1_ON=${p1MinThresh};P1_OFF=${p1MaxThresh};P1_MIN=${p1LowThresh};P2_ON=${p2MinThresh};P2_OFF=${p2MaxThresh};P2_MIN=${p2LowThresh}`);
-            alert("Пределы давления и параметры поиска воды сохранены!");
+            alert("Настройки порогов давления сохранены!");
         }
 
-        // --- CHART JS DUAL LINE REALTIME GRAPH ---
+        // --- ИНИЦИАЛИЗАЦИЯ И ОБНОВЛЕНИЕ ГРАФИКА CHART.JS ---
         function initChart() {
             const ctx = document.getElementById('pressureChart').getContext('2d');
             chartInstance = new Chart(ctx, {
