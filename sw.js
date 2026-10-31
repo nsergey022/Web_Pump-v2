@@ -1,5 +1,5 @@
 // Название кэша приложения
-const CACHE_NAME = 'stm32-pwa-v2';
+const CACHE_NAME = 'stm32-pwa-v3';
 
 // Ресурсы для кэширования при первой установке
 const ASSETS_TO_CACHE = [
@@ -9,9 +9,7 @@ const ASSETS_TO_CACHE = [
   './site.webmanifest',
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://cdn.jsdelivr.net/npm/chart.js',
-  'https://img.icons8.com/color/192/water-pump.png',
-  'https://img.icons8.com/color/512/water-pump.png'
+  'https://cdn.jsdelivr.net/npm/chart.js'
 ];
 
 // Установка Service Worker и кэширование ресурсов
@@ -25,7 +23,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Активация и удаление старых кэшей
+// Активация и очистка устаревших кэшей
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -45,7 +43,6 @@ self.addEventListener('fetch', (event) => {
         return cachedResponse;
       }
       return fetch(event.request).catch(() => {
-        // Если нет сети, отдаём заглавную страницу
         if (event.request.mode === 'navigate') {
           return caches.match('./index.html');
         }

@@ -9,14 +9,9 @@
 "orientation": "portrait",
 "icons": [
 {
-"src": "https://img.icons8.com/color/192/water-pump.png",
-"sizes": "192x192",
-"type": "image/png"
-},
-{
-"src": "https://img.icons8.com/color/512/water-pump.png",
-"sizes": "512x512",
-"type": "image/png",
+"src": "data:image/svg+xml;utf8,",
+"sizes": "192x192 512x512",
+"type": "image/svg+xml",
 "purpose": "any maskable"
 }
 ]
