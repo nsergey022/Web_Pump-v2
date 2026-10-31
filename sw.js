@@ -1,5 +1,5 @@
 // Название кэша приложения
-const CACHE_NAME = 'stm32-pwa-v3';
+const CACHE_NAME = 'stm32-pwa-v4';
 
 // Ресурсы для кэширования при первой установке
 const ASSETS_TO_CACHE = [
@@ -7,6 +7,7 @@ const ASSETS_TO_CACHE = [
   './index.html',
   './styles.css',
   './site.webmanifest',
+  './icon.svg',
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://cdn.jsdelivr.net/npm/chart.js'
