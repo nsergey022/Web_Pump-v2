@@ -1,14 +1,17 @@
 // Название кэша приложения
-const CACHE_NAME = 'stm32-pwa-v1';
+const CACHE_NAME = 'stm32-pwa-v2';
 
 // Ресурсы для кэширования при первой установке
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './styles.css',
   './site.webmanifest',
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://cdn.jsdelivr.net/npm/chart.js'
+  'https://cdn.jsdelivr.net/npm/chart.js',
+  'https://img.icons8.com/color/192/water-pump.png',
+  'https://img.icons8.com/color/512/water-pump.png'
 ];
 
 // Установка Service Worker и кэширование ресурсов
