@@ -2,19 +2,11 @@
 <html lang="ru" class="dark h-full">
 <head>
     <meta charset="UTF-8">
-    <!-- Оптимизация области просмотра для мобильных устройств (запрет масштабирования, адаптивные отступы notch) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- Оптимизация области просмотра для Android -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>STM32 BLE Controller - PWA</title>
 
-    <!-- PWA Мета-теги для iOS Safari (полноэкранный режим, иконка для HomeScreen) -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="STM32 Полив">
-    
-    <!-- Автономная SVG-иконка водяного насоса для экрана Домой (iOS) -->
-    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%23121824'/><circle cx='256' cy='256' r='200' fill='%230a0d14' stroke='%2300f0ff' stroke-width='10'/><path d='M256 110 L256 402 M110 256 L402 256 M152 152 L360 360 M152 360 L360 152' stroke='%2300f0ff' stroke-width='24' stroke-linecap='round'/><circle cx='256' cy='256' r='70' fill='%2300ff66'/></svg>">
-
-    <!-- Цветность верхней панели браузера Android -->
+    <!-- PWA Мета-теги для Android (Chrome) -->
     <meta name="theme-color" content="#0a0d14">
     <meta name="mobile-web-app-capable" content="yes">
 
@@ -57,7 +49,6 @@
     <!-- ВЕРХНЯЯ ПАНЕЛЬ СТАТУСА И ШАПКА -->
     <header class="bg-cyber-panel border-b border-cyber-border px-3 md:px-4 py-2.5 md:py-3 flex items-center justify-between sticky top-0 z-50 shadow-md">
         <div class="flex items-center space-x-2.5 md:space-x-3">
-            <!-- Иконка насоса в шапке -->
             <div class="w-9 h-9 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center shrink-0 p-1">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-full h-full">
                     <circle cx="256" cy="256" r="200" fill="#0a0d14" stroke="#00f0ff" stroke-width="20"/>
@@ -77,9 +68,9 @@
         </div>
 
         <div class="flex items-center space-x-2">
-            <!-- Кнопка установки PWA приложения -->
+            <!-- Кнопка установки PWA приложения Android -->
             <button id="pwaInstallBtn" onclick="triggerPWAInstall()" class="text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/50 px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition font-mono font-bold">
-                <i class="fa-solid fa-mobile-screen-button text-amber-400"></i>
+                <i class="fa-brands fa-android text-emerald-400 text-sm"></i>
                 <span>Установить PWA</span>
             </button>
 
@@ -91,7 +82,7 @@
         </div>
     </header>
 
-    <!-- НИЖНЯЯ НАВИГАЦИОННАЯ ПАНЕЛЬ ДЛЯ СМАРТФОНОВ / ВЕРХНЯЯ ДЛЯ ПК -->
+    <!-- НИЖНЯЯ НАВИГАЦИОННАЯ ПАНЕЛЬ ДЛЯ АНДРОИД / ВЕРХНЯЯ ДЛЯ ПК -->
     <nav class="fixed bottom-0 left-0 right-0 md:sticky md:top-[57px] bg-cyber-panel/95 backdrop-blur border-t md:border-t-0 md:border-b border-cyber-border px-2 md:px-4 flex justify-around md:justify-center space-x-1 md:space-x-4 font-mono text-xs z-50 mobile-bottom-nav py-1 md:py-0">
         <button id="tabBtnDashboard" onclick="switchTab('dashboard')" class="flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-cyan-400 text-cyan-400 font-semibold flex flex-col md:flex-row items-center justify-center gap-1 transition">
             <i class="fa-solid fa-gauge-high text-base md:text-sm"></i> 
@@ -550,7 +541,7 @@
 
                     <div class="space-y-3 pt-1">
                         <button onclick="syncLocalTime()" class="w-full py-2.5 px-3 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 font-mono text-xs font-semibold flex items-center justify-center gap-2 transition btn-active">
-                            <i class="fa-solid fa-rotate-angle"></i> Получить время со смартфона
+                            <i class="fa-solid fa-rotate-angle"></i> Получить время с устройства Android
                         </button>
 
                         <div class="grid grid-cols-2 gap-2.5">
@@ -650,47 +641,37 @@
 
     </main>
 
-    <!-- МОДАЛЬНОЕ ОКНО ИНСТРУКЦИИ УСТАНОВКИ PWA (ДЛЯ iOS И ИНДИКАЦИИ) -->
+    <!-- МОДАЛЬНОЕ ОКНО ИНСТРУКЦИИ УСТАНОВКИ PWA (ТОЛЬКО ANDROID CHROME) -->
     <div id="pwaInstallModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
         <div class="bg-cyber-panel border border-cyan-500/50 rounded-2xl max-w-md w-full p-5 space-y-4 relative shadow-2xl">
             <button onclick="closePwaModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
             <div class="flex items-center gap-3 border-b border-cyber-border pb-3">
-                <div class="w-10 h-10 rounded-xl bg-cyan-950 border border-cyan-500 flex items-center justify-center text-cyan-400">
-                    <i class="fa-solid fa-mobile-screen-button text-xl"></i>
+                <div class="w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-500 flex items-center justify-center text-emerald-400">
+                    <i class="fa-brands fa-android text-2xl"></i>
                 </div>
                 <div>
-                    <h3 class="font-bold text-white text-base">Установка PWA приложения</h3>
+                    <h3 class="font-bold text-white text-base">Установка PWA на Android</h3>
                     <p class="text-xs text-gray-400">Добавление на главный экран</p>
                 </div>
             </div>
 
-            <!-- Инструкция установки -->
+            <!-- Инструкция установки для Android -->
             <div class="space-y-3 text-xs font-mono text-gray-300">
-                <div class="bg-cyber-bg p-3 rounded-lg border border-cyber-border space-y-1.5">
-                    <div class="text-cyan-400 font-bold flex items-center gap-2">
-                        <i class="fa-brands fa-apple text-sm"></i> Инструкция для iPhone / iPad (Safari):
+                <div class="bg-cyber-bg p-3.5 rounded-lg border border-cyber-border space-y-2">
+                    <div class="text-emerald-400 font-bold flex items-center gap-2 text-sm">
+                        <i class="fa-brands fa-chrome text-base"></i> Google Chrome на Android:
                     </div>
-                    <ol class="list-decimal list-inside space-y-1 text-gray-400 text-[11px]">
-                        <li>Нажмите кнопку <span class="text-white font-bold">«Поделиться»</span> (квадрат со стрелкой вверх) внизу экрана Safari.</li>
-                        <li>Прокрутите меню вниз и выберите <span class="text-white font-bold">«На экран "Домой"»</span>.</li>
-                        <li>Нажмите <span class="text-white font-bold">«Добавить»</span> в правом верхнем углу.</li>
-                    </ol>
-                </div>
-
-                <div class="bg-cyber-bg p-3 rounded-lg border border-cyber-border space-y-1.5">
-                    <div class="text-emerald-400 font-bold flex items-center gap-2">
-                        <i class="fa-brands fa-android text-sm"></i> Инструкция для Android (Chrome):
-                    </div>
-                    <ol class="list-decimal list-inside space-y-1 text-gray-400 text-[11px]">
-                        <li>Нажмите три точки <span class="text-white font-bold">(⋮)</span> в верхнем углу браузера.</li>
-                        <li>Выберите пункт <span class="text-white font-bold">«Установить приложение»</span> или <span class="text-white font-bold">«Добавить на гл. экран»</span>.</li>
+                    <ol class="list-decimal list-inside space-y-1.5 text-gray-300 text-xs">
+                        <li>Нажмите меню три точки <span class="text-white font-bold font-mono">(⋮)</span> в правом верхнем углу браузера Chrome.</li>
+                        <li>Выберите пункт <span class="text-emerald-400 font-bold">«Установить приложение»</span> или <span class="text-emerald-400 font-bold">«Добавить на гл. экран»</span>.</li>
+                        <li>Подтвердите добавление — иконка появится в списке приложений.</li>
                     </ol>
                 </div>
             </div>
 
-            <button onclick="closePwaModal()" class="w-full py-3 bg-cyan-600 hover:bg-cyan-500 text-black font-mono font-bold text-xs rounded-xl">
+            <button onclick="closePwaModal()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-black font-mono font-bold text-xs rounded-xl transition">
                 Понятно
             </button>
         </div>
@@ -698,7 +679,6 @@
 
     <!-- РЕГИСТРАЦИЯ ВНЕШНЕГО SERVICE WORKER -->
     <script>
-        // Регистрация официального sw.js из файла в корне репозитория
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
@@ -707,7 +687,7 @@
             });
         }
 
-        // Обработка системного диалога установки PWA
+        // Обработка системного диалога установки PWA на Android
         let deferredPwaPrompt = null;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
@@ -721,7 +701,7 @@
                 deferredPwaPrompt.prompt();
                 deferredPwaPrompt.userChoice.then((choice) => {
                     if (choice.outcome === 'accepted') {
-                        console.log('Пользователь установил PWA');
+                        console.log('Пользователь установил PWA на Android');
                     }
                     deferredPwaPrompt = null;
                 });
@@ -748,7 +728,7 @@
         let isConnected = false;
         let rxBuffer = '';
 
-        // Переменные состояния насосов и датчиков
+        // Переменные состояния насосов и датчиков (Обновляются ТОЛЬКО по факту ответа STM32)
         let pump1Running = false;
         let pump2Running = false;
         let p1PressureBar = 0.0;
@@ -770,7 +750,7 @@
             syncLocalTime();
             
             // Проверка, запущено ли приложение как установленное PWA
-            if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+            if (window.matchMedia('(display-mode: standalone)').matches) {
                 const installBtn = document.getElementById('pwaInstallBtn');
                 if (installBtn) installBtn.classList.add('hidden');
             }
@@ -778,7 +758,7 @@
 
         // --- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ВРЕМЕНИ И RTC ---
 
-        /* Автоматическое получение локального времени смартфона */
+        /* Автоматическое получение локального времени устройства Android */
         function syncLocalTime() {
             const now = new Date();
             const year = now.getFullYear();
@@ -792,7 +772,7 @@
             document.getElementById('rtcTimePicker').value = `${hours}:${minutes}:${seconds}`;
         }
 
-        /* Отправка команды установки времени RTC в STM32 */
+        /* Отправка команды установки времени RTC в STM32 (Формат: AT+SETTIME=YYYY-MM-DD,HH:MM:SS) */
         function sendRTCConfig() {
             const dateVal = document.getElementById('rtcDatePicker').value;
             const timeVal = document.getElementById('rtcTimePicker').value;
@@ -802,7 +782,7 @@
                 return;
             }
 
-            const payload = `AT+SETTIME:${dateVal}T${timeVal}`;
+            const payload = `AT+SETTIME=${dateVal},${timeVal}`;
             sendRawCommand(payload);
             appendLog(`[RTC] Команда установки времени: ${payload}`);
         }
@@ -896,14 +876,14 @@
             }
         }
 
-        /* Ручная команда ПУСК / СТОП для насосов */
+        /* Запрос включения / выключения (Отправляется команда, интерфейс ЖДЕТ ответа STM32) */
         function sendPumpCommand(pumpNum, action) {
-            const cmd = `AT+PUMP${pumpNum}:${action}`;
+            const cmd = `AT+PUMP${pumpNum}=${action}`;
             sendRawCommand(cmd);
-            setPumpState(pumpNum, action === 'START');
+            appendLog(`[Запрос Н${pumpNum}]: Ожидание подтверждения от STM32...`);
         }
 
-        /* Обновление визуального состояния насоса в UI */
+        /* Функция обновления анимации и статусов насосов (Вызывается ТОЛЬКО при ответе от STM32) */
         function setPumpState(pumpNum, isRunning) {
             if (pumpNum === 1) pump1Running = isRunning;
             if (pumpNum === 2) pump2Running = isRunning;
@@ -1014,7 +994,7 @@
             }
         }
 
-        // --- ПЕРЕКЛЮЧЕНИЕ РЕЖИМА АВТО / РЕЛЕ ДАВЛЕНИЯ ---
+        // --- ПЕРЕКЛЮЧЕНИЕ РЕЖИМА АВТО / РЕЛЕ ДАВЛЕНИЯ (Формат: AT+PUMP1=RELAY / AT+PUMP1=AUTO) ---
         function togglePumpControlMode(pumpNum) {
             const toggle = document.getElementById(`p${pumpNum}RelayModeToggle`);
             const label = document.getElementById(`p${pumpNum}ModeLabel`);
@@ -1022,15 +1002,15 @@
             if (toggle.checked) {
                 label.innerText = "РЕЗЕРВ (Реле давления)";
                 label.className = "text-amber-400 font-bold";
-                sendRawCommand(`AT+PUMP${pumpNum}:MODE:RELAY`);
+                sendRawCommand(`AT+PUMP${pumpNum}=RELAY`);
             } else {
                 label.innerText = "АВТО (Таймер / PWA)";
                 label.className = "text-cyan-400 font-bold";
-                sendRawCommand(`AT+PUMP${pumpNum}:MODE:AUTO`);
+                sendRawCommand(`AT+PUMP${pumpNum}=AUTO`);
             }
         }
 
-        // --- ОТПРАВКА ГРАФИКА ПОЛИВА В МК ---
+        // --- ОТПРАВКА ГРАФИКА ПОЛИВА В МК (Формат: AT+SCH=Pump,Zone,Time,Dur,Days) ---
         function sendScheduleToSTM32() {
             for (let p = 1; p <= 2; p++) {
                 for (let z = 1; z <= 3; z++) {
@@ -1042,15 +1022,16 @@
                         days += document.getElementById(`p${p}z${z}d${d}`).checked ? '1' : '0';
                     }
 
-                    const packet = `AT+SCH:P${p}:Z${z}:${time},D:${dur},W:${days}`;
+                    const packet = `AT+SCH=${p},${z},${time},${dur},${days}`;
                     sendRawCommand(packet);
                 }
             }
             alert("Расписание полива всех зон передано в STM32!");
         }
 
-        // --- ПАРСИНГ ТЕЛЕМЕТРИИ С ДАТЧИКОВ STM32 ---
+        // --- ПАРСИНГ ТЕЛЕМЕТРИИ С ДАТЧИКОВ STM32 И ПОДТВЕРЖДЕНИЙ СОСТОЯНИЯ ---
         function parseTelemetryLine(line) {
+            // 1. Обработка формата JSON
             try {
                 if (line.startsWith('{') && line.endsWith('}')) {
                     const data = JSON.parse(line);
@@ -1058,14 +1039,30 @@
                     if (data.p2 !== undefined) updatePumpPressure(2, data.p2);
                     if (data.f1 !== undefined) updateFlowRate(1, data.f1);
                     if (data.f2 !== undefined) updateFlowRate(2, data.f2);
+
+                    // Включение/выключение индикации насосов ТОЛЬКО по факту ответа из JSON
                     if (data.p1On !== undefined) setPumpState(1, data.p1On === 1);
                     if (data.p2On !== undefined) setPumpState(2, data.p2On === 1);
+
                     if (data.t !== undefined) document.getElementById('stm32ClockDisplay').innerText = data.t;
                     if (data.d !== undefined) document.getElementById('stm32DateDisplay').innerText = `Дата: ${data.d}`;
                     updateLastTelemetryTimestamp();
                     return;
                 }
             } catch(e) {}
+
+            // 2. Обработка текстовых AT-подтверждений и телеметрии
+            if (line.includes('P1_STATE:ON') || line.includes('PUMP1:STARTED')) {
+                setPumpState(1, true);
+            } else if (line.includes('P1_STATE:OFF') || line.includes('PUMP1:STOPPED')) {
+                setPumpState(1, false);
+            }
+
+            if (line.includes('P2_STATE:ON') || line.includes('PUMP2:STARTED')) {
+                setPumpState(2, true);
+            } else if (line.includes('P2_STATE:OFF') || line.includes('PUMP2:STOPPED')) {
+                setPumpState(2, false);
+            }
 
             if (line.includes('P1:')) {
                 const m = line.match(/P1:([\d.]+)/);
@@ -1103,7 +1100,6 @@
             const display = document.getElementById(`p${pumpNum}FlowDisplay`);
             const status = document.getElementById(`p${pumpNum}FlowStatus`);
 
-            // Логика: 1 = Есть проток, 0 = Нет протока
             const hasFlow = (flowVal > 0);
 
             if (hasFlow) {
@@ -1124,7 +1120,7 @@
             document.getElementById('p2PressureDisplay').innerText = p2PressureBar.toFixed(2);
         }
 
-        /* Сохранение порогов давления */
+        /* Сохранение порогов давления (Формат: AT+CONFIG=P1_ON,P1_OFF,P1_MIN,P2_ON,P2_OFF,P2_MIN) */
         function savePumpConfig() {
             p1MinThresh = parseFloat(document.getElementById('p1MinInput').value);
             p1MaxThresh = parseFloat(document.getElementById('p1MaxInput').value);
@@ -1142,7 +1138,7 @@
             document.getElementById('p2MaxDash').innerText = p2MaxThresh.toFixed(2);
             document.getElementById('p2LowDash').innerText = p2LowThresh.toFixed(2);
 
-            sendRawCommand(`AT+CONFIG:P1_ON=${p1MinThresh};P1_OFF=${p1MaxThresh};P1_MIN=${p1LowThresh};P2_ON=${p2MinThresh};P2_OFF=${p2MaxThresh};P2_MIN=${p2LowThresh}`);
+            sendRawCommand(`AT+CONFIG=${p1MinThresh},${p1MaxThresh},${p1LowThresh},${p2MinThresh},${p2MaxThresh},${p2LowThresh}`);
             alert("Настройки порогов давления сохранены!");
         }
 
