@@ -1,6 +1,6 @@
 {
-"name": "STM32 BLE Pump Controller",
-"short_name": "STM32 Полив",
+"name": "Pump Controller",
+"short_name": "PcW",
 "description": "Автономное веб-приложение для управления двумя насосами через BLE HM-10",
 "start_url": "./index.html",
 "display": "standalone",
@@ -8,6 +8,12 @@
 "theme_color": "#121824",
 "orientation": "portrait",
 "icons": [
+  {
+    "src": "icons/web-app-manifest-96x96.png",
+    "sizes": "96x96",
+    "type": "image/png",
+    "purpose": "maskable"
+  },
     {
       "src": "icons/web-app-manifest-192x192.png",
       "sizes": "192x192",
@@ -20,5 +26,6 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+    
   ]
 }
