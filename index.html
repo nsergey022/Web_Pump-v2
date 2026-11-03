@@ -14,12 +14,12 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Подключение Tailwind CSS -->
+    <!-- Подключение Tailwind CSS  настройка темной темы -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
+    tailwind.config = {
+         darkMode: 'class',
+          theme: {
                 extend: {
                     colors: {
                         cyber: {
@@ -44,56 +44,69 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="h-full flex flex-col font-sans antialiased overflow-x-hidden pb-16 md:pb-0 selection:bg-cyan-500 selection:text-black">
+<body class="h-full flex flex-col font-sans antialiased overflow-x-hidden
+             pb-16 md:pb-0 selection:bg-cyan-500 selection:text-black">
 
     <!-- ВЕРХНЯЯ ПАНЕЛЬ СТАТУСА И ШАПКА -->
-    <header class="bg-cyber-panel border-b border-cyber-border px-3 md:px-4 py-2.5 md:py-3 flex items-center justify-between sticky top-0 z-50 shadow-md">
-        <div class="flex items-center space-x-2.5 md:space-x-3">
+ <header class="grid  grid-cols-1 bg-cyber-panel border-b border-cyber-border px-3 md:px-4 py-2.5 md:py-3 items-center sticky 
+top-0 z-50 shadow-md">
+ 
+ <!--общий блок логотипа данные и кнопка соединения -->
+ <div class="flex grid  grid-cols-3 flex justify-around md:justify-center space-x-1 ">
 
-            <div class="w-9 h-9 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center shrink-0 p-1">
-     <svg xmlns="http://www.w3.org/2000/svg" 
-        viewBox="0 0 512 512" 
-        class="w-full h-full">
-        <circle cx="256" cy="256" r="200" 
-               fill="#0a0d14" 
-               stroke="#00f0ff" 
-               stroke-width="20"/>
-        <path d="M256 110 L256 402 M110 256 L402 256 M152 152 L360 360 M152 360 L360 152" 
-                stroke="#00f0ff" 
-                stroke-width="30" 
-                stroke-linecap="round"/>
-        <circle cx="256" cy="256" r="70" fill="#00ff66"/>
-     </svg>
-<!-- моя иконка проверка -->
-
-<!-- конец  -->
-
-            </div>
-
-            <div>
-                <h1 class="font-bold text-xs md:text-base tracking-wide text-white flex items-center gap-1.5">
-                    STM32F411 <span class="text-[10px] md:text-xs px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono">HM-10</span>
-                </h1>
+<!--блок графики насоса картинка насоса -->
+    <div class="flex items-center space-x-1 md:space-x-3 border border-cyber-border rounded-xl w-32 px-1 ">
+        
+        <div class="w-12 h-12 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center shrink-0 p-1"
+            style="background-color:#67e499 ;" >
+            <img src=favicon.png />
+        </div>
+          <div >
+            <!-- w-24 flex items-center  tracking-wide -->
+            <h1 class=" font-bold text-xs md:text-base text-white gap-1.5">НАСОСНАЯ СТАНЦИЯ</h1>
                 <div class="flex items-center gap-1.5 text-[11px] md:text-xs text-gray-400 font-mono">
-                    <span id="statusIndicator" class="inline-block w-2 h-2 rounded-full bg-red-500"></span>
-                    <span id="statusText">Отключено</span>
+                    <!-- кружок красный или зеленый -->
+                <span id="statusIndicator" class="inline-block w-2 h-2 rounded-full bg-red-500"></span>
+                <span id="statusText">Отключено</span>
                 </div>
-            </div>
-        </div>
+          </div>
+    </div>
 
-        <div class="flex items-center space-x-2">
-            <!-- Кнопка установки PWA приложения Android -->
-            <button id="pwaInstallBtn" onclick="triggerPWAInstall()" class="text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/50 px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition font-mono font-bold">
-                <i class="fa-brands fa-android text-emerald-400 text-sm"></i>
-                <span>Установить PWA</span>
-            </button>
-
-            <!-- Кнопка подключения Bluetooth (Web BLE API) -->
-            <button id="bleConnectBtn" onclick="toggleBLEConnection()" class="text-xs md:text-sm font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 hover:border-cyan-400 px-3 md:px-4 py-2 rounded-xl flex items-center gap-1.5 transition glow-cyan btn-active touch-target-lg">
-                <i class="fa-solid fa-bluetooth text-sm"></i>
-                <span id="bleBtnText">Подключить</span>
-            </button>
+    <!-- блок обновления данных  
+    justify-between w-44 h-20
+     shadow-lg
+     bg-cyber-panel
+    -->
+    <div class="flex items-center  border border-cyber-border rounded-xl w-32 p-1 ">
+                <!-- p-3.5 md:p-4  -->
+        <div class="space-y-0.5">
+            <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Обновление данных</span>
+            <div id="lastTelemetryTime" class="text-xs md:text-sm text-cyan-400 font-mono font-bold">Ожидание пакета...</div>
+            <!-- <div class="text-[10px] text-gray-500 font-mono">Единица давления: <span class="text-gray-300 font-bold">бар (bar)</span></div> -->
         </div>
+        <!-- <div class="p-2.5 md:p-3 bg-indigo-950/40 rounded-lg border border-indigo-800/30 text-indigo-400">
+            <i class="fa-solid fa-gauge-simple-high text-xl md:text-2xl"></i>
+        </div> -->
+    </div>
+     
+
+    
+    <!-- Кнопка подключения Bluetooth (Web BLE API)  значек блютуз -->
+    <!-- space-x-2
+     style="padding-left: 5px;"
+     items-center
+    -->
+    <div class="flex  justify-between   w-32 ">
+        <button id="bleConnectBtn" onclick="toggleBLEConnection()" 
+         class="text-xs md:text-sm font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400  border border-cyan-500/50 hover:border-cyan-400 px-3 md:px-4 py-2 rounded-xl flex items-center gap-1.5 transition glow-cyan btn-active touch-target-lg">
+         <!-- значек блютуз --> 
+         <i class="fa-brands fa-bluetooth fa-4x"></i>
+         <span id="bleBtnText">Подключить</span>
+        </button>
+    </div>
+
+  </div> 
+
     </header>
 
     <!-- НАВИГАЦИОННАЯ ПАНЕЛЬ -->
@@ -135,6 +148,7 @@
                     </div>
                 </div>
 
+                <!-- вывд обмена данными -->
                 <div class="bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 flex items-center justify-between shadow-lg">
                     <div class="space-y-1">
                         <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Обновление данных</span>
