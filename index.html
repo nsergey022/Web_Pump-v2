@@ -55,7 +55,7 @@ top-0 z-50 shadow-md">
  <div class="flex grid  grid-cols-3 flex justify-around md:justify-center space-x-1 ">
 
 <!--блок графики насоса картинка насоса -->
-    <div class="flex items-center space-x-1 md:space-x-3 border border-cyber-border rounded-xl w-32 px-1 ">
+    <div class="flex items-center space-x-0.5 md:space-x-3 border border-cyber-border rounded-xl w-32 px-1 ">
         
         <div class="w-12 h-12 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center shrink-0 p-1"
             style="background-color:#67e499 ;" >
@@ -64,7 +64,7 @@ top-0 z-50 shadow-md">
           <div >
             <!-- w-24 flex items-center  tracking-wide -->
             <h1 class=" font-bold text-xs md:text-base text-white gap-1.5">НАСОСНАЯ СТАНЦИЯ</h1>
-                <div class="flex items-center gap-1.5 text-[11px] md:text-xs text-gray-400 font-mono">
+                <div class="flex items-center gap-0.5 text-[10px] md:text-xs text-gray-400 font-mono">
                     <!-- кружок красный или зеленый -->
                 <span id="statusIndicator" class="inline-block w-2 h-2 rounded-full bg-red-500"></span>
                 <span id="statusText">Отключено</span>
@@ -77,13 +77,18 @@ top-0 z-50 shadow-md">
      shadow-lg
      bg-cyber-panel
     -->
-    <div class="flex items-center  border border-cyber-border rounded-xl w-32 p-1 ">
+    <div class="flex items-center  border border-cyber-border rounded-xl w-32 p-1 grid  grid-cols-1  ">
                 <!-- p-3.5 md:p-4  -->
-        <div class="space-y-0.5">
-            <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Обновление данных</span>
-            <div id="lastTelemetryTime" class="text-xs md:text-sm text-cyan-400 font-mono font-bold">Ожидание пакета...</div>
+            <div>
+            <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider"><p>Обновление<br> данных</p> </span>
+            </div>
+            <!-- text-xs md:text-sm -->
+            <div id="lastTelemetryTime" 
+            class=" flex text-[10px] text-cyan-400 font-mono font-bold items-center">
+                Ожидание пакета...
+            </div>
             <!-- <div class="text-[10px] text-gray-500 font-mono">Единица давления: <span class="text-gray-300 font-bold">бар (bar)</span></div> -->
-        </div>
+       
         <!-- <div class="p-2.5 md:p-3 bg-indigo-950/40 rounded-lg border border-indigo-800/30 text-indigo-400">
             <i class="fa-solid fa-gauge-simple-high text-xl md:text-2xl"></i>
         </div> -->
