@@ -55,7 +55,7 @@ top-0 z-50 shadow-md  ">
                                         <!-- <div class="flex justify-between space-x-1 "> -->
 <div  class="grid grid-cols-3 gap-3 "> <!-- class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4" sm:grid-cols-3  md:gap-4-->
                 <!--блок графики насоса картинка насоса -->
-    <div class="flex items-center space-x-0.5 md:space-x-3 border border-cyber-border rounded-xl w-44 px-1 ">
+    <div class="flex items-center space-x-0.5 md:space-x-3 border border-cyber-border rounded-xl px-1 ">
         
         <div class="w-12 h-12 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center shrink-0 p-1"
             style="background-color:#67e499 ;" >
@@ -72,7 +72,7 @@ top-0 z-50 shadow-md  ">
           </div>
     </div>
        <!-- блок обновления данных   -->
-       <div class="flex items-center  border border-cyber-border rounded-xl w-32 p-1 grid  grid-cols-1  ">
+       <div class="flex items-center  border border-cyber-border rounded-xl p-1 grid  grid-cols-1  ">
         <!-- justify-between w-44 h-20  shadow-lg  bg-cyber-panel p-3.5 md:p-4-->
    <div>
    <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider"><p>Обновление<br> данных</p> </span>
@@ -92,18 +92,20 @@ top-0 z-50 shadow-md  ">
    </div>
  </div> 
         <!--вторая строка шапки   -->
-  <div class="flex justify-around py-2">
+  <div class="flex justify-around py-0.5">
 
-    <div class="grid grid-cols-2 bg-cyber-panel border border-cyber-border rounded-xl p-2 shadow-lg gap-5  ">
-        <!--space-y-0.5  -->
-        <div class="space-y-1.5 px-1" >
-        <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Дата: </span> 
+    <div class="grid grid-cols-2 bg-cyber-panel border border-cyber-border rounded-xl p-0 shadow-lg gap-12  ">
+        <!-- class="px-1 space-y-0.5" -->
+        <div  >
+        <span class="text-[10px] font-mono text-gray-400 uppercase tracking-wider">Дата: </span> 
         <div id="stm32DateDisplay" class="text-[12px] font-mono font-bold text-cyan-400 tracking-widest">--.--.----</div>  
         <!-- text-xl md:text-3xl -->
-    </div>
+        </div>
+
         <div >
-            <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Время МК (RTC)</span>
-            <div id="stm32ClockDisplay" class="text-xl md:text-3xl font-mono font-bold text-cyan-400 tracking-widest">--:--:--</div>
+            <span class="text-[10px]  font-mono text-gray-400 uppercase tracking-wider">Время</span>
+            <div id="stm32ClockDisplay" class="text-[12px] font-mono font-bold text-cyan-400 tracking-widest">--:--:--</div>
+        <!--text-xl  -->
         </div>
        
     </div>
