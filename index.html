@@ -48,14 +48,14 @@
              pb-16 md:pb-0 selection:bg-cyan-500 selection:text-black">
 
     <!-- ВЕРХНЯЯ ПАНЕЛЬ СТАТУСА И ШАПКА -->
- <header class="grid  grid-cols-1 bg-cyber-panel border-b border-cyber-border px-3 md:px-4 py-2.5 md:py-3 items-center sticky 
-top-0 z-50 shadow-md">
+<header class=" grid grid-cols-1 bg-cyber-panel border-b border-cyber-border px-3 md:px-4 py-2.5 md:py-3 items-center sticky 
+top-0 z-50 shadow-md  ">
  
- <!--общий блок логотипа данные и кнопка соединения -->
- <div class="flex grid  grid-cols-3 flex justify-around md:justify-center space-x-1 ">
-
-<!--блок графики насоса картинка насоса -->
-    <div class="flex items-center space-x-0.5 md:space-x-3 border border-cyber-border rounded-xl w-32 px-1 ">
+            <!--общий блок логотипа данные и кнопка соединения -->
+                                        <!-- <div class="flex justify-between space-x-1 "> -->
+<div  class="grid grid-cols-3 gap-3 "> <!-- class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4" sm:grid-cols-3  md:gap-4-->
+                <!--блок графики насоса картинка насоса -->
+    <div class="flex items-center space-x-0.5 md:space-x-3 border border-cyber-border rounded-xl w-44 px-1 ">
         
         <div class="w-12 h-12 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center shrink-0 p-1"
             style="background-color:#67e499 ;" >
@@ -71,48 +71,51 @@ top-0 z-50 shadow-md">
                 </div>
           </div>
     </div>
-
-    <!-- блок обновления данных  
-    justify-between w-44 h-20
-     shadow-lg
-     bg-cyber-panel
-    -->
-    <div class="flex items-center  border border-cyber-border rounded-xl w-32 p-1 grid  grid-cols-1  ">
-                <!-- p-3.5 md:p-4  -->
-            <div>
-            <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider"><p>Обновление<br> данных</p> </span>
-            </div>
-            <!-- text-xs md:text-sm -->
-            <div id="lastTelemetryTime" 
-            class=" flex text-[10px] text-cyan-400 font-mono font-bold items-center">
-                Ожидание пакета...
-            </div>
-            <!-- <div class="text-[10px] text-gray-500 font-mono">Единица давления: <span class="text-gray-300 font-bold">бар (bar)</span></div> -->
-       
-        <!-- <div class="p-2.5 md:p-3 bg-indigo-950/40 rounded-lg border border-indigo-800/30 text-indigo-400">
-            <i class="fa-solid fa-gauge-simple-high text-xl md:text-2xl"></i>
-        </div> -->
-    </div>
-     
-
-    
+       <!-- блок обновления данных   -->
+       <div class="flex items-center  border border-cyber-border rounded-xl w-32 p-1 grid  grid-cols-1  ">
+        <!-- justify-between w-44 h-20  shadow-lg  bg-cyber-panel p-3.5 md:p-4-->
+   <div>
+   <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider"><p>Обновление<br> данных</p> </span>
+   </div>
+   <!-- text-xs md:text-sm -->
+   <div id="lastTelemetryTime" class=" flex text-[10px] text-cyan-400 font-mono font-bold items-center">Ожидание пакета...</div>
+   </div>
     <!-- Кнопка подключения Bluetooth (Web BLE API)  значек блютуз -->
-    <!-- space-x-2
-     style="padding-left: 5px;"
-     items-center
-    -->
-    <div class="flex  justify-between   w-32 ">
+    <div class="w-44">
+                        <!-- space-x-2
+                    style="padding-left: 5px;"
+                    items-center
+                    -->
         <button id="bleConnectBtn" onclick="toggleBLEConnection()" 
          class="text-xs md:text-sm font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400  border border-cyan-500/50 hover:border-cyan-400 px-3 md:px-4 py-2 rounded-xl flex items-center gap-1.5 transition glow-cyan btn-active touch-target-lg">
          <!-- значек блютуз --> 
          <i class="fa-brands fa-bluetooth fa-4x"></i>
          <span id="bleBtnText">Подключить</span>
         </button>
+   </div>
+ </div> 
+        <!--вторая строка шапки   -->
+  <div class="flex justify-center py-2">
+
+    <div class="grid grid-cols-3 bg-cyber-panel border border-cyber-border rounded-xl p-2 shadow-lg gap-5  ">
+        <!--space-y-0.5  -->
+        <div class="space-y-1.5 px-1" >
+        <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Дата: </span> 
+        <div id="stm32DateDisplay" class="text-[12px] font-mono font-bold text-cyan-400 tracking-widest">--.--.----</div>  
+        <!-- text-xl md:text-3xl -->
     </div>
+        <div >
+            <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Время МК (RTC)</span>
+            <div id="stm32ClockDisplay" class="text-xl md:text-3xl font-mono font-bold text-cyan-400 tracking-widest">--:--:--</div>
+        </div>
+        <!-- значек часов -->
+        <div class="p-2.5 md:p-3 bg-cyan-950/40 rounded-lg border border-cyan-800/30 text-cyan-400">
+            <i class="fa-regular fa-clock text-xl md:text-2xl"></i>
+        </div>
+    </div>
+  </div>
 
-  </div> 
-
-    </header>
+</header>
 
     <!-- НАВИГАЦИОННАЯ ПАНЕЛЬ -->
     <nav class="fixed bottom-0 left-0 right-0 md:sticky md:top-[57px] bg-cyber-panel/95 backdrop-blur border-t md:border-t-0 md:border-b border-cyber-border px-2 md:px-4 flex justify-around md:justify-center space-x-1 md:space-x-4 font-mono text-xs z-50 mobile-bottom-nav py-1 md:py-0">
@@ -136,55 +139,7 @@ top-0 z-50 shadow-md">
         <!-- ВКЛАДКА 1: ДАШБОРД -->
         <div id="tabDashboard" class="space-y-4 md:space-y-6">
 
-            <!-- КАРТОЧКИ ТЕЛЕМЕТРИИ -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
-                <div class="bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 flex items-center justify-between shadow-lg">
-                    <div class="space-y-0.5">
-                        <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Время МК (RTC)</span>
-                        <div id="stm32ClockDisplay" class="text-xl md:text-3xl font-mono font-bold text-cyan-400 tracking-widest">
-                            --:--:--
-                        </div>
-                        <div id="stm32DateDisplay" class="text-[10px] md:text-xs font-mono text-gray-500">
-                            Дата: --.--.----
-                        </div>
-                    </div>
-                    <div class="p-2.5 md:p-3 bg-cyan-950/40 rounded-lg border border-cyan-800/30 text-cyan-400">
-                        <i class="fa-regular fa-clock text-xl md:text-2xl"></i>
-                    </div>
-                </div>
-
-                <!-- вывд обмена данными -->
-                <div class="bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 flex items-center justify-between shadow-lg">
-                    <div class="space-y-1">
-                        <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Обновление данных</span>
-                        <div id="lastTelemetryTime" class="text-xs md:text-sm text-cyan-400 font-mono font-bold">Ожидание пакета...</div>
-                        <div class="text-[10px] text-gray-500 font-mono">Единица давления: <span class="text-gray-300 font-bold">бар (bar)</span></div>
-                    </div>
-                    <div class="p-2.5 md:p-3 bg-indigo-950/40 rounded-lg border border-indigo-800/30 text-indigo-400">
-                        <i class="fa-solid fa-gauge-simple-high text-xl md:text-2xl"></i>
-                    </div>
-                </div>
-
-                <div class="bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 flex items-center justify-between shadow-lg">
-                    <div class="space-y-1">
-                        <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Статус систем</span>
-                        <div class="flex items-center gap-3 pt-1">
-                            <div class="flex items-center gap-1">
-                                <span class="text-xs font-mono text-gray-300">Н1:</span>
-                                <span id="pump1MiniBadge" class="px-2 py-0.5 rounded text-[10px] md:text-xs font-mono font-bold bg-red-950/80 text-red-400 border border-red-800/50">СТОП</span>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <span class="text-xs font-mono text-gray-300">Н2:</span>
-                                <span id="pump2MiniBadge" class="px-2 py-0.5 rounded text-[10px] md:text-xs font-mono font-bold bg-red-950/80 text-red-400 border border-red-800/50">СТОП</span>
-                            </div>
-                        </div>
-                        <div class="text-[10px] md:text-[11px] text-emerald-400 font-mono pt-1">BLE Связь: Готова</div>
-                    </div>
-                    <div class="p-2.5 md:p-3 bg-emerald-950/40 rounded-lg border border-emerald-800/30 text-cyber-neonGreen">
-                        <i class="fa-solid fa-square-rss text-xl md:text-2xl"></i>
-                    </div>
-                </div>
-            </div>
+            
 
             <!-- УПРАВЛЕНИЕ НАСОСАМИ -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
