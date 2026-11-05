@@ -48,7 +48,7 @@
              pb-16 md:pb-0 selection:bg-cyan-500 selection:text-black">
 
     <!-- ВЕРХНЯЯ ПАНЕЛЬ СТАТУСА И ШАПКА -->
-<header class=" grid grid-cols-1 bg-cyber-panel border-b border-cyber-border px-3 md:px-4 py-2.5 md:py-3 items-center sticky 
+<header class=" grid grid-cols-1 bg-cyber-panel border-b border-cyber-border px-2 py-0.5 items-center sticky 
 top-0 z-50 shadow-md  ">
  
             <!--общий блок логотипа данные и кнопка соединения -->
@@ -81,13 +81,10 @@ top-0 z-50 shadow-md  ">
    <div id="lastTelemetryTime" class=" flex text-[10px] text-cyan-400 font-mono font-bold items-center">Ожидание пакета...</div>
    </div>
     <!-- Кнопка подключения Bluetooth (Web BLE API)  значек блютуз -->
-    <div class="w-44">
-                        <!-- space-x-2
-                    style="padding-left: 5px;"
-                    items-center
-                    -->
-        <button id="bleConnectBtn" onclick="toggleBLEConnection()" 
-         class="text-xs md:text-sm font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400  border border-cyan-500/50 hover:border-cyan-400 px-3 md:px-4 py-2 rounded-xl flex items-center gap-1.5 transition glow-cyan btn-active touch-target-lg">
+    <div>
+         <!-- space-x-2 style="padding-left: 5px;"items-center-->
+         <button id="bleConnectBtn" onclick="toggleBLEConnection()" 
+         class="text-[9px] font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400  border border-cyan-500/50 hover:border-cyan-400 p-1 rounded-xl flex items-center gap-1.5 transition glow-cyan btn-active touch-target-lg">
          <!-- значек блютуз --> 
          <i class="fa-brands fa-bluetooth fa-4x"></i>
          <span id="bleBtnText">Подключить</span>
@@ -95,9 +92,9 @@ top-0 z-50 shadow-md  ">
    </div>
  </div> 
         <!--вторая строка шапки   -->
-  <div class="flex justify-center py-2">
+  <div class="flex justify-around py-2">
 
-    <div class="grid grid-cols-3 bg-cyber-panel border border-cyber-border rounded-xl p-2 shadow-lg gap-5  ">
+    <div class="grid grid-cols-2 bg-cyber-panel border border-cyber-border rounded-xl p-2 shadow-lg gap-5  ">
         <!--space-y-0.5  -->
         <div class="space-y-1.5 px-1" >
         <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Дата: </span> 
@@ -108,10 +105,7 @@ top-0 z-50 shadow-md  ">
             <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">Время МК (RTC)</span>
             <div id="stm32ClockDisplay" class="text-xl md:text-3xl font-mono font-bold text-cyan-400 tracking-widest">--:--:--</div>
         </div>
-        <!-- значек часов -->
-        <div class="p-2.5 md:p-3 bg-cyan-950/40 rounded-lg border border-cyan-800/30 text-cyan-400">
-            <i class="fa-regular fa-clock text-xl md:text-2xl"></i>
-        </div>
+       
     </div>
   </div>
 
