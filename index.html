@@ -145,23 +145,25 @@ top-0 z-50 shadow-md  ">
     <main class="flex-1 max-w-7xl w-full mx-auto p-2.5 md:p-6 space-y-4 md:space-y-6">
 
         <!-- ВКЛАДКА 1: ДАШБОРД -->
-        <div id="tabDashboard" class="space-y-4 md:space-y-6">
-
-
+ <div id="tabDashboard" class="space-y-4 md:space-y-6">
 
             <!-- УПРАВЛЕНИЕ НАСОСАМИ -->
    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
-    <!-- НАСОС 1 -->
+    
+                        <!-- НАСОС 1 -->
      <div id="pump1Card" class="bg-cyber-panel border border-cyber-border rounded-xl p-1 shadow-xl space-y-1.5 transition-all duration-300">
-       <div class="flex items-center justify-between border-b border-cyber-border/60 pb-0.5">
+       <!-- центральный блок насоса 1 -->
+        <div class="flex items-center justify-between border-b border-cyber-border/60 pb-0.5">
          <div class="flex items-center gap-2.5">
-                <div id="pump1IconBox" class="p-2 rounded-lg bg-gray-800/50 text-gray-400 border border-gray-700">
-                    <i id="pump1Icon" class="fa-solid fa-fan text-lg md:text-xl"></i>
-                </div>
-                <div>
-                 <h2 class="font-bold text-sm md:text-base text-white tracking-wide">НАСОС #1 </h2>
-                 <p class="text-[10px]  text-gray-400 font-mono">Водоснабжение дома / Зоны 1-3</p>
-                </div>
+              <!--иконка насоса 1 -->
+            <div id="pump1IconBox" class="p-2 rounded-lg bg-gray-800/50 text-gray-400 border border-gray-700">
+               <i id="pump1Icon" class="fa-solid fa-fan text-lg md:text-xl"></i> 
+            </div>
+
+            <div>
+               <h2 class="font-bold text-sm md:text-base text-white tracking-wide">НАСОС #1</h2>
+               <p class="text-[10px]  text-gray-400 font-mono">Водоснабжение дома / Зоны 1-3</p>
+            </div>
          </div>
             <span id="pump1StatusBadge" 
             class="px-2.5 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-mono font-bold bg-red-950 text-red-400 border border-red-800">
@@ -169,17 +171,70 @@ top-0 z-50 shadow-md  ">
             </span>
         </div>
 
-                    <div class="grid grid-cols-2 gap-2.5">
-                        <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border">
-                            <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Давление Н1</span>
-                            <div class="flex items-baseline gap-1 mt-0.5">
-                                <span id="p1PressureDisplay" class="text-xl md:text-2xl font-mono font-bold text-cyber-neonGreen">0.00</span>
-                                <span class="text-[10px] md:text-xs font-mono text-gray-400">бар</span>
+   <div class="grid grid-cols-3 gap-2.5">
+            <!-- общий блок контроля давления -->
+    <div class="bg-cyber-bg px-1  rounded-lg border border-cyber-border">
+                            <!-- <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Давление Н1</span> -->
+                 <div class="flex justify-between  gap-1 mt-0.5">
+                    <div>
+                    <span id="p1PressureDisplay" class="px-1 text-3xl  font-mono font-bold text-cyber-neonGreen">3.50</span>
+                    </div>
+                    <div class="flex self-end">
+                    <span class="text-[10px] font-mono text-gray-400">бар</span>
+                    </div>
+                 </div>
+                 <!-- блок уставок давления -->
+            <div class=" grid grid-cols-1">
+                <div class="flex justify-between text-[9px] font-mono text-gray-500 block  " >
+                    <div class="gap-4"> <span >МИН:</span> </div>
+                    <div> <span id="p1MinDash">1.50</span></div>
+                </div>
+                    <div class="flex justify-between text-[9px]  font-mono text-gray-500 block -mt-1">
+                            <div>
+                                <span >МАКС:</span>
                             </div>
-                            <span class="text-[9px] md:text-[10px] font-mono text-gray-500 block mt-1">Вкл: <span id="p1MinDash">1.50</span> / Выкл: <span id="p1MaxDash">3.50</span> бар</span>
-                            <span class="text-[9px] md:text-[10px] font-mono text-amber-500/80 block">Поиск воды: &lt; <span id="p1LowDash">0.50</span> бар</span>
-                        </div>
+                            <div>
+                            <span id="p1MaxDash">3.50</span>
+                            </div>
+                    </div>
+                        <div class="flex justify-between text-[9px]  font-mono text-gray-500 block -mt-1 ">
+                                <div >
+                                    <span class="text-[9px] font-mono text-sky-400 block" >Поиск воды: &lt;</span>
+                                </div>
+                                <div>
+                                <span class="text-[9px] font-mono text-sky-400 block" id="p1LowDash">0.50</span>
+                                </div>
+                        </div> 
+            </div>
+              
+    </div>
+                    <!-- общий блок температура -->
+      <div class="bg-cyber-bg px-1 rounded-lg border border-cyber-border" >
+                            <!-- <span class="text-[10px] font-mono text-amber-500 block uppercase font-bold">Темп-ра</span> -->
+            <div class="flex items-baseline gap-1.5 mt-0.5 justify-center">
+                 <span id="p1TempDisplay" class="text-2xl  font-mono font-bold text-amber-400">24.5</span>
+                 <span class="text-2xs font-mono text-amber-500 self-start">°C</span>
+            </div>
 
+            <div class=" grid grid-cols-1">
+                <div class="flex justify-between text-[9px] font-mono text-gray-500 block  " >
+                   <span >т-ра мин:</span> 
+                    <div> 
+                        <span >1.50</span> <!-- добавить id температуры-->
+                        <span >°C</span>
+                    </div>
+                </div>
+                    <div class="flex justify-between text-[9px]  font-mono text-gray-500 block -mt-1">
+                        <span >т-ра макс:</span>
+                            <div>
+                            <span >10.5</span> <!-- добавить id температуры-->
+                            <span >°C</span>
+                            </div>
+                    </div>
+                       
+            </div>
+     </div>
+                        <!-- поток -->
                         <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border">
                             <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Датчик протока Н1</span>
                             <div class="flex items-baseline gap-1 mt-0.5">
@@ -187,7 +242,7 @@ top-0 z-50 shadow-md  ">
                             </div>
                             <span id="p1FlowStatus" class="text-[9px] md:text-[10px] font-mono font-bold text-rose-400 block mt-1">ОТСУТСТВУЕТ</span>
                         </div>
-                    </div>
+        </div>
 
                     <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border space-y-1.5">
                         <div class="flex items-center justify-between text-xs font-mono">
@@ -302,7 +357,7 @@ top-0 z-50 shadow-md  ">
                 </div>
             </div>
 
-        </div>
+  </div>
 
         <!-- ВКЛАДКА 2: ГРАФИК -->
         <div id="tabSchedule" class="hidden space-y-4 md:space-y-6">
