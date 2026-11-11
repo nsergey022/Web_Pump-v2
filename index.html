@@ -59,7 +59,7 @@
              pb-16 md:pb-0 selection:bg-cyan-500 selection:text-black">
 
     <!-- ВЕРХНЯЯ ПАНЕЛЬ СТАТУСА И ШАПКА -->
-<header class=" grid grid-cols-1 bg-cyber-panel border-b border-cyber-border px-2 py-0.5 items-center sticky 
+<header class=" grid grid-cols-1 bg-cyber-panel border-b-2 border-indigo-600 px-2 py-0.5 items-center sticky 
 top-0 z-50 shadow-md  ">
  
             <!--общий блок логотипа данные и кнопка соединения -->
@@ -148,12 +148,13 @@ top-0 z-50 shadow-md  ">
  <div id="tabDashboard" class="space-y-4 md:space-y-6">
 
             <!-- УПРАВЛЕНИЕ НАСОСАМИ -->
-   <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+   <div class="grid grid-cols-1 gap-2 ">
     
                         <!-- НАСОС 1 -->
-     <div id="pump1Card" class="bg-cyber-panel border border-cyber-border rounded-xl p-1 shadow-xl space-y-1.5 transition-all duration-300">
-       <!-- центральный блок насоса 1 -->
-        <div class="flex items-center justify-between border-b border-cyber-border/60 pb-0.5">
+     <div id="pump1Card" class="bg-cyber-panel border-2 border-indigo-600 rounded-xl p-1 shadow-xl space-y-1.5 transition-all duration-300">
+        <!-- шапка блока насоса 1 -->
+        <div class="flex items-center justify-between  pb-0.5">
+            <!-- border-b border-cyber-border/60 -->
          <div class="flex items-center gap-2.5">
               <!--иконка насоса 1 -->
             <div id="pump1IconBox" class="p-2 rounded-lg bg-gray-800/50 text-gray-400 border border-gray-700">
@@ -175,14 +176,12 @@ top-0 z-50 shadow-md  ">
             <!-- общий блок контроля давления -->
     <div class="bg-cyber-bg px-1  rounded-lg border border-cyber-border">
                             <!-- <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Давление Н1</span> -->
-                 <div class="flex justify-between  gap-1 mt-0.5">
-                    <div>
+                 <div class="flex justify-center  ">
                     <span id="p1PressureDisplay" class="px-1 text-3xl  font-mono font-bold text-cyber-neonGreen">3.50</span>
-                    </div>
-                    <div class="flex self-end">
-                    <span class="text-[10px] font-mono text-gray-400">бар</span>
-                    </div>
-                 </div>
+                  </div>
+                  <div class="flex justify-center  -mt-1">
+                    <span class="text-[10px] font-mono text-green-400">Bаr</span>
+                  </div>
                  <!-- блок уставок давления -->
             <div class=" grid grid-cols-1">
                 <div class="flex justify-between text-[9px] font-mono text-gray-500 block  " >
@@ -213,7 +212,9 @@ top-0 z-50 shadow-md  ">
                             <!-- <span class="text-[10px] font-mono text-amber-500 block uppercase font-bold">Темп-ра</span> -->
             <div class="flex items-baseline gap-1.5 mt-0.5 justify-center">
                  <span id="p1TempDisplay" class="text-2xl  font-mono font-bold text-amber-400">24.5</span>
-                 <span class="text-2xs font-mono text-amber-500 self-start">°C</span>
+            </div>
+            <div class="flex justify-center  -mt-1">
+              <span class="text-xs font-mono text-amber-500 -mt-0.5">°C</span>  
             </div>
 
             <div class=" grid grid-cols-1">
@@ -269,7 +270,7 @@ top-0 z-50 shadow-md  ">
                 </div>
 
                 <!-- НАСОС 2 -->
-                <div id="pump2Card" class="bg-cyber-panel border border-cyber-border rounded-xl p-4 md:p-5 shadow-xl space-y-3.5 md:space-y-4 transition-all duration-300">
+                <div id="pump2Card" class="bg-cyber-panel border-2 border-indigo-600 rounded-xl p-4 md:p-5 shadow-xl space-y-3.5 md:space-y-4 transition-all duration-300">
                     <div class="flex items-center justify-between border-b border-cyber-border/60 pb-2.5">
                         <div class="flex items-center gap-2.5">
                             <div id="pump2IconBox" class="p-2 md:p-2.5 rounded-lg bg-gray-800/50 text-gray-400 border border-gray-700">
