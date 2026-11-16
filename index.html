@@ -63,12 +63,38 @@
 top-0 z-50 shadow-md  ">
  
             <!--общий блок логотипа данные и кнопка соединения -->
-                                        <!-- <div class="flex justify-between space-x-1 "> -->
-<div  class="grid grid-cols-3 gap-3 "> <!-- class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4" sm:grid-cols-3  md:gap-4-->
+            <div class="grid grid-cols-3 grid-rows-2 ">
+              <div class="grid grid-cols-6 grid-rows-2 ">
+                <div class="row-span-2 col-span-2 " >
+                    <div class="w-8 h-8 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center shrink-0 p-1"
+                    style="background-color:#67e499 ;" >
+                    <img src=favicon.png />
+                     </div>
+                </div>
+                <div class="col-span-4 ">
+                    <span class=" font-bold text-[14px] text-white gap-1.5">Статус</span>
+                </div>
+                <div class="col-span-4 font-bold text-[10px] " >    <!-- кружок красный или зеленый -->
+                    <span id="statusIndicator" class="inline-block w-2 h-2 rounded-full bg-red-500"></span>
+                    <span id="statusText" class="text-[8px]">Отключено</span>
+                </div>
+               
+              </div>
+                            <div>2</div>
+                            <div>3</div>
+                            <div>4</div>
+                            <div>5</div>
+                            <div>6</div>
+            </div> 
+            
+
+
+
+<div  class="grid grid-cols-3 gap-2 ">
                 <!--блок графики насоса картинка насоса -->
     <div class="flex items-center space-x-0.5 md:space-x-3 border border-cyber-border rounded-xl px-1 ">
         
-        <div class="w-12 h-12 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center shrink-0 p-1"
+        <div class="w-8 h-8 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center shrink-0 p-1"
             style="background-color:#67e499 ;" >
             <img src=favicon.png />
         </div>
@@ -83,14 +109,11 @@ top-0 z-50 shadow-md  ">
           </div>
     </div>
        <!-- блок обновления данных   -->
-       <div class="flex items-center  border border-cyber-border rounded-xl p-1 grid  grid-cols-1  ">
-        <!-- justify-between w-44 h-20  shadow-lg  bg-cyber-panel p-3.5 md:p-4-->
-   <div>
-   <span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider"><p>Обновление<br> данных</p> </span>
-   </div>
-   <!-- text-xs md:text-sm -->
-   <div id="lastTelemetryTime" class=" flex text-[10px] text-cyan-400 font-mono font-bold items-center">Ожидание пакета...</div>
-   </div>
+       <div class="flex items-center  border border-cyber-border rounded-xl p-1   ">
+                <!-- justify-between w-44 h-20  shadow-lg  bg-cyber-panel p-3.5 md:p-4-->
+            <div><span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider"><p>Обновление<br> данных</p> </span> </div>
+            <div id="lastTelemetryTime" class=" flex text-[10px] text-cyan-400 font-mono font-bold items-center">Ожидание пакета...</div>
+       </div>
     <!-- Кнопка подключения Bluetooth (Web BLE API)  значек блютуз -->
     <div>
          <!-- space-x-2 style="padding-left: 5px;"items-center-->
