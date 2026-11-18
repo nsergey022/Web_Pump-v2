@@ -63,103 +63,77 @@
 top-0 z-50 shadow-md  ">
  
             <!--общий блок логотипа данные и кнопка соединения -->
-            <div class="grid grid-cols-3 grid-rows-2 ">
+  <div class="grid grid-cols-3  gap-1">
               <div class="grid grid-cols-6 grid-rows-2 ">
-                <div class="row-span-2 col-span-2 " >
-                    <div class="w-8 h-8 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center shrink-0 p-1"
+                <div class="row-span-2 col-span-2 flex items-center justify-center" >
+                    <div class="w-8 h-8 rounded-xl bg-cyan-950 border border-cyan-500/40 shrink-0 p-1"
                     style="background-color:#67e499 ;" >
                     <img src=favicon.png />
                      </div>
                 </div>
-                <div class="col-span-4 ">
-                    <span class=" font-bold text-[14px] text-white gap-1.5">Статус</span>
+                <div class="col-span-4 px-1">
+                    <span class=" font-bold  text-gray-300 ">Статус</span>
                 </div>
-                <div class="col-span-4 font-bold text-[10px] " >    <!-- кружок красный или зеленый -->
+                <!-- кружок красный или зеленый -->
+                <div class="col-span-4 font-bold text-[10px] flex  items-start  px-1 " >    
                     <span id="statusIndicator" class="inline-block w-2 h-2 rounded-full bg-red-500"></span>
-                    <span id="statusText" class="text-[8px]">Отключено</span>
+                    <span id="statusText" class="text-[8px] px-1">Отключено</span>
                 </div>
                
               </div>
-                            <div>2</div>
-                            <div>3</div>
-                            <div>4</div>
-                            <div>5</div>
-                            <div>6</div>
-            </div> 
-            
-
-
-
-<div  class="grid grid-cols-3 gap-2 ">
-                <!--блок графики насоса картинка насоса -->
-    <div class="flex items-center space-x-0.5 md:space-x-3 border border-cyber-border rounded-xl px-1 ">
-        
-        <div class="w-8 h-8 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center shrink-0 p-1"
-            style="background-color:#67e499 ;" >
-            <img src=favicon.png />
-        </div>
-          <div >
-            <!-- w-24 flex items-center  tracking-wide -->
-            <h1 class=" font-bold text-xs md:text-base text-white gap-1.5">НАСОСНАЯ СТАНЦИЯ</h1>
-                <div class="flex items-center gap-0.5 text-[10px] md:text-xs text-gray-400 font-mono">
-                    <!-- кружок красный или зеленый -->
-                <span id="statusIndicator" class="inline-block w-2 h-2 rounded-full bg-red-500"></span>
-                <span id="statusText">Отключено</span>
+                 <div id="lastTelemetryTime" class=" flex text-[10px] text-cyan-400 font-mono font-bold items-center">Ожидание данных...</div>
+                 <div class=" flex justify-center items-center " >
+                    <div >
+                             <!-- space-x-2 style="padding-left: 5px;"items-center-->
+                    <button id="bleConnectBtn" onclick="toggleBLEConnection()" 
+                    class="text-[9px] font-semibold bg-cyan-500/10  hover:bg-cyan-500/20 text-cyan-400  border-4 border-cyan-500/50 hover:border-cyan-400 px-3 rounded-xl flex items-center gap-1 transition glow-cyan btn-active touch-target-lg space-x-2 ">
+                    <!-- значек блютуз --> 
+                    <i class="fa-brands fa-bluetooth fa-3x"></i>
+                    <span id="bleBtnText">Подключить</span>
+                    </button>
+                 </div>
                 </div>
-          </div>
-    </div>
-       <!-- блок обновления данных   -->
-       <div class="flex items-center  border border-cyber-border rounded-xl p-1   ">
-                <!-- justify-between w-44 h-20  shadow-lg  bg-cyber-panel p-3.5 md:p-4-->
-            <div><span class="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider"><p>Обновление<br> данных</p> </span> </div>
-            <div id="lastTelemetryTime" class=" flex text-[10px] text-cyan-400 font-mono font-bold items-center">Ожидание пакета...</div>
-       </div>
-    <!-- Кнопка подключения Bluetooth (Web BLE API)  значек блютуз -->
-    <div>
-         <!-- space-x-2 style="padding-left: 5px;"items-center-->
-         <button id="bleConnectBtn" onclick="toggleBLEConnection()" 
-         class="text-[9px] font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400  border border-cyan-500/50 hover:border-cyan-400 p-1 rounded-xl flex items-center gap-1.5 transition glow-cyan btn-active touch-target-lg">
-         <!-- значек блютуз --> 
-         <i class="fa-brands fa-bluetooth fa-4x"></i>
-         <span id="bleBtnText">Подключить</span>
-        </button>
-   </div>
- </div> 
-        <!--вторая строка шапки   -->
-  <div class=" py-0.5  ">
-<!--justify-around  -->
-    <div class="grid grid-cols-3 bg-cyber-panel  px-2 shadow-lg items-center ">
-       <!-- дата -->
-        <div>
-        <!-- <span class="text-[10px] font-mono text-gray-400 uppercase tracking-wider">Дата: </span>  -->
-        <div id="stm32DateDisplay" class="font-mono text-xs  font-light  text-cyber-neonGreen/80  ">06.11.2026</div>  
-        <!-- text-xl md:text-3xl text-cyan-400 font-mono-->
-        </div>
-  <!-- время -->
-        <div class="border-2 border-cyber-border rounded-md px-2 bg-cyber-bg ">
-            <!-- <span class="text-[10px] font-mono text-gray-400 uppercase tracking-wider">Время</span> -->
-            <!-- <div id="stm32ClockDisplay" class=" flex justify-center text-[16px] font-mono font-bold text-cyber-neonGreen tracking-widest">01:30:55</div> -->
-            <div id="stm32ClockDisplay" class=" flex justify-center text-base font-digital  text-cyber-neonGreen tracking-widest">01:30:52</div>
-        <div>
-        <!-- здесь можно дописать еще один столбец -->
-       </div>
-    </div>
-  </div>
+                </div> 
 
+                <div class="grid grid-cols-3 bg-cyber-panel  px-2 shadow-lg items-center ">
+                    <!-- дата -->
+                     <div>
+                     <!-- <span class="text-[10px] font-mono text-gray-400 uppercase tracking-wider">Дата: </span>  -->
+                     <div id="stm32DateDisplay" class="font-mono text-xs  font-light  text-cyber-neonGreen/80  ">06.11.2026</div>  
+                     <!-- text-xl md:text-3xl text-cyan-400 font-mono-->
+                     </div>
+               <!-- время -->
+                     <div class="border-2 border-cyber-border rounded-md px-2 bg-cyber-bg ">
+                         <!-- <span class="text-[10px] font-mono text-gray-400 uppercase tracking-wider">Время</span> -->
+                         <!-- <div id="stm32ClockDisplay" class=" flex justify-center text-[16px] font-mono font-bold text-cyber-neonGreen tracking-widest">01:30:55</div> -->
+                         <div id="stm32ClockDisplay" class=" flex justify-center text-base font-digital  text-cyber-neonGreen tracking-widest">01:30:52</div>
+                     <div></div> <!-- здесь можно дописать еще один столбец -->
+                    
+                    
+                 </div>
+ </div>
 </header>
 
     <!-- НАВИГАЦИОННАЯ ПАНЕЛЬ -->
-    <nav class="fixed bottom-0 left-0 right-0 md:sticky md:top-[57px] bg-cyber-panel/95 backdrop-blur border-t md:border-t-0 md:border-b border-cyber-border px-2 md:px-4 flex justify-around md:justify-center space-x-1 md:space-x-4 font-mono text-xs z-50 mobile-bottom-nav py-1 md:py-0">
-        <button id="tabBtnDashboard" onclick="switchTab('dashboard')" class="flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-cyan-400 text-cyan-400 font-semibold flex flex-col md:flex-row items-center justify-center gap-1 transition">
-            <i class="fa-solid fa-gauge-high text-base md:text-sm"></i> 
-            <span class="text-[10px] md:text-xs">Дашборд</span>
+    <!-- md:sticky md:top-[57px] md:border-t-0 md:border-b md:px-4 md:justify-center md:space-x-4 md:py-0-->
+    <nav class="fixed bottom-0 left-0 right-0  bg-cyber-panel/95 backdrop-blur border-t  border-cyber-border px-2  flex justify-around  space-x-1  font-mono text-xs z-50 mobile-bottom-nav py-1 ">
+        <button id="tabBtnDashboard" onclick="switchTab('dashboard')" class="flex-1 py-0 px-1  border-t-2   border-cyan-400 text-cyan-400 font-semibold flex flex-col  items-center justify-center gap-1 transition">
+            <i class="fa-solid fa-gauge-high text-base"></i> 
+            <span class="text-[10px] ">Дашборд</span>
         </button>
-        <button id="tabBtnSchedule" onclick="switchTab('schedule')" class="flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex flex-col md:flex-row items-center justify-center gap-1 transition">
-            <i class="fa-regular fa-calendar-check text-base md:text-sm"></i> 
-            <span class="text-[10px] md:text-xs">График</span>
+        <!-- дописать в функцию параметры переключения -->
+        <button id="tabBtnGraph" onclick="switchTab('graph')" class="flex-1  py-0  px-2  border-t-2  border-transparent text-gray-400 hover:text-gray-200 flex flex-col  items-center justify-center gap-1 transition">
+            <i class="fa-solid fa-chart-line text-base "></i> 
+            <span class="text-[8px] md:text-xs">График давления</span>
         </button>
-        <button id="tabBtnSettings" onclick="switchTab('settings')" class="flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex flex-col md:flex-row items-center justify-center gap-1 transition">
-            <i class="fa-solid fa-sliders text-base md:text-sm"></i> 
+
+        <button id="tabBtnSchedule" onclick="switchTab('schedule')" class="flex-1  py-0  px-2  border-t-2   border-transparent text-gray-400 hover:text-gray-200 flex flex-col  items-center justify-center gap-1 transition">
+            <i class="fa-regular fa-calendar-check text-base "></i> 
+            <span class="text-[10px] md:text-xs">Расписание</span>
+        </button>
+        
+        <button id="tabBtnSettings" onclick="switchTab('settings')" class="flex-1  py-0  px-2  border-t-2   border-transparent text-gray-400 hover:text-gray-200 flex flex-col  items-center justify-center gap-1 transition">
+            <i class="fa-solid fa-sliders text-base "></i> 
             <span class="text-[10px] md:text-xs">Настройки</span>
         </button>
     </nav>
@@ -168,481 +142,484 @@ top-0 z-50 shadow-md  ">
     <main class="flex-1 max-w-7xl w-full mx-auto p-2.5 md:p-6 space-y-4 md:space-y-6">
 
         <!-- ВКЛАДКА 1: ДАШБОРД -->
- <div id="tabDashboard" class="space-y-4 md:space-y-6">
+        <div id="tabDashboard" class="space-y-4 md:space-y-6">
 
-            <!-- УПРАВЛЕНИЕ НАСОСАМИ  один столбец два блока-->
-<div class="grid grid-cols-1 gap-4  ">
-    
-    <!-- border-b border-cyber-border/60 --> <!--иконка насоса 1 -->
-                        <!-- НАСОС 1 -->      
-<div id="pump1Card" class="bg-cyber-panel border-2 border-indigo-600 rounded-xl p-1 shadow-xl space-y-0.5 transition-all duration-300">
-        <!-- шапка блока насоса 1 -->
-      <div class="grid grid-flow-col grid-rows-2 grid-cols-9 gap-0">
-        <div class="col-span-3 row-span-2  rounded-lg border border-sky-700 bg-cyber-bg">
-           <div class="grid  grid-rows-2 grid-cols-1 ">
-                <div class="flex justify-center">
-                    <p class="font-mono  text-[8px] text-white tracking-wide ">Режим управления:</p>
-                </div>
-                <div class="flex justify-center pb-0.5">
-                    <span id="pump1ControlMode" class="px-2 font-mono font-bold text-[8px] text-green-400 rounded-lg bg-cyan-950  border border-cyan-500/80">
-                    Датчик давления
-                    </span>
-                </div>
-           </div>
-        </div>
-            <div class="row-span-2 flex justify-center items-center  ">
-              <div id="pump1IconBox" class="flex justify-center items-center p-1 rounded-lg bg-gray-800/50 text-gray-400 border border-gray-700 w-8">
-                  <i id="pump1Icon" class="fa-solid fa-fan text-[15px] "></i>
-              </div>
-            </div>
-
-            <div class="col-span-3 flex  items-center justify-start  -mt-1">
-                <span class="font-bold  text-[10px]  text-white tracking-wide ">Насосная станция</span>
-            </div>
-
-            <div class="col-span-3 flex items-center justify-start -mt-1 ">
-                <span class="font-bold text-[10px]  text-white tracking-wide">Обогрев насоса</span>
-            </div>
-                <div class="col-span-2 flex  justify-start  items-center -mt-1.5">
-                    <span id="pump1StatusBadge" class="px-1 py-0 rounded-full text-[8px] font-mono font-bold bg-red-950 text-red-400 border border-red-800">
-                     ОСТАНОВЛЕНА
-                    </span>
-                </div>
-                    <div class="col-span-2 flex  justify-start items-center -mt-1.5">
-                        <span id="heat1Status" class="px-2.5 py-0 rounded-full text-[8px] font-mono font-bold bg-red-950 text-red-400 border border-red-800">
-                         ВЫКЛЮЧЕН
-                        </span>
-                    </div>
-      </div>
-
-     <!-- общий блок телеметрии -->
- <div class="grid grid-cols-3 gap-0.5 ">
-            <!-- блок контроля давления -->
-    <div class="bg-cyber-bg px-1  rounded-lg border border-sky-700">
-                <div class="flex justify-center  ">
-                  <span id="p1PressureDisplay" class="px-1 text-2xl font-mono font-bold text-cyber-neonGreen ">3.50</span>
-                </div>
-                <div class="flex justify-center  -mt-1"><span class="text-[10px] font-mono text-green-400">Bаr</span></div>
-                 <!-- блок уставок давления -->
-          <div class=" grid grid-flow-col grid-cols-2 grid-rows-3">
-                <div class="-mt-1">
-                    <span class="flex justify-between text-[9px]  font-mono text-gray-500 block ">МАКС:</span>
-                </div>
-                <div class="-mt-1">
-                     <span class="flex justify-between text-[9px] font-mono text-gray-500 block  ">МИН:</span> 
-                </div>
-                <div class="col-span-2 -mt-1"  >
-                    <span class="flex justify-between text-[9px] font-mono text-sky-400 block" >Поиск воды:&lt;</span> 
-                 </div>
-                 <div class="-mt-1">
-                    <span id="p1MaxDash" class="flex justify-between text-[9px] font-mono text-gray-500 block">3.50</span>
-                 </div>               
-                <div class="-mt-1">
-                     <span id="p1MinDash" class="flex justify-between text-[9px] font-mono text-gray-500 block">1.50</span>
-                </div> 
-                 <div class="-mt-1"></div> <!--пустая ячейка -->
-                <div class="-mt-1"></div>  <!--пустая ячейка -->
-                <div class="-mt-1"> 
-                    <span id="p1LowDash" class=" text-[9px] font-mono text-sky-400 block" >0.50</span>
-                </div>
-          </div>
-    </div>
-                    <!-- общий блок температура -->
-      <div class="bg-cyber-bg px-1 rounded-lg border border-sky-700" id="blockHeat" >
-                            <!-- <span class="text-[10px] font-mono text-amber-500 block uppercase font-bold">Темп-ра</span> -->
-            <div class="flex items-baseline gap-1.5 mt-0.5 justify-center">
-             <span id="p1TempDisplay" class="text-2xl font-mono font-bold text-amber-400">24.5</span>
-            </div>
-            <div class="flex justify-center  -mt-1"><span class="text-xs font-mono text-amber-500 -mt-0.5">°C</span></div> 
-            <!-- блок уставок температуры -->
+                    <!-- УПРАВЛЕНИЕ НАСОСАМИ  один столбец два блока-->
+        <div class="grid grid-cols-1 gap-4  ">
             
-            <label class=" cursor-pointer">  <!-- label для переключателя расширяем на все строки уставок так удобно нажимать -->
-              <div class=" grid grid-flow-row grid-rows-2 grid-cols-3 ">
-                <div class="-mt-1"><span class=" text-[9px]  font-mono text-gray-500 block">МАКС:</span></div>
-                <div class="-mt-1 text-[9px]  font-mono text-gray-500 block"><span id="heat1Max" >10.5</span></div>
-                <div class="-mt-1"></div> <!--пустая ячейка -->
-                <div class="-mt-1" ><span class="text-[9px] font-mono text-gray-500 block ">МИН:</span></div>
-                <div class="-mt-1 text-[9px]  font-mono text-gray-500 block"><span id="heat1Min" >1.50</span></div>
-                <div class="-mt-1"></div> <!--пустая ячейка -->
-              </div>
-               <!-- ручной вкл выкл нагрев  -->
-                <div class=" grid grid-cols-3">
-                  <div class="col-span-2 -mt-1"><span id="h1ModeLabel" class="text-[8px]  font-mono text-gray-300 block" >Нагрев:АВТО</span></div>
-                  <div class="-mt-0.5"><div class="flex justify-center">
-                            <!-- переключатель нагрева -->
-                            <div  class="relative inline-flex items-center ">
-                                <input type="checkbox" id="h1ModeToggle" onchange="toggleHeatControlMode(1)" class="sr-only peer">
-                                <div class="w-8 h-2 bg-gray-700 peer-focus:outline-none rounded-full 
-                                    peer peer-checked:after:translate-x-5 
-                                    peer-checked:after:border-white 
-                                    after:content-[''] 
-                                    after:absolute 
-                                    after:top-[0px] after:left-[2px] 
-                                    after:bg-white 
-                                    after:border-gray-300 after:border after:rounded-full 
-                                    after:h-2 after:w-2 
-                                    after:transition-all
-                                    peer-checked:bg-green-500">
-                                </div>
-                            </div>
-                    </div></div>
+            <!-- border-b border-cyber-border/60 --> <!--иконка насоса 1 -->
+                                <!-- НАСОС 1 -->      
+        <div id="pump1Card" class="bg-cyber-panel border-2 border-indigo-600 rounded-xl p-1 shadow-xl space-y-0.5 transition-all duration-300">
+                <!-- шапка блока насоса 1 -->
+            <div class="grid grid-flow-col grid-rows-2 grid-cols-9 gap-0">
+                <div class="col-span-3 row-span-2  rounded-lg border border-sky-700 bg-cyber-bg">
+                <div class="grid  grid-rows-2 grid-cols-1 ">
+                        <div class="flex justify-center">
+                            <p class="font-mono  text-[8px] text-white tracking-wide ">Режим управления:</p>
+                        </div>
+                        <div class="flex justify-center pb-0.5">
+                            <span id="pump1ControlMode" class="px-2 font-mono font-bold text-[8px] text-green-400 rounded-lg bg-cyan-950  border border-cyan-500/80">
+                            Датчик давления
+                            </span>
+                        </div>
                 </div>
-            </label>
-      </div>
-                            <!-- поток -->
-           <div class="grid grid-flow-row grid-rows-3 grid-cols-3 bg-cyber-bg  rounded-lg border border-sky-700 p-1">
-                <div class="col-span-3 flex justify-center">
-                    <span class=" text-[10px] font-mono text-gray-300 ">ПРОТОК ВОДЫ</span>
                 </div>
-                <div class="col-span-3 flex justify-center items-center -mt-2">
-                    <span id="p1FlowDisplay" class=" px-5 py-0.5 text-[12px] font-mono font-bold text-red-400 rounded-full bg-red-950  border border-red-800 block">
-                     НЕТ</span>
-                </div>
-                <div class="col-span-2 flex justify-center items-center mt-1">
-                    <span class=" text-[8px] font-mono text-gray-300 block ">Датчик протока</span>
-                </div>
-                <div class=" flex justify-center items-center mt-1">
-                    <span id="p1FlowStatus" class="px-2 py-0.1 text-[8px] font-mono text-green-400 rounded-full bg-green-950 border border-green-800 block  ">
-                     ВКЛ</span>
-                </div>
-           </div>
-  </div>
-                        <!-- режимы -->
-        <!-- <div class="bg-cyber-bg p-1.5 md:p-3 rounded-lg border border-cyber-border space-y-0.5">
-            <div class="flex items-center justify-between text-xs font-mono">
-            <span class="text-gray-300 text-[11px] md:text-xs">Режим управления:</span>
-            <label class="relative inline-flex items-center cursor-pointer p-1">
+                    <div class="row-span-2 flex justify-center items-center  ">
+                    <div id="pump1IconBox" class="flex justify-center items-center p-1 rounded-lg bg-gray-800/50 text-gray-400 border border-gray-700 w-8">
+                        <i id="pump1Icon" class="fa-solid fa-fan text-[15px] "></i>
+                    </div>
+                    </div>
 
-                <input type="checkbox" id="p1RelayModeToggle" onchange="togglePumpControlMode(1)" class="sr-only peer">
-                    <div class="w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[6px] after:left-[6px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
-            </label>
-                   </div>
-              <div class="flex justify-between items-center text-[10px] md:text-[11px] font-mono">
-                   <span class="text-gray-400">Источник:</span>
-                    <span id="p1ModeLabel" class="text-cyan-400 font-bold">АВТО (Таймер / PWA)</span>
-              </div>
-        </div> -->
+                    <div class="col-span-3 flex  items-center justify-start  -mt-1">
+                        <span class="font-bold  text-[10px]  text-white tracking-wide ">Насосная станция</span>
+                    </div>
 
- <!--зоны полива -->
-   <div class="bg-cyber-bg p-1.5 rounded-xl border border-sky-700 space-y-1.5">
-     <span class="text-[10px] font-mono font-bold text-slate-400 uppercase block">Статус зон полива:</span>
-    <div class="grid grid-cols-3 gap-2 font-mono text-[10px] ">
-<!--  Зона 1 -->
-      <div id="p1z1Badge"
-           class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
-          <div class="col-span-2 "><label for="p1z1Status"><span id="p1z1StatusDispley" class="text-cyber-neonGreen">Зона 1</span></div></label>
-          <div class="col-span-2 text-end "><input type="checkbox" id="p1z1Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
-          <div class="col-span-2 "><span>Старт</span></div>
-          <div class="col-span-2 text-end "><span id="p1z1SetTime">12:10</span></div>
-          <div class="col-span-3 "><span >Длит.(мин)</span></div> 
-          <div class="col-span-1 text-end"><span id="p1z1WorkMin">20</span></div>
-      </div>
-<!--  Зона 2 -->
-       <div id="p1z2Badge"
-            class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
-                   <div class="col-span-2 "><label for="p1z2Status"><span id="p1z2StatusDispley" class="text-cyber-neonGreen">Зона 2</span></div></label>
-                   <div class="col-span-2 text-end "><input type="checkbox" id="p1z2Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
-                   <div class="col-span-2 "><span>Старт</span></div>
-                   <div class="col-span-2 text-end "><span id="p1z2SetTime">12:10</span></div>
-                   <div class="col-span-3 "><span >Длит.(мин)</span></div> 
-                   <div class="col-span-1 text-end"><span id="p1z2WorkMin">20</span></div>
-               </div>
-<!--  Зона 3 -->
-        <div id="p1z3Badge"
-            class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
-                   <div class="col-span-2 "><label for="p1z3Status"><span id="p1z3StatusDispley" class="text-cyber-neonGreen">Зона 3</span></div></label>
-                   <div class="col-span-2 text-end "><input type="checkbox" id="p1z3Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
-                   <div class="col-span-2 "><span>Старт</span></div>
-                   <div class="col-span-2 text-end "><span id="p1z3SetTime">12:10</span></div>
-                   <div class="col-span-3 "><span >Длит.(мин)</span></div> 
-                   <div class="col-span-1 text-end"><span id="p1z3WorkMin">20</span></div>
-                   </div>
-    </div>
-  </div>
-        <!-- кнопки -->
-        <div class="grid grid-cols-2 gap-2.5 pt-1 px-2">
-          <button onclick="sendPumpCommand(1, 'START')" class="py-3 px-3 gap-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-cyber-neonGreen border border-emerald-500/50 font-mono font-bold text-xs  flex items-center justify-center transition glow-green btn-active touch-target-lg">
-             <i class="fa-solid fa-play text-sm"></i> ПУСК
-          </button>
-          <button onclick="sendPumpCommand(1, 'STOP')" class="py-3 px-3 gap-2 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-cyber-neonRed border border-rose-500/50 font-mono font-bold text-xs  flex items-center justify-center  transition glow-red btn-active touch-target-lg">
-             <i class="fa-solid fa-square text-sm"></i> СТОП
-          </button>
-        </div>
-</div>
-
-                <!-- НАСОС 2 -->
-                <div id="pump2Card" class="bg-cyber-panel border-2 border-indigo-600 rounded-xl p-1 shadow-xl space-y-0.5 transition-all duration-300">
-                    <!-- шапка блока насоса 1 -->
-                  <div class="grid grid-flow-col grid-rows-2 grid-cols-9 gap-0">
-                    <div class="col-span-3 row-span-2  rounded-lg border border-sky-700 bg-cyber-bg">
-                       <div class="grid  grid-rows-2 grid-cols-1 ">
-                            <div class="flex justify-center">
-                                <p class="font-mono  text-[8px] text-white tracking-wide ">Режим управления:</p>
-                            </div>
-                            <div class="flex justify-center pb-0.5">
-                                <span id="pump2ControlMode" class="px-2 font-mono font-bold text-[8px] text-green-400 rounded-lg bg-cyan-950  border border-cyan-500/80">
-                                Датчик давления
+                    <div class="col-span-3 flex items-center justify-start -mt-1 ">
+                        <span class="font-bold text-[10px]  text-white tracking-wide">Обогрев насоса</span>
+                    </div>
+                        <div class="col-span-2 flex  justify-start  items-center -mt-1.5">
+                            <span id="pump1StatusBadge" class="px-1 py-0 rounded-full text-[8px] font-mono font-bold bg-red-950 text-red-400 border border-red-800">
+                            ОСТАНОВЛЕНА
+                            </span>
+                        </div>
+                            <div class="col-span-2 flex  justify-start items-center -mt-1.5">
+                                <span id="heat1Status" class="px-2.5 py-0 rounded-full text-[8px] font-mono font-bold bg-red-950 text-red-400 border border-red-800">
+                                ВЫКЛЮЧЕН
                                 </span>
                             </div>
-                       </div>
-                    </div>
-                        <div class="row-span-2 flex justify-center items-center  ">
-                          <div id="pump2IconBox" class="flex justify-center items-center p-1 rounded-lg bg-gray-800/50 text-gray-400 border border-gray-700 w-8">
-                              <i id="pump2Icon" class="fa-solid fa-fan text-[15px] "></i>
-                          </div>
+            </div>
+
+            <!-- общий блок телеметрии -->
+        <div class="grid grid-cols-3 gap-0.5 ">
+                    <!-- блок контроля давления -->
+            <div class="bg-cyber-bg px-1  rounded-lg border border-sky-700">
+                        <div class="flex justify-center  ">
+                        <span id="p1PressureDisplay" class="px-1 text-2xl font-mono font-bold text-cyber-neonGreen ">3.50</span>
                         </div>
-            
-                        <div class="col-span-3 flex  items-center justify-start  -mt-1">
-                            <span class="font-bold  text-[10px]  text-white tracking-wide ">Насос полива</span>
+                        <div class="flex justify-center  -mt-1"><span class="text-[10px] font-mono text-green-400">Bаr</span></div>
+                        <!-- блок уставок давления -->
+                <div class=" grid grid-flow-col grid-cols-2 grid-rows-3">
+                        <div class="-mt-1">
+                            <span class="flex justify-between text-[9px]  font-mono text-gray-500 block ">МАКС:</span>
                         </div>
-            
-                        <div class="col-span-3 flex items-center justify-start -mt-1 ">
-                            <span class="font-bold text-[10px]  text-white tracking-wide">Обогрев насоса</span>
+                        <div class="-mt-1">
+                            <span class="flex justify-between text-[9px] font-mono text-gray-500 block  ">МИН:</span> 
                         </div>
-                            <div class="col-span-2 flex  justify-start  items-center -mt-1.5">
-                                <span id="pump2StatusBadge" class="px-1 py-0 rounded-full text-[8px] font-mono font-bold bg-red-950 text-red-400 border border-red-800">
-                                 ОСТАНОВЛЕНА
-                                </span>
-                            </div>
-                                <div class="col-span-2 flex  justify-start items-center -mt-1.5">
-                                    <span id="heat1Status" class="px-2.5 py-0 rounded-full text-[8px] font-mono font-bold bg-red-950 text-red-400 border border-red-800">
-                                     ВЫКЛЮЧЕН
-                                    </span>
-                                </div>
-                  </div>
-            
-                 <!-- общий блок телеметрии -->
-             <div class="grid grid-cols-3 gap-0.5 ">
-                        <!-- блок контроля давления -->
-                <div class="bg-cyber-bg px-1  rounded-lg border border-sky-700">
-                            <div class="flex justify-center  ">
-                              <span id="p2PressureDisplay" class="px-1 text-2xl font-mono font-bold text-cyber-neonGreen ">3.50</span>
-                            </div>
-                            <div class="flex justify-center  -mt-1"><span class="text-[10px] font-mono text-green-400">Bаr</span></div>
-                             <!-- блок уставок давления -->
-                      <div class=" grid grid-flow-col grid-cols-2 grid-rows-3">
-                            <div class="-mt-1">
-                                <span class="flex justify-between text-[9px]  font-mono text-gray-500 block ">МАКС:</span>
-                            </div>
-                            <div class="-mt-1">
-                                 <span class="flex justify-between text-[9px] font-mono text-gray-500 block  ">МИН:</span> 
-                            </div>
-                            <div class="col-span-2 -mt-1"  >
-                                <span class="flex justify-between text-[9px] font-mono text-sky-400 block" >Поиск воды:&lt;</span> 
-                             </div>
-                             <div class="-mt-1">
-                                <span id="p2MaxDash" class="flex justify-between text-[9px] font-mono text-gray-500 block">3.50</span>
-                             </div>               
-                            <div class="-mt-1">
-                                 <span id="p2MinDash" class="flex justify-between text-[9px] font-mono text-gray-500 block">1.50</span>
-                            </div> 
-                             <div class="-mt-1"></div> <!--пустая ячейка -->
-                            <div class="-mt-1"></div>  <!--пустая ячейка -->
-                            <div class="-mt-1"> 
-                                <span id="p2LowDash" class=" text-[9px] font-mono text-sky-400 block" >0.50</span>
-                            </div>
-                      </div>
+                        <div class="col-span-2 -mt-1"  >
+                            <span class="flex justify-between text-[9px] font-mono text-sky-400 block" >Поиск воды:&lt;</span> 
+                        </div>
+                        <div class="-mt-1">
+                            <span id="p1MaxDash" class="flex justify-between text-[9px] font-mono text-gray-500 block">3.50</span>
+                        </div>               
+                        <div class="-mt-1">
+                            <span id="p1MinDash" class="flex justify-between text-[9px] font-mono text-gray-500 block">1.50</span>
+                        </div> 
+                        <div class="-mt-1"></div> <!--пустая ячейка -->
+                        <div class="-mt-1"></div>  <!--пустая ячейка -->
+                        <div class="-mt-1"> 
+                            <span id="p1LowDash" class=" text-[9px] font-mono text-sky-400 block" >0.50</span>
+                        </div>
                 </div>
-                                <!-- общий блок температура -->
-                  <div class="bg-cyber-bg px-1 rounded-lg border border-sky-700" id="blockHeat2" >
-                                        <!-- <span class="text-[10px] font-mono text-amber-500 block uppercase font-bold">Темп-ра</span> -->
-                        <div class="flex items-baseline gap-1.5 mt-0.5 justify-center">
-                         <span id="p2TempDisplay" class="text-2xl font-mono font-bold text-amber-400">24.5</span>
-                        </div>
-                        <div class="flex justify-center  -mt-1"><span class="text-xs font-mono text-amber-500 -mt-0.5">°C</span></div> 
-                        <!-- блок уставок температуры -->
-                        
-                        <label class=" cursor-pointer">  <!-- label для переключателя расширяем на все строки уставок так удобно нажимать -->
-                          <div class=" grid grid-flow-row grid-rows-2 grid-cols-3 ">
-                            <div class="-mt-1"><span class=" text-[9px]  font-mono text-gray-500 block">МАКС:</span></div>
-                            <div class="-mt-1 text-[9px]  font-mono text-gray-500 block"><span id="heat2Max" >10.5</span></div>
-                            <div class="-mt-1"></div> <!--пустая ячейка -->
-                            <div class="-mt-1" ><span class="text-[9px] font-mono text-gray-500 block ">МИН:</span></div>
-                            <div class="-mt-1 text-[9px]  font-mono text-gray-500 block"><span id="heat2Min" >1.50</span></div>
-                            <div class="-mt-1"></div> <!--пустая ячейка -->
-                          </div>
-                           <!-- ручной вкл выкл нагрев  -->
-                            <div class=" grid grid-cols-3">
-                              <div class="col-span-2 -mt-1"><span id="h2ModeLabel" class="text-[8px]  font-mono text-gray-300 block" >Нагрев:АВТО</span></div>
-                              <div class="-mt-0.5"><div class="flex justify-center">
-                                        <!-- переключатель нагрева -->
-                                        <div  class="relative inline-flex items-center ">
-                                            <input type="checkbox" id="h2ModeToggle" onchange="toggleHeatControlMode(2)" class="sr-only peer">
-                                            <div class="w-8 h-2 bg-gray-700 peer-focus:outline-none rounded-full 
-                                                peer peer-checked:after:translate-x-5 
-                                                peer-checked:after:border-white 
-                                                after:content-[''] 
-                                                after:absolute 
-                                                after:top-[0px] after:left-[2px] 
-                                                after:bg-white 
-                                                after:border-gray-300 after:border after:rounded-full 
-                                                after:h-2 after:w-2 
-                                                after:transition-all
-                                                peer-checked:bg-green-500">
-                                            </div>
+            </div>
+                            <!-- общий блок температура -->
+            <div class="bg-cyber-bg px-1 rounded-lg border border-sky-700" id="blockHeat" >
+                                    <!-- <span class="text-[10px] font-mono text-amber-500 block uppercase font-bold">Темп-ра</span> -->
+                    <div class="flex items-baseline gap-1.5 mt-0.5 justify-center">
+                    <span id="p1TempDisplay" class="text-2xl font-mono font-bold text-amber-400">24.5</span>
+                    </div>
+                    <div class="flex justify-center  -mt-1"><span class="text-xs font-mono text-amber-500 -mt-0.5">°C</span></div> 
+                    <!-- блок уставок температуры -->
+                    
+                    <label class=" cursor-pointer">  <!-- label для переключателя расширяем на все строки уставок так удобно нажимать -->
+                    <div class=" grid grid-flow-row grid-rows-2 grid-cols-3 ">
+                        <div class="-mt-1"><span class=" text-[9px]  font-mono text-gray-500 block">МАКС:</span></div>
+                        <div class="-mt-1 text-[9px]  font-mono text-gray-500 block"><span id="heat1Max" >10.5</span></div>
+                        <div class="-mt-1"></div> <!--пустая ячейка -->
+                        <div class="-mt-1" ><span class="text-[9px] font-mono text-gray-500 block ">МИН:</span></div>
+                        <div class="-mt-1 text-[9px]  font-mono text-gray-500 block"><span id="heat1Min" >1.50</span></div>
+                        <div class="-mt-1"></div> <!--пустая ячейка -->
+                    </div>
+                    <!-- ручной вкл выкл нагрев  -->
+                        <div class=" grid grid-cols-3">
+                        <div class="col-span-2 -mt-1"><span id="h1ModeLabel" class="text-[8px]  font-mono text-gray-300 block" >Нагрев:АВТО</span></div>
+                        <div class="-mt-0.5"><div class="flex justify-center">
+                                    <!-- переключатель нагрева -->
+                                    <div  class="relative inline-flex items-center ">
+                                        <input type="checkbox" id="h1ModeToggle" onchange="toggleHeatControlMode(1)" class="sr-only peer">
+                                        <div class="w-8 h-2 bg-gray-700 peer-focus:outline-none rounded-full 
+                                            peer peer-checked:after:translate-x-5 
+                                            peer-checked:after:border-white 
+                                            after:content-[''] 
+                                            after:absolute 
+                                            after:top-[0px] after:left-[2px] 
+                                            after:bg-white 
+                                            after:border-gray-300 after:border after:rounded-full 
+                                            after:h-2 after:w-2 
+                                            after:transition-all
+                                            peer-checked:bg-green-500">
                                         </div>
-                                </div></div>
-                            </div>
-                        </label>
-                  </div>
-                                        <!-- поток -->
-                       <div class="grid grid-flow-row grid-rows-3 grid-cols-3 bg-cyber-bg  rounded-lg border border-sky-700 p-1">
-                            <div class="col-span-3 flex justify-center">
-                                <span class=" text-[10px] font-mono text-gray-300 ">ПРОТОК ВОДЫ</span>
-                            </div>
-                            <div class="col-span-3 flex justify-center items-center -mt-2">
-                                <span id="p2FlowDisplay" class=" px-5 py-0.5 text-[12px] font-mono font-bold text-red-400 rounded-full bg-red-950  border border-red-800 block">
-                                 НЕТ</span>
-                            </div>
-                            <div class="col-span-2 flex justify-center items-center mt-1">
-                                <span class=" text-[8px] font-mono text-gray-300 block ">Датчик протока</span>
-                            </div>
-                            <div class=" flex justify-center items-center mt-1">
-                                <span id="p2FlowStatus" class="px-2 py-0.1 text-[8px] font-mono text-green-400 rounded-full bg-green-950 border border-green-800 block  ">
-                                 ВКЛ</span>
-                            </div>
-                       </div>
-              </div>
-                               
-             <!--зоны полива -->
-               <div class="bg-cyber-bg p-1.5 rounded-xl border border-sky-700 space-y-1.5">
-                 <span class="text-[10px] font-mono font-bold text-slate-400 uppercase block">Статус зон полива:</span>
-                <div class="grid grid-cols-3 gap-2 font-mono text-[10px] ">
-            <!--  Зона 1 -->
-                  <div id="p2z1Badge"
-                       class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
-                      <div class="col-span-2 "><label for="p2z1Status"><span id="p2z1StatusDispley" class="text-cyber-neonGreen">Зона 1</span></div></label>
-                      <div class="col-span-2 text-end "><input type="checkbox" id="p2z1Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
-                      <div class="col-span-2 "><span>Старт</span></div>
-                      <div class="col-span-2 text-end "><span id="p2z1SetTime">12:10</span></div>
-                      <div class="col-span-3 "><span >Длит.(мин)</span></div> 
-                      <div class="col-span-1 text-end"><span id="p2z1WorkMin">20</span></div>
-                  </div>
-            <!--  Зона 2 -->
-                   <div id="p2z2Badge"
-                        class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
-                               <div class="col-span-2 "><label for="p2z2Status"><span id="p2z2StatusDispley" class="text-cyber-neonGreen">Зона 2</span></div></label>
-                               <div class="col-span-2 text-end "><input type="checkbox" id="p2z2Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
-                               <div class="col-span-2 "><span>Старт</span></div>
-                               <div class="col-span-2 text-end "><span id="p2z2SetTime">12:10</span></div>
-                               <div class="col-span-3 "><span >Длит.(мин)</span></div> 
-                               <div class="col-span-1 text-end"><span id="p2z2WorkMin">20</span></div>
-                           </div>
-            <!--  Зона 3 -->
-                    <div id="p2z3Badge"
-                        class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
-                               <div class="col-span-2 "><label for="p2z3Status"><span id="p2z3StatusDispley" class="text-cyber-neonGreen">Зона 3</span></div></label>
-                               <div class="col-span-2 text-end "><input type="checkbox" id="p2z3Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
-                               <div class="col-span-2 "><span>Старт</span></div>
-                               <div class="col-span-2 text-end "><span id="p2z3SetTime">12:10</span></div>
-                               <div class="col-span-3 "><span >Длит.(мин)</span></div> 
-                               <div class="col-span-1 text-end"><span id="p2z3WorkMin">20</span></div>
-                               </div>
-                </div>
-              </div>
-                    <!-- кнопки -->
-                    <div class="grid grid-cols-2 gap-2.5 pt-1 px-2">
-                      <button onclick="sendPumpCommand(2, 'START')" class="py-3 px-3 gap-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-cyber-neonGreen border border-emerald-500/50 font-mono font-bold text-xs  flex items-center justify-center transition glow-green btn-active touch-target-lg">
-                         <i class="fa-solid fa-play text-sm"></i> ПУСК
-                      </button>
-                      <button onclick="sendPumpCommand(2, 'STOP')" class="py-3 px-3 gap-2 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-cyber-neonRed border border-rose-500/50 font-mono font-bold text-xs  flex items-center justify-center  transition glow-red btn-active touch-target-lg">
-                         <i class="fa-solid fa-square text-sm"></i> СТОП
-                      </button>
-                    </div>
+                                    </div>
+                            </div></div>
+                        </div>
+                    </label>
             </div>
-
-
-                <!-- <div id="pump2Card" class="bg-cyber-panel border-2 border-indigo-600 rounded-xl p-4 md:p-5 shadow-xl space-y-3.5 md:space-y-4 transition-all duration-300">
-                    <div class="flex items-center justify-between border-b border-cyber-border/60 pb-2.5">
-                        <div class="flex items-center gap-2.5">
-                            <div id="pump2IconBox" class="p-2 md:p-2.5 rounded-lg bg-gray-800/50 text-gray-400 border border-gray-700">
-                                <i id="pump2Icon" class="fa-solid fa-fan text-lg md:text-xl"></i>
-                            </div>
-                            <div>
-                                <h2 class="font-bold text-sm md:text-base text-white tracking-wide">НАСОС #2 (Линия Б)</h2>
-                                <p class="text-[10px] md:text-xs text-gray-400 font-mono">Дождевание / Зоны 1-3</p>
-                            </div>
+                                    <!-- поток -->
+                <div class="grid grid-flow-row grid-rows-3 grid-cols-3 bg-cyber-bg  rounded-lg border border-sky-700 p-1">
+                        <div class="col-span-3 flex justify-center">
+                            <span class=" text-[10px] font-mono text-gray-300 ">ПРОТОК ВОДЫ</span>
                         </div>
-                        <span id="pump2StatusBadge" class="px-2.5 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-mono font-bold bg-red-950 text-red-400 border border-red-800">
-                            ОСТАНОВЛЕН
-                        </span>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-2.5">
-                        <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border">
-                            <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Давление Н2</span>
-                            <div class="flex items-baseline gap-1 mt-0.5">
-                                <span id="p2PressureDisplay" class="text-xl md:text-2xl font-mono font-bold text-cyber-neonGreen">0.00</span>
-                                <span class="text-[10px] md:text-xs font-mono text-gray-400">бар</span>
-                            </div>
-                            <span class="text-[9px] md:text-[10px] font-mono text-gray-500 block mt-1">Вкл: <span id="p2MinDash">1.50</span> / Выкл: <span id="p2MaxDash">3.50</span> бар</span>
-                            <span class="text-[9px] md:text-[10px] font-mono text-amber-500/80 block">Поиск воды: &lt; <span id="p2LowDash">0.50</span> бар</span>
+                        <div class="col-span-3 flex justify-center items-center -mt-2">
+                            <span id="p1FlowDisplay" class=" px-5 py-0.5 text-[12px] font-mono font-bold text-red-400 rounded-full bg-red-950  border border-red-800 block">
+                            НЕТ</span>
                         </div>
-
-                        <div class="bg-cyber-bg p-1 md:p-3 rounded-lg border border-cyber-border">
-                            <span class="text-[10px] font-mono text-gray-400 block">Датчик протока Н2</span>
-                            <div class="flex items-baseline gap-1 mt-0.5">
-                                <span id="p2FlowDisplay" class="text-xl md:text-2xl font-mono font-bold text-gray-500">НЕТ</span>
-                            </div>
-                            <span id="p2FlowStatus" class="text-[9px] md:text-[10px] font-mono font-bold text-rose-400 block mt-1">ОТСУТСТВУЕТ</span>
+                        <div class="col-span-2 flex justify-center items-center mt-1">
+                            <span class=" text-[8px] font-mono text-gray-300 block ">Датчик протока</span>
                         </div>
-                    </div>
-
-                    <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border space-y-1.5">
-                        <div class="flex items-center justify-between text-xs font-mono">
-                            <span class="text-gray-300 text-[11px] md:text-xs">Режим управления:</span>
-                            <label class="relative inline-flex items-center cursor-pointer p-1">
-                                <input type="checkbox" id="p2RelayModeToggle" onchange="togglePumpControlMode(2)" class="sr-only peer">
-                                <div class="w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[6px] after:left-[6px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
-                            </label>
+                        <div class=" flex justify-center items-center mt-1">
+                            <span id="p1FlowStatus" class="px-2 py-0.1 text-[8px] font-mono text-green-400 rounded-full bg-green-950 border border-green-800 block  ">
+                            ВКЛ</span>
                         </div>
-                        <div class="flex justify-between items-center text-[10px] md:text-[11px] font-mono">
-                            <span class="text-gray-400">Источник:</span>
-                            <span id="p2ModeLabel" class="text-cyan-400 font-bold">АВТО (Таймер / PWA)</span>
-                        </div>
-                    </div>
+                </div>
+        </div>
+                                <!-- режимы -->
+                <!-- <div class="bg-cyber-bg p-1.5 md:p-3 rounded-lg border border-cyber-border space-y-0.5">
+                    <div class="flex items-center justify-between text-xs font-mono">
+                    <span class="text-gray-300 text-[11px] md:text-xs">Режим управления:</span>
+                    <label class="relative inline-flex items-center cursor-pointer p-1">
 
-                    <div class="grid grid-cols-2 gap-2.5 pt-1">
-                        <button onclick="sendPumpCommand(2, 'START')" class="py-3 px-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-cyber-neonGreen border border-emerald-500/50 font-mono font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition glow-green btn-active touch-target-lg">
-                            <i class="fa-solid fa-play text-sm"></i> ПУСК
-                        </button>
-                        <button onclick="sendPumpCommand(2, 'STOP')" class="py-3 px-3 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-cyber-neonRed border border-rose-500/50 font-mono font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition glow-red btn-active touch-target-lg">
-                            <i class="fa-solid fa-square text-sm"></i> СТОП
-                        </button>
+                        <input type="checkbox" id="p1RelayModeToggle" onchange="togglePumpControlMode(1)" class="sr-only peer">
+                            <div class="w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[6px] after:left-[6px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
+                    </label>
+                        </div>
+                    <div class="flex justify-between items-center text-[10px] md:text-[11px] font-mono">
+                        <span class="text-gray-400">Источник:</span>
+                            <span id="p1ModeLabel" class="text-cyan-400 font-bold">АВТО (Таймер / PWA)</span>
                     </div>
                 </div> -->
-</div>  <!-- УПРАВЛЕНИЕ НАСОСАМИ  конец-->
 
-            <!-- ГРАФИК И ЛОГ -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-                <div class="lg:col-span-2 bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 shadow-xl flex flex-col justify-between">
-                    <div class="flex items-center justify-between mb-2 md:mb-3">
-                        <h3 class="text-xs font-mono uppercase tracking-wider text-gray-300 flex items-center gap-2">
-                            <i class="fa-solid fa-chart-line text-cyan-400"></i> График давления (бар)
-                        </h3>
-                        <button onclick="clearChart()" class="text-xs font-mono text-gray-500 hover:text-gray-300 p-1">Сброс</button>
-                    </div>
-                    <div class="h-48 md:h-64 w-full relative">
-                        <canvas id="pressureChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 shadow-xl flex flex-col min-h-[200px] md:min-h-[280px]">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="text-xs font-mono uppercase tracking-wider text-gray-300 flex items-center gap-2">
-                            <i class="fa-solid fa-terminal text-amber-400"></i> UART Лог
-                        </h3>
-                        <button onclick="clearConsoleLog()" class="text-xs font-mono text-gray-500 hover:text-gray-300 p-1">Очистить</button>
-                    </div>
-                    <div id="consoleLog" class="flex-1 bg-cyber-bg border border-cyber-border rounded-lg p-2.5 font-mono text-[10px] md:text-[11px] text-green-400 overflow-y-auto max-h-40 md:max-h-56 space-y-1">
-                        <div class="text-gray-600">// Ожидание данных HM-10...</div>
-                    </div>
-                </div>
+        <!--зоны полива -->
+        <div class="bg-cyber-bg p-1.5 rounded-xl border border-sky-700 space-y-1.5">
+            <span class="text-[10px] font-mono font-bold text-slate-400 uppercase block">Статус зон полива:</span>
+            <div class="grid grid-cols-3 gap-2 font-mono text-[10px] ">
+        <!--  Зона 1 -->
+            <div id="p1z1Badge"
+                class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
+                <div class="col-span-2 "><label for="p1z1Status"><span id="p1z1StatusDispley" class="text-cyber-neonGreen">Зона 1</span></div></label>
+                <div class="col-span-2 text-end "><input type="checkbox" id="p1z1Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
+                <div class="col-span-2 "><span>Старт</span></div>
+                <div class="col-span-2 text-end "><span id="p1z1SetTime">12:10</span></div>
+                <div class="col-span-3 "><span >Длит.(мин)</span></div> 
+                <div class="col-span-1 text-end"><span id="p1z1WorkMin">20</span></div>
             </div>
+        <!--  Зона 2 -->
+            <div id="p1z2Badge"
+                    class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
+                        <div class="col-span-2 "><label for="p1z2Status"><span id="p1z2StatusDispley" class="text-cyber-neonGreen">Зона 2</span></div></label>
+                        <div class="col-span-2 text-end "><input type="checkbox" id="p1z2Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
+                        <div class="col-span-2 "><span>Старт</span></div>
+                        <div class="col-span-2 text-end "><span id="p1z2SetTime">12:10</span></div>
+                        <div class="col-span-3 "><span >Длит.(мин)</span></div> 
+                        <div class="col-span-1 text-end"><span id="p1z2WorkMin">20</span></div>
+                    </div>
+        <!--  Зона 3 -->
+                <div id="p1z3Badge"
+                    class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
+                        <div class="col-span-2 "><label for="p1z3Status"><span id="p1z3StatusDispley" class="text-cyber-neonGreen">Зона 3</span></div></label>
+                        <div class="col-span-2 text-end "><input type="checkbox" id="p1z3Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
+                        <div class="col-span-2 "><span>Старт</span></div>
+                        <div class="col-span-2 text-end "><span id="p1z3SetTime">12:10</span></div>
+                        <div class="col-span-3 "><span >Длит.(мин)</span></div> 
+                        <div class="col-span-1 text-end"><span id="p1z3WorkMin">20</span></div>
+                        </div>
+            </div>
+        </div>
+                <!-- кнопки -->
+                <div class="grid grid-cols-2 gap-2.5 pt-1 px-2">
+                <button onclick="sendPumpCommand(1, 'START')" class="py-3 px-3 gap-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-cyber-neonGreen border border-emerald-500/50 font-mono font-bold text-xs  flex items-center justify-center transition glow-green btn-active touch-target-lg">
+                    <i class="fa-solid fa-play text-sm"></i> ПУСК
+                </button>
+                <button onclick="sendPumpCommand(1, 'STOP')" class="py-3 px-3 gap-2 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-cyber-neonRed border border-rose-500/50 font-mono font-bold text-xs  flex items-center justify-center  transition glow-red btn-active touch-target-lg">
+                    <i class="fa-solid fa-square text-sm"></i> СТОП
+                </button>
+                </div>
+        </div>
 
-  </div>
+                        <!-- НАСОС 2 -->
+                        <div id="pump2Card" class="bg-cyber-panel border-2 border-indigo-600 rounded-xl p-1 shadow-xl space-y-0.5 transition-all duration-300">
+                            <!-- шапка блока насоса 1 -->
+                        <div class="grid grid-flow-col grid-rows-2 grid-cols-9 gap-0">
+                            <div class="col-span-3 row-span-2  rounded-lg border border-sky-700 bg-cyber-bg">
+                            <div class="grid  grid-rows-2 grid-cols-1 ">
+                                    <div class="flex justify-center">
+                                        <p class="font-mono  text-[8px] text-white tracking-wide ">Режим управления:</p>
+                                    </div>
+                                    <div class="flex justify-center pb-0.5">
+                                        <span id="pump2ControlMode" class="px-2 font-mono font-bold text-[8px] text-green-400 rounded-lg bg-cyan-950  border border-cyan-500/80">
+                                        Датчик давления
+                                        </span>
+                                    </div>
+                            </div>
+                            </div>
+                                <div class="row-span-2 flex justify-center items-center  ">
+                                <div id="pump2IconBox" class="flex justify-center items-center p-1 rounded-lg bg-gray-800/50 text-gray-400 border border-gray-700 w-8">
+                                    <i id="pump2Icon" class="fa-solid fa-fan text-[15px] "></i>
+                                </div>
+                                </div>
+                    
+                                <div class="col-span-3 flex  items-center justify-start  -mt-1">
+                                    <span class="font-bold  text-[10px]  text-white tracking-wide ">Насос полива</span>
+                                </div>
+                    
+                                <div class="col-span-3 flex items-center justify-start -mt-1 ">
+                                    <span class="font-bold text-[10px]  text-white tracking-wide">Обогрев насоса</span>
+                                </div>
+                                    <div class="col-span-2 flex  justify-start  items-center -mt-1.5">
+                                        <span id="pump2StatusBadge" class="px-1 py-0 rounded-full text-[8px] font-mono font-bold bg-red-950 text-red-400 border border-red-800">
+                                        ОСТАНОВЛЕНА
+                                        </span>
+                                    </div>
+                                        <div class="col-span-2 flex  justify-start items-center -mt-1.5">
+                                            <span id="heat1Status" class="px-2.5 py-0 rounded-full text-[8px] font-mono font-bold bg-red-950 text-red-400 border border-red-800">
+                                            ВЫКЛЮЧЕН
+                                            </span>
+                                        </div>
+                        </div>
+                    
+                        <!-- общий блок телеметрии -->
+                    <div class="grid grid-cols-3 gap-0.5 ">
+                                <!-- блок контроля давления -->
+                        <div class="bg-cyber-bg px-1  rounded-lg border border-sky-700">
+                                    <div class="flex justify-center  ">
+                                    <span id="p2PressureDisplay" class="px-1 text-2xl font-mono font-bold text-cyber-neonGreen ">3.50</span>
+                                    </div>
+                                    <div class="flex justify-center  -mt-1"><span class="text-[10px] font-mono text-green-400">Bаr</span></div>
+                                    <!-- блок уставок давления -->
+                            <div class=" grid grid-flow-col grid-cols-2 grid-rows-3">
+                                    <div class="-mt-1">
+                                        <span class="flex justify-between text-[9px]  font-mono text-gray-500 block ">МАКС:</span>
+                                    </div>
+                                    <div class="-mt-1">
+                                        <span class="flex justify-between text-[9px] font-mono text-gray-500 block  ">МИН:</span> 
+                                    </div>
+                                    <div class="col-span-2 -mt-1"  >
+                                        <span class="flex justify-between text-[9px] font-mono text-sky-400 block" >Поиск воды:&lt;</span> 
+                                    </div>
+                                    <div class="-mt-1">
+                                        <span id="p2MaxDash" class="flex justify-between text-[9px] font-mono text-gray-500 block">3.50</span>
+                                    </div>               
+                                    <div class="-mt-1">
+                                        <span id="p2MinDash" class="flex justify-between text-[9px] font-mono text-gray-500 block">1.50</span>
+                                    </div> 
+                                    <div class="-mt-1"></div> <!--пустая ячейка -->
+                                    <div class="-mt-1"></div>  <!--пустая ячейка -->
+                                    <div class="-mt-1"> 
+                                        <span id="p2LowDash" class=" text-[9px] font-mono text-sky-400 block" >0.50</span>
+                                    </div>
+                            </div>
+                        </div>
+                                        <!-- общий блок температура -->
+                        <div class="bg-cyber-bg px-1 rounded-lg border border-sky-700" id="blockHeat2" >
+                                                <!-- <span class="text-[10px] font-mono text-amber-500 block uppercase font-bold">Темп-ра</span> -->
+                                <div class="flex items-baseline gap-1.5 mt-0.5 justify-center">
+                                <span id="p2TempDisplay" class="text-2xl font-mono font-bold text-amber-400">24.5</span>
+                                </div>
+                                <div class="flex justify-center  -mt-1"><span class="text-xs font-mono text-amber-500 -mt-0.5">°C</span></div> 
+                                <!-- блок уставок температуры -->
+                                
+                                <label class=" cursor-pointer">  <!-- label для переключателя расширяем на все строки уставок так удобно нажимать -->
+                                <div class=" grid grid-flow-row grid-rows-2 grid-cols-3 ">
+                                    <div class="-mt-1"><span class=" text-[9px]  font-mono text-gray-500 block">МАКС:</span></div>
+                                    <div class="-mt-1 text-[9px]  font-mono text-gray-500 block"><span id="heat2Max" >10.5</span></div>
+                                    <div class="-mt-1"></div> <!--пустая ячейка -->
+                                    <div class="-mt-1" ><span class="text-[9px] font-mono text-gray-500 block ">МИН:</span></div>
+                                    <div class="-mt-1 text-[9px]  font-mono text-gray-500 block"><span id="heat2Min" >1.50</span></div>
+                                    <div class="-mt-1"></div> <!--пустая ячейка -->
+                                </div>
+                                <!-- ручной вкл выкл нагрев  -->
+                                    <div class=" grid grid-cols-3">
+                                    <div class="col-span-2 -mt-1"><span id="h2ModeLabel" class="text-[8px]  font-mono text-gray-300 block" >Нагрев:АВТО</span></div>
+                                    <div class="-mt-0.5"><div class="flex justify-center">
+                                                <!-- переключатель нагрева -->
+                                                <div  class="relative inline-flex items-center ">
+                                                    <input type="checkbox" id="h2ModeToggle" onchange="toggleHeatControlMode(2)" class="sr-only peer">
+                                                    <div class="w-8 h-2 bg-gray-700 peer-focus:outline-none rounded-full 
+                                                        peer peer-checked:after:translate-x-5 
+                                                        peer-checked:after:border-white 
+                                                        after:content-[''] 
+                                                        after:absolute 
+                                                        after:top-[0px] after:left-[2px] 
+                                                        after:bg-white 
+                                                        after:border-gray-300 after:border after:rounded-full 
+                                                        after:h-2 after:w-2 
+                                                        after:transition-all
+                                                        peer-checked:bg-green-500">
+                                                    </div>
+                                                </div>
+                                        </div></div>
+                                    </div>
+                                </label>
+                        </div>
+                                                <!-- поток -->
+                            <div class="grid grid-flow-row grid-rows-3 grid-cols-3 bg-cyber-bg  rounded-lg border border-sky-700 p-1">
+                                    <div class="col-span-3 flex justify-center">
+                                        <span class=" text-[10px] font-mono text-gray-300 ">ПРОТОК ВОДЫ</span>
+                                    </div>
+                                    <div class="col-span-3 flex justify-center items-center -mt-2">
+                                        <span id="p2FlowDisplay" class=" px-5 py-0.5 text-[12px] font-mono font-bold text-red-400 rounded-full bg-red-950  border border-red-800 block">
+                                        НЕТ</span>
+                                    </div>
+                                    <div class="col-span-2 flex justify-center items-center mt-1">
+                                        <span class=" text-[8px] font-mono text-gray-300 block ">Датчик протока</span>
+                                    </div>
+                                    <div class=" flex justify-center items-center mt-1">
+                                        <span id="p2FlowStatus" class="px-2 py-0.1 text-[8px] font-mono text-green-400 rounded-full bg-green-950 border border-green-800 block  ">
+                                        ВКЛ</span>
+                                    </div>
+                            </div>
+                    </div>
+                                    
+                    <!--зоны полива -->
+                    <div class="bg-cyber-bg p-1.5 rounded-xl border border-sky-700 space-y-1.5">
+                        <span class="text-[10px] font-mono font-bold text-slate-400 uppercase block">Статус зон полива:</span>
+                        <div class="grid grid-cols-3 gap-2 font-mono text-[10px] ">
+                    <!--  Зона 1 -->
+                        <div id="p2z1Badge"
+                            class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
+                            <div class="col-span-2 "><label for="p2z1Status"><span id="p2z1StatusDispley" class="text-cyber-neonGreen">Зона 1</span></div></label>
+                            <div class="col-span-2 text-end "><input type="checkbox" id="p2z1Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
+                            <div class="col-span-2 "><span>Старт</span></div>
+                            <div class="col-span-2 text-end "><span id="p2z1SetTime">12:10</span></div>
+                            <div class="col-span-3 "><span >Длит.(мин)</span></div> 
+                            <div class="col-span-1 text-end"><span id="p2z1WorkMin">20</span></div>
+                        </div>
+                    <!--  Зона 2 -->
+                        <div id="p2z2Badge"
+                                class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
+                                    <div class="col-span-2 "><label for="p2z2Status"><span id="p2z2StatusDispley" class="text-cyber-neonGreen">Зона 2</span></div></label>
+                                    <div class="col-span-2 text-end "><input type="checkbox" id="p2z2Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
+                                    <div class="col-span-2 "><span>Старт</span></div>
+                                    <div class="col-span-2 text-end "><span id="p2z2SetTime">12:10</span></div>
+                                    <div class="col-span-3 "><span >Длит.(мин)</span></div> 
+                                    <div class="col-span-1 text-end"><span id="p2z2WorkMin">20</span></div>
+                                </div>
+                    <!--  Зона 3 -->
+                            <div id="p2z3Badge"
+                                class=" grid grid-cols-4 grid-rows-3 py-1.5 px-1 text-slate-300 font-bold transition border border-slate-800 rounded-lg bg-slate-700">
+                                    <div class="col-span-2 "><label for="p2z3Status"><span id="p2z3StatusDispley" class="text-cyber-neonGreen">Зона 3</span></div></label>
+                                    <div class="col-span-2 text-end "><input type="checkbox" id="p2z3Status" checked></div><!-- чек бокс дописать вызов функцию при нажатии изменения цвета и действий-->
+                                    <div class="col-span-2 "><span>Старт</span></div>
+                                    <div class="col-span-2 text-end "><span id="p2z3SetTime">12:10</span></div>
+                                    <div class="col-span-3 "><span >Длит.(мин)</span></div> 
+                                    <div class="col-span-1 text-end"><span id="p2z3WorkMin">20</span></div>
+                                    </div>
+                        </div>
+                    </div>
+                            <!-- кнопки -->
+                            <div class="grid grid-cols-2 gap-2.5 pt-1 px-2">
+                            <button onclick="sendPumpCommand(2, 'START')" class="py-3 px-3 gap-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-cyber-neonGreen border border-emerald-500/50 font-mono font-bold text-xs  flex items-center justify-center transition glow-green btn-active touch-target-lg">
+                                <i class="fa-solid fa-play text-sm"></i> ПУСК
+                            </button>
+                            <button onclick="sendPumpCommand(2, 'STOP')" class="py-3 px-3 gap-2 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-cyber-neonRed border border-rose-500/50 font-mono font-bold text-xs  flex items-center justify-center  transition glow-red btn-active touch-target-lg">
+                                <i class="fa-solid fa-square text-sm"></i> СТОП
+                            </button>
+                            </div>
+                    </div>
 
-        <!-- ВКЛАДКА 2: ГРАФИК -->
+
+                        <!-- <div id="pump2Card" class="bg-cyber-panel border-2 border-indigo-600 rounded-xl p-4 md:p-5 shadow-xl space-y-3.5 md:space-y-4 transition-all duration-300">
+                            <div class="flex items-center justify-between border-b border-cyber-border/60 pb-2.5">
+                                <div class="flex items-center gap-2.5">
+                                    <div id="pump2IconBox" class="p-2 md:p-2.5 rounded-lg bg-gray-800/50 text-gray-400 border border-gray-700">
+                                        <i id="pump2Icon" class="fa-solid fa-fan text-lg md:text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h2 class="font-bold text-sm md:text-base text-white tracking-wide">НАСОС #2 (Линия Б)</h2>
+                                        <p class="text-[10px] md:text-xs text-gray-400 font-mono">Дождевание / Зоны 1-3</p>
+                                    </div>
+                                </div>
+                                <span id="pump2StatusBadge" class="px-2.5 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-mono font-bold bg-red-950 text-red-400 border border-red-800">
+                                    ОСТАНОВЛЕН
+                                </span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2.5">
+                                <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border">
+                                    <span class="text-[10px] md:text-[11px] font-mono text-gray-400 block">Давление Н2</span>
+                                    <div class="flex items-baseline gap-1 mt-0.5">
+                                        <span id="p2PressureDisplay" class="text-xl md:text-2xl font-mono font-bold text-cyber-neonGreen">0.00</span>
+                                        <span class="text-[10px] md:text-xs font-mono text-gray-400">бар</span>
+                                    </div>
+                                    <span class="text-[9px] md:text-[10px] font-mono text-gray-500 block mt-1">Вкл: <span id="p2MinDash">1.50</span> / Выкл: <span id="p2MaxDash">3.50</span> бар</span>
+                                    <span class="text-[9px] md:text-[10px] font-mono text-amber-500/80 block">Поиск воды: &lt; <span id="p2LowDash">0.50</span> бар</span>
+                                </div>
+
+                                <div class="bg-cyber-bg p-1 md:p-3 rounded-lg border border-cyber-border">
+                                    <span class="text-[10px] font-mono text-gray-400 block">Датчик протока Н2</span>
+                                    <div class="flex items-baseline gap-1 mt-0.5">
+                                        <span id="p2FlowDisplay" class="text-xl md:text-2xl font-mono font-bold text-gray-500">НЕТ</span>
+                                    </div>
+                                    <span id="p2FlowStatus" class="text-[9px] md:text-[10px] font-mono font-bold text-rose-400 block mt-1">ОТСУТСТВУЕТ</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-cyber-bg p-2.5 md:p-3 rounded-lg border border-cyber-border space-y-1.5">
+                                <div class="flex items-center justify-between text-xs font-mono">
+                                    <span class="text-gray-300 text-[11px] md:text-xs">Режим управления:</span>
+                                    <label class="relative inline-flex items-center cursor-pointer p-1">
+                                        <input type="checkbox" id="p2RelayModeToggle" onchange="togglePumpControlMode(2)" class="sr-only peer">
+                                        <div class="w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[6px] after:left-[6px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
+                                    </label>
+                                </div>
+                                <div class="flex justify-between items-center text-[10px] md:text-[11px] font-mono">
+                                    <span class="text-gray-400">Источник:</span>
+                                    <span id="p2ModeLabel" class="text-cyan-400 font-bold">АВТО (Таймер / PWA)</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2.5 pt-1">
+                                <button onclick="sendPumpCommand(2, 'START')" class="py-3 px-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-cyber-neonGreen border border-emerald-500/50 font-mono font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition glow-green btn-active touch-target-lg">
+                                    <i class="fa-solid fa-play text-sm"></i> ПУСК
+                                </button>
+                                <button onclick="sendPumpCommand(2, 'STOP')" class="py-3 px-3 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-cyber-neonRed border border-rose-500/50 font-mono font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition glow-red btn-active touch-target-lg">
+                                    <i class="fa-solid fa-square text-sm"></i> СТОП
+                                </button>
+                            </div>
+                        </div> -->
+        </div>  <!-- УПРАВЛЕНИЕ НАСОСАМИ  конец-->
+
+                    <!-- ГРАФИК -->
+                        <!-- <div class="lg:col-span-2 bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 shadow-xl flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-2 md:mb-3">
+                                <h3 class="text-xs font-mono uppercase tracking-wider text-gray-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-chart-line text-cyan-400"></i> График давления (бар)
+                                </h3>
+                                <button onclick="clearChart()" class="text-xs font-mono text-gray-500 hover:text-gray-300 p-1">Сброс</button>
+                            </div>
+                            <div class="h-48 md:h-64 w-full relative">
+                                <canvas id="pressureChart"></canvas>
+                            </div>
+                        </div> -->
+
+                    <!-- ЛОГ приема и передачи -->
+                    
+                        <div class="bg-cyber-panel border border-cyber-border rounded-xl p-1.5 shadow-xl flex flex-col min-h-[280px] ">
+                            <div class="flex items-center justify-between mb-1">
+                                <h3 class="text-xs font-mono uppercase tracking-wider text-gray-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-terminal text-amber-400"></i> UART Лог
+                                </h3>
+                                <button onclick="clearConsoleLog()" class="text-xs font-mono text-gray-500 hover:text-gray-300 p-1">Очистить</button>
+                            </div>
+                            <div id="consoleLog" class="flex-1 bg-cyber-bg border border-cyber-border rounded-lg p-1.5 font-mono text-[8px] text-green-400 overflow-y-auto max-h-40 space-y-0">
+                                <div class="text-gray-600 -mt-1">// Ожидание данных HM-10...</div>
+                            </div>
+                        </div>
+
+
+                   
+
+        </div>
+
+        <!-- ВКЛАДКА 2: Расписание полива -->
         <div id="tabSchedule" class="hidden space-y-4 md:space-y-6">
             <div class="bg-cyber-panel border border-cyber-border rounded-xl p-4 md:p-5 shadow-xl space-y-4">
                 <h2 class="font-bold text-sm md:text-base text-white flex items-center gap-2 border-b border-cyber-border/60 pb-3">
@@ -871,41 +848,57 @@ top-0 z-50 shadow-md  ">
             </div>
         </div>
 
+        <!-- ВКЛАДКА График давления  -->
+        <div id="tabGraph" class="hidden space-y-4 md:space-y-6">
+            <div class="lg:col-span-2 bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 shadow-xl flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-2 md:mb-3">
+                    <h3 class="text-xs font-mono uppercase tracking-wider text-gray-300 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-cyan-400"></i> График давления (бар)
+                    </h3>
+                    <button onclick="clearChart()" class="text-xs font-mono text-gray-500 hover:text-gray-300 p-1">Сброс</button>
+                </div>
+                <div class="h-48 md:h-64 w-full relative">
+                    <canvas id="pressureChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+
     </main>
 
-    <!-- МОДАЛЬНОЕ ОКНО ИНСТРУКЦИИ PWA -->
-    <div id="pwaInstallModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
-        <div class="bg-cyber-panel border border-cyan-500/50 rounded-2xl max-w-md w-full p-5 space-y-4 relative shadow-2xl">
-            <button onclick="closePwaModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div class="flex items-center gap-3 border-b border-cyber-border pb-3">
-                <div class="w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-500 flex items-center justify-center text-emerald-400">
-                    <i class="fa-brands fa-android text-2xl"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold text-white text-base">Установка PWA на Android</h3>
-                    <p class="text-xs text-gray-400">Добавление на главный экран</p>
-                </div>
-            </div>
+                 <!-- МОДАЛЬНОЕ ОКНО ИНСТРУКЦИИ PWA    удалить -->
+                <div id="pwaInstallModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+                    <div class="bg-cyber-panel border border-cyan-500/50 rounded-2xl max-w-md w-full p-5 space-y-4 relative shadow-2xl">
+                        <button onclick="closePwaModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1">
+                            <i class="fa-solid fa-xmark text-lg"></i>
+                        </button>
+                        <div class="flex items-center gap-3 border-b border-cyber-border pb-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-500 flex items-center justify-center text-emerald-400">
+                                <i class="fa-brands fa-android text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-base">Установка PWA на Android</h3>
+                                <p class="text-xs text-gray-400">Добавление на главный экран</p>
+                            </div>
+                        </div>
 
-            <div class="space-y-3 text-xs font-mono text-gray-300">
-                <div class="bg-cyber-bg p-3.5 rounded-lg border border-cyber-border space-y-2">
-                    <div class="text-emerald-400 font-bold flex items-center gap-2 text-sm">
-                        <i class="fa-brands fa-chrome text-base"></i> Google Chrome на Android:
+                        <div class="space-y-3 text-xs font-mono text-gray-300">
+                            <div class="bg-cyber-bg p-3.5 rounded-lg border border-cyber-border space-y-2">
+                                <div class="text-emerald-400 font-bold flex items-center gap-2 text-sm">
+                                    <i class="fa-brands fa-chrome text-base"></i> Google Chrome на Android:
+                                </div>
+                                <ol class="list-decimal list-inside space-y-1.5 text-gray-300 text-xs">
+                                    <li>Нажмите меню три точки <span class="text-white font-bold font-mono">(⋮)</span> в углу.</li>
+                                    <li>Выберите <span class="text-emerald-400 font-bold">«Установить приложение»</span> или <span class="text-emerald-400 font-bold">«Добавить на гл. экран»</span>.</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <button onclick="closePwaModal()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-black font-mono font-bold text-xs rounded-xl transition">
+                            Понятно
+                        </button>
                     </div>
-                    <ol class="list-decimal list-inside space-y-1.5 text-gray-300 text-xs">
-                        <li>Нажмите меню три точки <span class="text-white font-bold font-mono">(⋮)</span> в углу.</li>
-                        <li>Выберите <span class="text-emerald-400 font-bold">«Установить приложение»</span> или <span class="text-emerald-400 font-bold">«Добавить на гл. экран»</span>.</li>
-                    </ol>
                 </div>
-            </div>
-
-            <button onclick="closePwaModal()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-black font-mono font-bold text-xs rounded-xl transition">
-                Понятно
-            </button>
-        </div>
-    </div>
 
     <!-- PWA REGISTRATION -->
     <script>
