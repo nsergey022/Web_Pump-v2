@@ -36,6 +36,7 @@
                         
                         mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
                         digital: ['Wallpoet', 'monospace' ],  // я добавил шрифт digital font-digital
+                        dotFont: ['Doto', 'monospace'],  // шрифт точки
                     }
                 }
             }
@@ -52,11 +53,11 @@
          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
 
 <!-- подключение шрифта Wallpoet  -->
-<link href="https://fonts.googleapis.com/css2?family=Wallpoet&display=swap" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/css2?family=Wallpoet&display=swap" rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Wallpoet&display=swap" rel="stylesheet">
 <!-- =============================== -->
 </head>
-<body class="h-full flex flex-col font-sans antialiased overflow-x-hidden
-             pb-16 md:pb-0 selection:bg-cyan-500 selection:text-black">
+<body class="h-full max-w-[500px] min-w-[360px] flex flex-col font-sans antialiased overflow-x-hidden pb-16  selection:bg-cyan-500 selection:text-black">
 
     <!-- ВЕРХНЯЯ ПАНЕЛЬ СТАТУСА И ШАПКА -->
 <header class=" grid grid-cols-1 bg-cyber-panel border-b-2 border-indigo-600 px-2 py-0.5 items-center sticky 
@@ -93,9 +94,9 @@ top-0 z-50 shadow-md  ">
                     </button>
                  </div>
                 </div>
-                </div> 
-
-                <div class="grid grid-cols-3 bg-cyber-panel  px-2 shadow-lg items-center ">
+  </div> 
+            <!-- календарь -->
+ <div class="grid grid-cols-3 bg-cyber-panel  px-2 shadow-lg items-center ">
                     <!-- дата -->
                      <div>
                      <!-- <span class="text-[10px] font-mono text-gray-400 uppercase tracking-wider">Дата: </span>  -->
@@ -114,41 +115,39 @@ top-0 z-50 shadow-md  ">
  </div>
 </header>
 
-    <!-- НАВИГАЦИОННАЯ ПАНЕЛЬ -->
-    <!-- md:sticky md:top-[57px] md:border-t-0 md:border-b md:px-4 md:justify-center md:space-x-4 md:py-0-->
-    <nav class="fixed bottom-0 left-0 right-0  bg-cyber-panel/95 backdrop-blur border-t  border-cyber-border px-2  flex justify-around  space-x-1  font-mono text-xs z-50 mobile-bottom-nav py-1 ">
-        <button id="tabBtnDashboard" onclick="switchTab('dashboard')" class="flex-1 py-0 px-1  border-t-2   border-cyan-400 text-cyan-400 font-semibold flex flex-col  items-center justify-center gap-1 transition">
+    <!-- НАВИГАЦИОННАЯ ПАНЕЛЬ  внизу экрана-->
+    <nav class="fixed max-w-[500px] min-w-[360px] bottom-0 left-0 right-0  bg-cyber-panel/95 backdrop-blur border-t  border-cyber-border px-2  flex justify-around  space-x-1  font-mono text-xs z-50 mobile-bottom-nav py-1 ">
+       
+        <button id="tabBtnDashboard" onclick="switchTab('dashboard')" class="flex-1 py-0 px-1 border-t-2   border-cyan-400 text-cyan-400 font-semibold flex flex-col  items-center justify-center gap-1 transition">
             <i class="fa-solid fa-gauge-high text-base"></i> 
             <span class="text-[10px] ">Дашборд</span>
         </button>
-        <!-- дописать в функцию параметры переключения -->
-        <button id="tabBtnGraph" onclick="switchTab('graph')" class="flex-1  py-0  px-2  border-t-2  border-transparent text-gray-400 hover:text-gray-200 flex flex-col  items-center justify-center gap-1 transition">
+        
+        <button id="tabBtnGraph" onclick="switchTab('graph')" class="flex-1 py-0 px-2 border-t-2 border-transparent text-gray-400 hover:text-gray-200 flex flex-col items-center justify-center gap-1 transition">
             <i class="fa-solid fa-chart-line text-base "></i> 
             <span class="text-[8px] md:text-xs">График давления</span>
         </button>
 
-        <button id="tabBtnSchedule" onclick="switchTab('schedule')" class="flex-1  py-0  px-2  border-t-2   border-transparent text-gray-400 hover:text-gray-200 flex flex-col  items-center justify-center gap-1 transition">
+        <button id="tabBtnSchedule" onclick="switchTab('schedule')" class="flex-1 py-0 px-2 border-t-2 border-transparent text-gray-400 hover:text-gray-200 flex flex-col items-center justify-center gap-1 transition">
             <i class="fa-regular fa-calendar-check text-base "></i> 
             <span class="text-[10px] md:text-xs">Расписание</span>
         </button>
         
-        <button id="tabBtnSettings" onclick="switchTab('settings')" class="flex-1  py-0  px-2  border-t-2   border-transparent text-gray-400 hover:text-gray-200 flex flex-col  items-center justify-center gap-1 transition">
+        <button id="tabBtnSettings" onclick="switchTab('settings')" class="flex-1 py-0 px-2 border-t-2 border-transparent text-gray-400 hover:text-gray-200 flex flex-col items-center justify-center gap-1 transition">
             <i class="fa-solid fa-sliders text-base "></i> 
             <span class="text-[10px] md:text-xs">Настройки</span>
         </button>
+
     </nav>
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-2.5 md:p-6 space-y-4 md:space-y-6">
+    <main class="flex-1 max-w-[500px] min-w-[360px] p-0 space-y-4">
 
-        <!-- ВКЛАДКА 1: ДАШБОРД -->
-        <div id="tabDashboard" class="space-y-4 md:space-y-6">
-
-                    <!-- УПРАВЛЕНИЕ НАСОСАМИ  один столбец два блока-->
-        <div class="grid grid-cols-1 gap-4  ">
-            
-            <!-- border-b border-cyber-border/60 --> <!--иконка насоса 1 -->
-                                <!-- НАСОС 1 -->      
+        <!-- ВКЛАДКА 1: ДАШБОРД или главная вкладка с насосами-->
+ <div id="tabDashboard" class="space-y-4 bg-slate-700 p-2 ">
+                    <!-- УПРАВЛЕНИЕ НАСОСАМИ  -->
+        <div class="grid grid-cols-1 gap-4 px-2">
+                    <!-- НАСОС 1 -->      
         <div id="pump1Card" class="bg-cyber-panel border-2 border-indigo-600 rounded-xl p-1 shadow-xl space-y-0.5 transition-all duration-300">
                 <!-- шапка блока насоса 1 -->
             <div class="grid grid-flow-col grid-rows-2 grid-cols-9 gap-0">
@@ -602,22 +601,22 @@ top-0 z-50 shadow-md  ">
 
                     <!-- ЛОГ приема и передачи -->
                     
-                        <div class="bg-cyber-panel border border-cyber-border rounded-xl p-1.5 shadow-xl flex flex-col min-h-[280px] ">
-                            <div class="flex items-center justify-between mb-1">
-                                <h3 class="text-xs font-mono uppercase tracking-wider text-gray-300 flex items-center gap-2">
-                                    <i class="fa-solid fa-terminal text-amber-400"></i> UART Лог
-                                </h3>
-                                <button onclick="clearConsoleLog()" class="text-xs font-mono text-gray-500 hover:text-gray-300 p-1">Очистить</button>
-                            </div>
-                            <div id="consoleLog" class="flex-1 bg-cyber-bg border border-cyber-border rounded-lg p-1.5 font-mono text-[8px] text-green-400 overflow-y-auto max-h-40 space-y-0">
-                                <div class="text-gray-600 -mt-1">// Ожидание данных HM-10...</div>
-                            </div>
-                        </div>
+        <div class="bg-cyber-panel border border-cyber-border rounded-xl p-1.5 shadow-xl flex flex-col min-h-[280px] mx-2">
+           <div class="flex items-center justify-between mb-1">
+                <h3 class="text-xs font-mono uppercase tracking-wider text-gray-300 flex items-center gap-2">
+                <i class="fa-solid fa-terminal text-amber-400"></i> UART Лог
+                    </h3>
+                    <button onclick="clearConsoleLog()" class="text-xs font-mono text-gray-500 hover:text-gray-300 p-1">Очистить</button>
+            </div>
+               <div id="consoleLog" class="flex-1 bg-cyber-bg border border-cyber-border rounded-lg p-1.5 font-mono text-[8px] text-green-400 overflow-y-auto max-h-40 space-y-0">
+               <div class="text-gray-600 -mt-1">// Ожидание данных HM-10...</div>
+               </div>
+        </div>              
 
 
                    
 
-        </div>
+ </div>
 
         <!-- ВКЛАДКА 2: Расписание полива -->
         <div id="tabSchedule" class="hidden space-y-4 md:space-y-6">
@@ -749,7 +748,7 @@ top-0 z-50 shadow-md  ">
         </div>
 
         <!-- ВКЛАДКА 3: НАСТРОЙКИ -->
-        <div id="tabSettings" class="hidden space-y-4 md:space-y-6">
+        <div id="tabSettings" class="hidden space-y-4 ">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
                 <!-- RTC -->
                 <div class="bg-cyber-panel border border-cyber-border rounded-xl p-4 md:p-5 shadow-xl space-y-3.5">
@@ -849,15 +848,15 @@ top-0 z-50 shadow-md  ">
         </div>
 
         <!-- ВКЛАДКА График давления  -->
-        <div id="tabGraph" class="hidden space-y-4 md:space-y-6">
-            <div class="lg:col-span-2 bg-cyber-panel border border-cyber-border rounded-xl p-3.5 md:p-4 shadow-xl flex flex-col justify-between">
-                <div class="flex items-center justify-between mb-2 md:mb-3">
+        <div id="tabGraph" class="hidden space-y-4 ">
+            <div class="lg:col-span-2 bg-cyber-panel border border-cyber-border rounded-xl p-3.5  shadow-xl flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-2 ">
                     <h3 class="text-xs font-mono uppercase tracking-wider text-gray-300 flex items-center gap-2">
                         <i class="fa-solid fa-chart-line text-cyan-400"></i> График давления (бар)
                     </h3>
                     <button onclick="clearChart()" class="text-xs font-mono text-gray-500 hover:text-gray-300 p-1">Сброс</button>
                 </div>
-                <div class="h-48 md:h-64 w-full relative">
+                <div class="h-48  w-full relative">
                     <canvas id="pressureChart"></canvas>
                 </div>
             </div>
@@ -1146,35 +1145,44 @@ top-0 z-50 shadow-md  ">
             }
         }
 
+// переключение между вкладками  график, настройки , полив,
         function switchTab(tabName) {
             const dashTab = document.getElementById('tabDashboard');
             const schedTab = document.getElementById('tabSchedule');
             const settingsTab = document.getElementById('tabSettings');
-            
+            const graphTab = document.getElementById('tabGraph');
+
             const btnDash = document.getElementById('tabBtnDashboard');
             const btnSched = document.getElementById('tabBtnSchedule');
             const btnSettings = document.getElementById('tabBtnSettings');
+            const btnGraph = document.getElementById('tabBtnGraph');
 
             dashTab.classList.add('hidden');
             schedTab.classList.add('hidden');
             settingsTab.classList.add('hidden');
+            graphTab.classList.add('hidden');
 
-            btnDash.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex flex-col md:flex-row items-center justify-center gap-1 transition";
-            btnSched.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex flex-col md:flex-row items-center justify-center gap-1 transition";
-            btnSettings.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex flex-col md:flex-row items-center justify-center gap-1 transition";
+            btnDash.className =     "flex-1  py-0  px-1  border-t-2  border-transparent text-gray-400 hover:text-gray-200 flex flex-col  items-center justify-center gap-1 transition";
+            btnSched.className =    "flex-1  py-0  px-1  border-t-2  border-transparent text-gray-400 hover:text-gray-200 flex flex-col  items-center justify-center gap-1 transition";
+            btnSettings.className = "flex-1  py-0  px-1  border-t-2  border-transparent text-gray-400 hover:text-gray-200 flex flex-col  items-center justify-center gap-1 transition";
+            btnGraph.className =    "flex-1  py-0  px-1  border-t-2  border-transparent text-gray-400 hover:text-gray-200 flex flex-col  items-center justify-center gap-1 transition"; 
 
             if (tabName === 'dashboard') {
                 dashTab.classList.remove('hidden');
-                btnDash.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-cyan-400 text-cyan-400 font-semibold flex flex-col md:flex-row items-center justify-center gap-1 transition";
+                btnDash.className = "flex-1  py-0  px-1  border-t-2  border-cyan-400 text-cyan-400 font-semibold flex flex-col  items-center justify-center gap-1 transition";
             } else if (tabName === 'schedule') {
                 schedTab.classList.remove('hidden');
-                btnSched.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-cyan-400 text-cyan-400 font-semibold flex flex-col md:flex-row items-center justify-center gap-1 transition";
-            } else {
+                btnSched.className = "flex-1  py-0  px-1  border-t-2  border-cyan-400 text-cyan-400 font-semibold flex flex-col  items-center justify-center gap-1 transition";
+            } else if(tabName === 'settings') {
                 settingsTab.classList.remove('hidden');
-                btnSettings.className = "flex-1 md:flex-none py-2 md:py-2.5 px-2 md:px-4 border-t-2 md:border-t-0 md:border-b-2 border-cyan-400 text-cyan-400 font-semibold flex flex-col md:flex-row items-center justify-center gap-1 transition";
+                btnSettings.className = "flex-1  py-0  px-1  border-t-2  border-cyan-400 text-cyan-400 font-semibold flex flex-col  items-center justify-center gap-1 transition";
+            } else if(tabName === 'graph') {
+                graphTab.classList.remove('hidden');
+                btnGraph.className = "flex-1  py-0  px-1  border-t-2  border-cyan-400 text-cyan-400 font-semibold flex flex-col  items-center justify-center gap-1 transition";
             }
         }
-// изменение цвета и отправки команды для реле насоса
+
+        // изменение цвета и отправки команды для реле насоса
         function togglePumpControlMode(pumpNum) {
             const toggle = document.getElementById(`p${pumpNum}RelayModeToggle`);
             const label = document.getElementById(`p${pumpNum}ModeLabel`);
