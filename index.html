@@ -616,21 +616,23 @@ top-0 z-50 shadow-md  ">
  </div>
 
         <!-- ВКЛАДКА 2: Расписание полива -->
-        <div id="tabSchedule" class="hidden space-y-4 md:space-y-6">
-            <div class="bg-cyber-panel border border-cyber-border rounded-xl p-4 md:p-5 shadow-xl space-y-4">
-                <h2 class="font-bold text-sm md:text-base text-white flex items-center gap-2 border-b border-cyber-border/60 pb-3">
+        <div id="tabSchedule" class="hidden space-y-4 ">
+            <div class="bg-cyber-panel border border-cyber-border rounded-xl p-4  shadow-xl space-y-4">
+                <h2 class="font-bold text-sm text-white flex items-center gap-2 border-b border-cyber-border/60 pb-3">
                     <i class="fa-solid fa-calendar-days text-cyan-400"></i> Расписание автополива для 3 зон
                 </h2>
 
                 <!-- ЗОНЫ H1 -->
                 <div class="space-y-3 pt-2">
-                    <h3 class="text-xs md:text-sm font-mono font-bold text-cyan-400 uppercase tracking-wider">Зоны Насоса #1 (Капельный полив)</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <h3 class="text-xs  font-mono font-bold text-cyan-400 uppercase tracking-wider">Зоны Насоса #1 (Водоснабжение дома)</h3>
+                    <div class="grid grid-cols-1 gap-3">
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 1.1</span>
                             <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label><input type="time" id="p1z1Time" value="06:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label><input type="number" id="p1z1Dur" value="30" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Старт</label>
+                                <input type="time" id="p1z1Time" value="06:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
+                                <input type="number" id="p1z1Dur" value="30" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
                             </div>
                             <div class="flex justify-between gap-1 text-[10px] pt-1">
                                 <label><input type="checkbox" id="p1z1d1" checked> ПН</label>
@@ -646,8 +648,10 @@ top-0 z-50 shadow-md  ">
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 1.2</span>
                             <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label><input type="time" id="p1z2Time" value="07:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label><input type="number" id="p1z2Dur" value="45" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Старт</label>
+                                <input type="time" id="p1z2Time" value="07:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
+                                <input type="number" id="p1z2Dur" value="45" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
                             </div>
                             <div class="flex justify-between gap-1 text-[10px] pt-1">
                                 <label><input type="checkbox" id="p1z2d1" checked> ПН</label>
@@ -663,8 +667,10 @@ top-0 z-50 shadow-md  ">
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 1.3</span>
                             <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label><input type="time" id="p1z3Time" value="20:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label><input type="number" id="p1z3Dur" value="20" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Старт</label>
+                                    <input type="time" id="p1z3Time" value="20:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
+                                    <input type="number" id="p1z3Dur" value="20" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
                             </div>
                             <div class="flex justify-between gap-1 text-[10px] pt-1">
                                 <label><input type="checkbox" id="p1z3d1" checked> ПН</label>
@@ -681,13 +687,15 @@ top-0 z-50 shadow-md  ">
 
                 <!-- ЗОНЫ H2 -->
                 <div class="space-y-3 pt-4">
-                    <h3 class="text-xs md:text-sm font-mono font-bold text-amber-400 uppercase tracking-wider">Зоны Насоса #2 (Дождевание)</h3>
+                    <h3 class="text-xs md:text-sm font-mono font-bold text-amber-400 uppercase tracking-wider">Зоны Насоса #2 (Полив)</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 2.1</span>
                             <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label><input type="time" id="p2z1Time" value="05:30" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label><input type="number" id="p2z1Dur" value="60" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Старт</label>
+                                    <input type="time" id="p2z1Time" value="05:30" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
+                                    <input type="number" id="p2z1Dur" value="60" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
                             </div>
                             <div class="flex justify-between gap-1 text-[10px] pt-1">
                                 <label><input type="checkbox" id="p2z1d1"> ПН</label>
@@ -703,8 +711,10 @@ top-0 z-50 shadow-md  ">
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 2.2</span>
                             <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label><input type="time" id="p2z2Time" value="19:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label><input type="number" id="p2z2Dur" value="25" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Старт</label>
+                                    <input type="time" id="p2z2Time" value="19:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
+                                    <input type="number" id="p2z2Dur" value="25" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
                             </div>
                             <div class="flex justify-between gap-1 text-[10px] pt-1">
                                 <label><input type="checkbox" id="p2z2d1" checked> ПН</label>
@@ -720,8 +730,10 @@ top-0 z-50 shadow-md  ">
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
                             <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 2.3</span>
                             <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label><input type="time" id="p2z3Time" value="21:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label><input type="number" id="p2z3Dur" value="15" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Старт</label>
+                                    <input type="time" id="p2z3Time" value="21:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
+                                    <input type="number" id="p2z3Dur" value="15" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
                             </div>
                             <div class="flex justify-between gap-1 text-[10px] pt-1">
                                 <label><input type="checkbox" id="p2z3d1" checked> ПН</label>
@@ -737,9 +749,12 @@ top-0 z-50 shadow-md  ">
                 </div>
 
                 <div class="pt-2">
-                    <button onclick="sendScheduleToSTM32()" class="w-full py-3.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-black font-mono font-bold text-xs md:text-sm flex items-center justify-center gap-2 transition glow-cyan btn-active touch-target-lg">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> Передать график полива в STM32
+                    <button onclick="sendScheduleToSTM32()" class="w-full py-3.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-black font-mono font-bold text-xs  flex items-center justify-center gap-2 transition glow-cyan btn-active touch-target-lg">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Передать график полива в контроллер
                     </button>
+                </div>
+                <div class="pb-10">
+
                 </div>
             </div>
         </div>
