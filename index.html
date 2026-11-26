@@ -610,31 +610,36 @@ top-0 z-50 shadow-md  ">
                </div>
         </div>              
 
-
-                   
-
  </div>
 
         <!-- ВКЛАДКА 2: Расписание полива -->
         <div id="tabSchedule" class="hidden space-y-4 ">
-            <div class="bg-cyber-panel border border-cyber-border rounded-xl p-4  shadow-xl space-y-4">
-                <h2 class="font-bold text-sm text-white flex items-center gap-2 border-b border-cyber-border/60 pb-3">
+            <div class="bg-slate-700 border border-cyber-border rounded-xl p-4  shadow-xl space-y-4">
+                <h2 class="font-bold text-sm text-white flex items-center gap-2 border-b border-cyber-border/60 pb-2">
                     <i class="fa-solid fa-calendar-days text-cyan-400"></i> Расписание автополива для 3 зон
                 </h2>
 
                 <!-- ЗОНЫ H1 -->
-                <div class="space-y-3 pt-2">
+                <div class="space-y-1 pt-1">
                     <h3 class="text-xs  font-mono font-bold text-cyan-400 uppercase tracking-wider">Зоны Насоса #1 (Водоснабжение дома)</h3>
                     <div class="grid grid-cols-1 gap-3">
-                        <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
-                            <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 1.1</span>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label>
-                                <input type="time" id="p1z1Time" value="06:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
-                                <input type="number" id="p1z1Dur" value="30" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                        <div class="text-[14px] bg-cyber-bg border border-cyber-border rounded-lg p-1 space-y-2 font-mono ">
+                            <span class="flex font-bold text-lime-400 border-b border-cyber-border pb-1 justify-center">Зона 1.1</span>
+                            <div class="grid grid-cols-2 grid-rows-2 grid-flow-row gap-2 items-center ">
+                                <div>
+                                    <label class="text-gray-200 ">Время включения</label>
+                                </div>
+                                <div>
+                                 <input type="time" id="p1z1Time" value="06:00" class="w-full  bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
+                                <div><label class="text-gray-200 ">Длит работы (мин)</label></div>
+                                <div>
+                                    <input type="number" id="p1z1Dur" value="30" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
                             </div>
-                            <div class="flex justify-between gap-1 text-[10px] pt-1">
+                            <!-- <div class="flex justify-between gap-1 text-[10px] pt-1">
                                 <label><input type="checkbox" id="p1z1d1" checked> ПН</label>
                                 <label><input type="checkbox" id="p1z1d2"> ВТ</label>
                                 <label><input type="checkbox" id="p1z1d3" checked> СР</label>
@@ -642,7 +647,7 @@ top-0 z-50 shadow-md  ">
                                 <label><input type="checkbox" id="p1z1d5" checked> ПТ</label>
                                 <label><input type="checkbox" id="p1z1d6"> СБ</label>
                                 <label><input type="checkbox" id="p1z1d0"> ВС</label>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
