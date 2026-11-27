@@ -613,71 +613,107 @@ top-0 z-50 shadow-md  ">
  </div>
 
         <!-- ВКЛАДКА 2: Расписание полива -->
-        <div id="tabSchedule" class="hidden space-y-4 ">
-            <div class="bg-slate-700 border border-cyber-border rounded-xl p-4  shadow-xl space-y-4">
-                <h2 class="font-bold text-sm text-white flex items-center gap-2 border-b border-cyber-border/60 pb-2">
-                    <i class="fa-solid fa-calendar-days text-cyan-400"></i> Расписание автополива для 3 зон
+        <div id="tabSchedule" class="hidden ">
+            <div class="bg-slate-700 border border-cyber-border rounded-xl p-2  shadow-xl space-y-2">
+                <h2 class="font-bold text-sm text-white flex items-center gap-2 border-b border-cyber-border/60 pb-1">
+                    <i class="fa-solid fa-calendar-days text-cyan-400"></i> Расписание автополива для 3-x зон
                 </h2>
 
+
                 <!-- ЗОНЫ H1 -->
-                <div class="space-y-1 pt-1">
-                    <h3 class="text-xs  font-mono font-bold text-cyan-400 uppercase tracking-wider">Зоны Насоса #1 (Водоснабжение дома)</h3>
-                    <div class="grid grid-cols-1 gap-3">
-                        <div class="text-[14px] bg-cyber-bg border border-cyber-border rounded-lg p-1 space-y-2 font-mono ">
-                            <span class="flex font-bold text-lime-400 border-b border-cyber-border pb-1 justify-center">Зона 1.1</span>
-                            <div class="grid grid-cols-2 grid-rows-2 grid-flow-row gap-2 items-center ">
+                <div class="space-y-1 pt-1  border border-indigo-600 rounded-xl">
+                    <div class=" grid grid-cols-6 ">
+                        <div class="col-span-4 flex items-center ">
+                            <span class=" text-[12px] font-mono font-bold text-cyan-400 uppercase tracking-wider pl-4" >Зоны полива насоса #1</span>
+                        </div>
+                        <div class="col-span-2 flex justify-center p-0.5">
+                            <button  onclick="sendScheduleToSTM32()" class="py-0.5 px-2 rounded-xl bg-cyan-950/40 hover:bg-cyan-900/60 text-cyan-400 border-2 border-cyan-500 font-mono font-bold transition items-center">
+                                <!-- <i class="fa-solid fa-play"></i> -->
+                                <span class="text-[10px] items-center ">СОХРАНИТЬ</span> 
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 gap-1 px-2">
+                        <!-- Зона 1.1 -->
+                        <div class="text-[12px] bg-cyber-bg border border-cyber-border rounded-lg p-1 space-y-2 font-mono ">
+                            <div class="grid grid-cols-4  border-b border-cyber-border pb-1 ">
+                                <label for="p1z1Activ" class="col-span-2 px-4">
+                                 <span id="p1z1Display" class="font-bold text-lime-400" >Зона 1.1 -(ВКЛ)-</span>
+                                </label>
+                                <input type="checkbox"id="p1z1Activ" class="col-span-2"  checked>
+                             </div>
+
+                            <div class="grid grid-cols-2 grid-rows-2 grid-flow-row gap-1 items-center pl-4 ">
                                 <div>
                                     <label class="text-gray-200 ">Время включения</label>
                                 </div>
                                 <div>
-                                 <input type="time" id="p1z1Time" value="06:00" class="w-full  bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                 <input type="time" id="p1z1Time" value="06:00" class=" w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
                                 </div>
                                 
                                 <div><label class="text-gray-200 ">Длит работы (мин)</label></div>
                                 <div>
-                                    <input type="number" id="p1z1Dur" value="30" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                    <input type="number" id="p1z1Dur" value="30" class=" w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
                                 </div>
                                 
                             </div>
-                            <!-- <div class="flex justify-between gap-1 text-[10px] pt-1">
-                                <label><input type="checkbox" id="p1z1d1" checked> ПН</label>
-                                <label><input type="checkbox" id="p1z1d2"> ВТ</label>
-                                <label><input type="checkbox" id="p1z1d3" checked> СР</label>
-                                <label><input type="checkbox" id="p1z1d4"> ЧТ</label>
-                                <label><input type="checkbox" id="p1z1d5" checked> ПТ</label>
-                                <label><input type="checkbox" id="p1z1d6"> СБ</label>
-                                <label><input type="checkbox" id="p1z1d0"> ВС</label>
-                            </div> -->
+                            
                         </div>
 
-                        <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
-                            <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 1.2</span>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label>
-                                <input type="time" id="p1z2Time" value="07:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
-                                <input type="number" id="p1z2Dur" value="45" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                        <div class="text-[12px] bg-cyber-bg border border-cyber-border rounded-lg p-1 space-y-2 font-mono">
+                            <div class="grid grid-cols-4  border-b border-cyber-border pb-1 ">
+                                <label for="p1z2Activ" class="col-span-2 px-4">
+                                 <span id="p1z2Display" class="font-bold text-lime-400" >Зона 1.2 -(ВКЛ)-</span>
+                                </label>
+                                <input type="checkbox"id="p1z2Activ" class="col-span-2"  checked>
+                             </div>
+                            
+                            <div class="grid grid-cols-2 grid-rows-2 grid-flow-row gap-1 items-center pl-4  ">
+                                <div>
+                                    <label class="text-gray-200 ">Время включения</label>
+                                </div>
+                                <div>
+                                 <input type="time" id="p1z2Time" value="06:00" class=" w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
+                                <div><label class="text-gray-200 ">Длит работы (мин)</label></div>
+                                <div>
+                                    <input type="number" id="p1z2Dur" value="30" class=" w-full  bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
                             </div>
-                            <div class="flex justify-between gap-1 text-[10px] pt-1">
-                                <label><input type="checkbox" id="p1z2d1" checked> ПН</label>
-                                <label><input type="checkbox" id="p1z2d2" checked> ВТ</label>
-                                <label><input type="checkbox" id="p1z2d3" checked> СР</label>
-                                <label><input type="checkbox" id="p1z2d4" checked> ЧТ</label>
-                                <label><input type="checkbox" id="p1z2d5" checked> ПТ</label>
-                                <label><input type="checkbox" id="p1z2d6" checked> СБ</label>
-                                <label><input type="checkbox" id="p1z2d0" checked> ВС</label>
-                            </div>
+                          
                         </div>
 
-                        <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
-                            <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 1.3</span>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label>
-                                    <input type="time" id="p1z3Time" value="20:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
-                                    <input type="number" id="p1z3Dur" value="20" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                        <div class="text-[12px] bg-cyber-bg border border-cyber-border rounded-lg p-1 space-y-2 font-mono">
+                            <div class="grid grid-cols-4  border-b border-cyber-border pb-1 ">
+                                <label for="p1z3Activ" class="col-span-2 px-4">
+                                 <span id="p1z1Display" class="font-bold text-lime-400" >Зона 1.3 -(ВКЛ)-</span>
+                                </label>
+                                <input type="checkbox"id="p1z3Activ" class="col-span-2"  checked>
+                             </div>
+                            <div class="grid grid-cols-2 grid-rows-2 grid-flow-row gap-1 items-center pl-4  ">
+                                <div>
+                                    <label class="text-gray-200 ">Время включения</label>
+                                </div>
+                                <div>
+                                 <input type="time" id="p1z3Time" value="06:00" class=" w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
+                                <div><label class="text-gray-200 ">Длит работы (мин)</label></div>
+                                <div>
+                                    <input type="number" id="p1z3Dur" value="30" class=" w-full  bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
                             </div>
-                            <div class="flex justify-between gap-1 text-[10px] pt-1">
+                            
+                        </div>
+                        <div class="flex font-bold text-lime-400 text-[12] justify-center ">
+                            <span >Периоды работы</span>
+                        </div>
+                        <!-- исправить id общий для всех зон -->
+                            <div class="flex justify-between gap-1 text-[12px] px-2">
                                 <label><input type="checkbox" id="p1z3d1" checked> ПН</label>
                                 <label><input type="checkbox" id="p1z3d2"> ВТ</label>
                                 <label><input type="checkbox" id="p1z3d3" checked> СР</label>
@@ -686,81 +722,125 @@ top-0 z-50 shadow-md  ">
                                 <label><input type="checkbox" id="p1z3d6"> СБ</label>
                                 <label><input type="checkbox" id="p1z3d0"> ВС</label>
                             </div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- ЗОНЫ H2 -->
-                <div class="space-y-3 pt-4">
-                    <h3 class="text-xs md:text-sm font-mono font-bold text-amber-400 uppercase tracking-wider">Зоны Насоса #2 (Полив)</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
-                            <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 2.1</span>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label>
-                                    <input type="time" id="p2z1Time" value="05:30" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
-                                    <input type="number" id="p2z1Dur" value="60" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                <div class="space-y-1 pt-1  border border-indigo-600 rounded-xl">
+                    <div class=" grid grid-cols-6 ">
+                        <div class="col-span-4 flex items-center ">
+                            <span class=" text-[12px] font-mono font-bold text-cyan-400 uppercase tracking-wider pl-4" >Зоны полива насоса #2</span>
+                        </div>
+                        <div class="col-span-2 flex justify-center p-0.5">
+                            <button  onclick="sendScheduleToSTM32()" class="py-0.5 px-2 rounded-xl bg-cyan-950/40 hover:bg-cyan-900/60 text-cyan-400 border-2 border-cyan-500 font-mono font-bold transition items-center">
+                                <!-- <i class="fa-solid fa-play"></i> -->
+                                <span class="text-[10px] items-center ">СОХРАНИТЬ</span> 
+                            </button>
+                        </div>
+                    </div>   
+                    <!-- <h3 class=" flex text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider justify-center">Зоны Насоса #2 (ПОЛИВ)</h3> -->
+                    <div class="grid grid-cols-1 gap-1 px-2">
+                        
+                        <div class="text-[12px] bg-cyber-bg border border-cyber-border rounded-lg p-1 space-y-2 font-mono ">
+                            <div class="grid grid-cols-4  border-b border-cyber-border pb-1 ">
+                                <label for="p2z1Activ" class="col-span-2 px-4">
+                                 <span id="p2z1Display" class="font-bold text-lime-400" >Зона 2.1 -(ВКЛ)-</span>
+                                </label>
+                                <input type="checkbox"id="p2z1Activ" class="col-span-2"  checked>
+                             </div>
+                            <div class="grid grid-cols-2 grid-rows-2 grid-flow-row gap-1 items-center pl-4 ">
+                                <div>
+                                    <label class="text-gray-200 ">Время включения</label>
+                                </div>
+                                <div>
+                                 <input type="time" id="p2z1Time" value="06:00" class=" w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
+                                <div><label class="text-gray-200 ">Длит работы (мин)</label></div>
+                                <div>
+                                    <input type="number" id="p2z1Dur" value="30" class=" w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
                             </div>
-                            <div class="flex justify-between gap-1 text-[10px] pt-1">
-                                <label><input type="checkbox" id="p2z1d1"> ПН</label>
-                                <label><input type="checkbox" id="p2z1d2" checked> ВТ</label>
-                                <label><input type="checkbox" id="p2z1d3"> СР</label>
-                                <label><input type="checkbox" id="p2z1d4" checked> ЧТ</label>
-                                <label><input type="checkbox" id="p2z1d5"> ПТ</label>
-                                <label><input type="checkbox" id="p2z1d6" checked> СБ</label>
-                                <label><input type="checkbox" id="p2z1d0"> ВС</label>
-                            </div>
+                            
                         </div>
 
-                        <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
-                            <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 2.2</span>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label>
-                                    <input type="time" id="p2z2Time" value="19:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
-                                    <input type="number" id="p2z2Dur" value="25" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                        <div class="text-[12px] bg-cyber-bg border border-cyber-border rounded-lg p-1 space-y-2 font-mono">
+                            <div class="grid grid-cols-4  border-b border-cyber-border pb-1 ">
+                                <label for="p2z2Activ" class="col-span-2 px-4">
+                                 <span id="p1z2Display" class="font-bold text-lime-400" >Зона 2.2 -(ВКЛ)-</span>
+                                </label>
+                                <input type="checkbox"id="p2z2Activ" class="col-span-2"  checked>
+                             </div>
+                            <div class="grid grid-cols-2 grid-rows-2 grid-flow-row gap-1 items-center pl-4  ">
+                                <div>
+                                    <label class="text-gray-200 ">Время включения</label>
+                                </div>
+                                <div>
+                                 <input type="time" id="p2z2Time" value="06:00" class=" w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
+                                <div><label class="text-gray-200 ">Длит работы (мин)</label></div>
+                                <div>
+                                    <input type="number" id="p2z2Dur" value="30" class=" w-full  bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
                             </div>
-                            <div class="flex justify-between gap-1 text-[10px] pt-1">
-                                <label><input type="checkbox" id="p2z2d1" checked> ПН</label>
-                                <label><input type="checkbox" id="p2z2d2"> ВТ</label>
-                                <label><input type="checkbox" id="p2z2d3" checked> СР</label>
-                                <label><input type="checkbox" id="p2z2d4"> ЧТ</label>
-                                <label><input type="checkbox" id="p2z2d5" checked> ПТ</label>
-                                <label><input type="checkbox" id="p2z2d6"> СБ</label>
-                                <label><input type="checkbox" id="p2z2d0" checked> ВС</label>
-                            </div>
+                          
+                           
                         </div>
 
-                        <div class="bg-cyber-bg border border-cyber-border rounded-lg p-3 space-y-2 font-mono text-xs">
-                            <span class="font-bold text-gray-200 block border-b border-cyber-border pb-1">Зона 2.3</span>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-gray-400 text-[10px]">Старт</label>
-                                    <input type="time" id="p2z3Time" value="21:00" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
-                                <div><label class="text-gray-400 text-[10px]">Длит (мин)</label>
-                                    <input type="number" id="p2z3Dur" value="15" class="w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white text-xs"></div>
+                        <div class="text-[12px] bg-cyber-bg border border-cyber-border rounded-lg p-1 space-y-2 font-mono">
+                            <div class="grid grid-cols-4  border-b border-cyber-border pb-1 ">
+                                <label for="p2z3Activ" class="col-span-2 px-4">
+                                 <span id="p2z3Display" class="font-bold text-lime-400" >Зона 2.3 -(ВКЛ)-</span>
+                                </label>
+                                <input type="checkbox"id="p2z3Activ" class="col-span-2"  checked>
+                             </div>
+                            <div class="grid grid-cols-2 grid-rows-2 grid-flow-row gap-1 items-center pl-4  ">
+                                <div>
+                                    <label class="text-gray-200 ">Время включения</label>
+                                </div>
+                                <div>
+                                 <input type="time" id="p2z3Time" value="06:00" class=" w-full bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
+                                <div><label class="text-gray-200 ">Длит работы (мин)</label></div>
+                                <div>
+                                    <input type="number" id="p2z3Dur" value="30" class=" w-full  bg-cyber-panel border border-cyber-border rounded px-2 py-1 text-white ">
+                                </div>
+                                
                             </div>
-                            <div class="flex justify-between gap-1 text-[10px] pt-1">
+                            
+                        </div>
+                        <div>
+                            <span class="flex font-bold text-lime-400 text-[12] justify-center ">Периоды работы</span>
+                        </div>
+                        <!-- исправить id общий для всех зон -->
+                            <div class="flex justify-between gap-1 text-[12px] px-2">
                                 <label><input type="checkbox" id="p2z3d1" checked> ПН</label>
-                                <label><input type="checkbox" id="p2z3d2" checked> ВТ</label>
+                                <label><input type="checkbox" id="p2z3d2"> ВТ</label>
                                 <label><input type="checkbox" id="p2z3d3" checked> СР</label>
-                                <label><input type="checkbox" id="p2z3d4" checked> ЧТ</label>
+                                <label><input type="checkbox" id="p2z3d4"> ЧТ</label>
                                 <label><input type="checkbox" id="p2z3d5" checked> ПТ</label>
-                                <label><input type="checkbox" id="p2z3d6" checked> СБ</label>
-                                <label><input type="checkbox" id="p2z3d0" checked> ВС</label>
+                                <label><input type="checkbox" id="p2z3d6"> СБ</label>
+                                <label><input type="checkbox" id="p2z3d0"> ВС</label>
                             </div>
-                        </div>
+
+
+
                     </div>
                 </div>
 
-                <div class="pt-2">
+
+
+
+                <!-- <div class="pt-2">
                     <button onclick="sendScheduleToSTM32()" class="w-full py-3.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-black font-mono font-bold text-xs  flex items-center justify-center gap-2 transition glow-cyan btn-active touch-target-lg">
                         <i class="fa-solid fa-cloud-arrow-up"></i> Передать график полива в контроллер
                     </button>
-                </div>
-                <div class="pb-10">
-
-                </div>
+                </div> -->
+                <div class="pb-10"></div>
             </div>
         </div>
 
